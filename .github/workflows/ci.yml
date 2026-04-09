@@ -1,0 +1,85 @@
+name: CI Pipeline - Universal Robots URe
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  tests-complets:
+    name: "Tests Complets — Architecture Classique Sans IA — Ure"
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: "Générer les fichiers IA dynamiques"
+        run: python prepare_inputs.py
+
+      - name: "Commit les fichiers IA générés"
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add ai_inputs/git_diff.txt
+          git add ai_inputs/test_history.txt
+          git add ai_inputs/test_history_store.json
+          git diff --staged --quiet || git commit -m "ci: update AI inputs [skip ci]"
+          git push || true
+
+      - name: Build image Docker
+        run: docker build -t ur-simulation .
+
+      - name: Lancer tous les tests dans Docker
+        run: docker run --name ur-test ur-simulation
+
+      - name: Récupérer les rapports
+        if: always()
+        run: docker cp ur-test:/app/reports/. reports/
+
+      - name: "DIAGNOSTIC — Build log"
+        if: always()
+        run: |
+          echo "=========================================="
+          echo " BUILD LOG"
+          echo "=========================================="
+          cat reports/build.log || echo "(absent)"
+
+      - name: "DIAGNOSTIC — Webots stdout"
+        if: always()
+        run: |
+          echo "=========================================="
+          echo " WEBOTS STDOUT"
+          echo "=========================================="
+          cat reports/webots_stdout.log || echo "(absent)"
+
+      - name: "DIAGNOSTIC — Webots stderr"
+        if: always()
+        run: |
+          echo "=========================================="
+          echo " WEBOTS STDERR"
+          echo "=========================================="
+          cat reports/webots_stderr.log || echo "(absent)"
+
+      - name: "DIAGNOSTIC — simulation_results.json"
+        if: always()
+        run: |
+          echo "=========================================="
+          echo " simulation_results.json"
+          echo "=========================================="
+          cat reports/simulation_results.json || echo "(absent)"
+
+      - name: Upload rapport
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: rapport-tests-ure
+          path: |
+            reports/
+            ai_inputs/
