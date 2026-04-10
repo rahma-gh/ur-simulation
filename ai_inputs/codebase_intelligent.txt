@@ -1,8 +1,7 @@
 ====================================================================================================
-CODEBASE INTELLIGENT MAP — ur-simulation  [FICHIER STATIQUE]
+CODEBASE INTELLIGENT MAP — ur-simulation
 Entrées : 11  |  Tests couverts : 106
 Colonnes : file_path | module_name | function_name | class_name | code_content | related_test_cases
-NOTE : Ce fichier ne change que si tu modifies le code source ou les tests.
 ====================================================================================================
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

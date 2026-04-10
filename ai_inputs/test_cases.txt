@@ -1,9 +1,8 @@
 ====================================================================================================
-TEST CASES — ur-simulation  [FICHIER STATIQUE]
+TEST CASES — ur-simulation 
 Total : 106 tests  |  functional: 34  |  non_functional: 72
 Structure : tests/functional/  +  tests/functional/communication/
             tests/non_functional/boundary|performance|realtime|safety|stress/
-NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
 ====================================================================================================
 
 
@@ -14,7 +13,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_gripper_position_dans_limites
   │  FILE         : tests/non_functional/safety/test_gripper_position_dans_limites.py
   │  DESCRIPTION  : La position du gripper est-elle dans les limites physiques [0, 1] ?
-  │  ASSERT       : La position du gripper est-elle dans les limites physiques [0, 1] ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c
   └──────────────────────────────────────────────────────────────
 
@@ -22,7 +20,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_gripper_position_dans_source_c
   │  FILE         : tests/non_functional/safety/test_gripper_position_dans_source_c.py
   │  DESCRIPTION  : La valeur 0.85 est-elle bien utilisée dans le contrôleur C ?
-  │  ASSERT       : La valeur 0.85 est-elle bien utilisée dans le contrôleur C ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c
   └──────────────────────────────────────────────────────────────
 
@@ -30,7 +27,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_gripper_sans_ecrasement
   │  FILE         : tests/non_functional/safety/test_gripper_sans_ecrasement.py
   │  DESCRIPTION  : La position de fermeture du gripper est-elle > 0 (pas d'écrasement) ?
-  │  ASSERT       : La position de fermeture du gripper est-elle > 0 (pas d'écrasement) ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c
   └──────────────────────────────────────────────────────────────
 
@@ -38,7 +34,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_hauteurs_can_positives
   │  FILE         : tests/non_functional/safety/test_hauteurs_can_positives.py
   │  DESCRIPTION  : Les hauteurs max des canettes sont-elles positives (pas sous le sol) ?
-  │  ASSERT       : Les hauteurs max des canettes sont-elles positives (pas sous le sol) ?
   │  JSON KEYS    : max_can_heights
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -47,7 +42,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_positions_cibles_securisees
   │  FILE         : tests/non_functional/safety/test_positions_cibles_securisees.py
   │  DESCRIPTION  : Toutes les positions cibles sont-elles dans les limites physiques UR ?
-  │  ASSERT       : Toutes les positions cibles sont-elles dans les limites physiques UR ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c
   └──────────────────────────────────────────────────────────────
 
@@ -55,7 +49,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_positions_finales_differentes_initiales
   │  FILE         : tests/non_functional/safety/test_positions_finales_differentes_initiales.py
   │  DESCRIPTION  : Les canettes ont-elles été déplacées (positions finales ≠ initiales) ?
-  │  ASSERT       : Les canettes ont-elles été déplacées (positions finales ≠ initiales) ?
   │  JSON KEYS    : can_initial_positions|can_final_positions
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -64,7 +57,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_positions_retour_zero_securisees
   │  FILE         : tests/non_functional/safety/test_positions_retour_zero_securisees.py
   │  DESCRIPTION  : Les positions de retour (0.0 rad) sont-elles sécurisées ?
-  │  ASSERT       : Les positions de retour (0.0 rad) sont-elles sécurisées ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c
   └──────────────────────────────────────────────────────────────
 
@@ -72,7 +64,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_seuil_detection_distance_sensor
   │  FILE         : tests/non_functional/safety/test_seuil_detection_distance_sensor.py
   │  DESCRIPTION  : Le seuil de détection du capteur de distance est-il dans une plage sûre ?
-  │  ASSERT       : Le seuil de détection du capteur de distance est-il dans une plage sûre ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c
   └──────────────────────────────────────────────────────────────
 
@@ -80,7 +71,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_vitesse_bras_dans_source_c
   │  FILE         : tests/non_functional/safety/test_vitesse_bras_dans_source_c.py
   │  DESCRIPTION  : La vitesse par défaut 1.0 est-elle définie dans le contrôleur C ?
-  │  ASSERT       : La vitesse par défaut 1.0 est-elle définie dans le contrôleur C ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c
   └──────────────────────────────────────────────────────────────
 
@@ -88,7 +78,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_vitesse_bras_non_nulle
   │  FILE         : tests/non_functional/safety/test_vitesse_bras_non_nulle.py
   │  DESCRIPTION  : La vitesse du bras est-elle > 0 (pas de blocage mécanique) ?
-  │  ASSERT       : La vitesse du bras est-elle > 0 (pas de blocage mécanique) ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c
   └──────────────────────────────────────────────────────────────
 
@@ -96,7 +85,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_vitesse_bras_securisee
   │  FILE         : tests/non_functional/safety/test_vitesse_bras_securisee.py
   │  DESCRIPTION  : La vitesse par défaut du bras est-elle ≤ 2.0 rad/s (seuil sécurité) ?
-  │  ASSERT       : La vitesse par défaut du bras est-elle ≤ 2.0 rad/s (seuil sécurité) ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c
   └──────────────────────────────────────────────────────────────
 
@@ -104,7 +92,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_vitesse_dans_limites_absolues
   │  FILE         : tests/non_functional/safety/test_vitesse_dans_limites_absolues.py
   │  DESCRIPTION  : La vitesse est-elle en dessous des limites physiques absolues UR ?
-  │  ASSERT       : La vitesse est-elle en dessous des limites physiques absolues UR ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c
   └──────────────────────────────────────────────────────────────
 
@@ -116,7 +103,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_can_souleve_au_dessus_table
   │  FILE         : tests/non_functional/performance/test_can_souleve_au_dessus_table.py
   │  DESCRIPTION  : Au moins une canette a-t-elle été soulevée au-dessus du seuil de saisie ?
-  │  ASSERT       : Au moins une canette a-t-elle été soulevée au-dessus du seuil de saisie ?
   │  JSON KEYS    : max_can_heights
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -125,7 +111,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_duree_cycle_complet_ure
   │  FILE         : tests/non_functional/performance/test_duree_cycle_complet_ure.py
   │  DESCRIPTION  : La durée d'un cycle complet URe est-elle raisonnable (<30s) ?
-  │  ASSERT       : La durée d'un cycle complet URe est-elle raisonnable (<30s) ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c
   └──────────────────────────────────────────────────────────────
 
@@ -133,7 +118,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_duree_simulation_totale_raisonnable
   │  FILE         : tests/non_functional/performance/test_duree_simulation_totale_raisonnable.py
   │  DESCRIPTION  : La durée de simulation totale (3 cycles) est-elle raisonnable ?
-  │  ASSERT       : La durée de simulation totale (3 cycles) est-elle raisonnable ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c
   └──────────────────────────────────────────────────────────────
 
@@ -141,7 +125,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_duree_trois_cycles
   │  FILE         : tests/non_functional/performance/test_duree_trois_cycles.py
   │  DESCRIPTION  : La durée pour 3 canettes (3 cycles) est-elle < 90s ?
-  │  ASSERT       : La durée pour 3 canettes (3 cycles) est-elle < 90s ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c
   └──────────────────────────────────────────────────────────────
 
@@ -149,7 +132,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_hauteur_can_lors_saisie
   │  FILE         : tests/non_functional/performance/test_hauteur_can_lors_saisie.py
   │  DESCRIPTION  : Les hauteurs maximales de toutes les canettes sont-elles enregistrées ?
-  │  ASSERT       : Les hauteurs maximales de toutes les canettes sont-elles enregistrées ?
   │  JSON KEYS    : max_can_heights|total_cans
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -158,7 +140,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_nombre_phases_mouvement
   │  FILE         : tests/non_functional/performance/test_nombre_phases_mouvement.py
   │  DESCRIPTION  : Le nombre de phases de la machine d'état est-il de 5 ?
-  │  ASSERT       : Le nombre de phases de la machine d'état est-il de 5 ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c
   └──────────────────────────────────────────────────────────────
 
@@ -166,7 +147,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_phases_presentes_dans_source
   │  FILE         : tests/non_functional/performance/test_phases_presentes_dans_source.py
   │  DESCRIPTION  : Toutes les phases sont-elles déclarées dans le contrôleur C ?
-  │  ASSERT       : Toutes les phases sont-elles déclarées dans le contrôleur C ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c
   └──────────────────────────────────────────────────────────────
 
@@ -174,7 +154,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_ratio_efficacite
   │  FILE         : tests/non_functional/performance/test_ratio_efficacite.py
   │  DESCRIPTION  : Le ratio étapes actives / total est-il > 50% ?
-  │  ASSERT       : Le ratio étapes actives / total est-il > 50% ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c
   └──────────────────────────────────────────────────────────────
 
@@ -182,7 +161,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_ratio_phases_actives
   │  FILE         : tests/non_functional/performance/test_ratio_phases_actives.py
   │  DESCRIPTION  : Le ratio phases actives / phases totales est-il supérieur à 60% ?
-  │  ASSERT       : Le ratio phases actives / phases totales est-il supérieur à 60% ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c
   └──────────────────────────────────────────────────────────────
 
@@ -190,7 +168,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_simulation_sans_timeout
   │  FILE         : tests/non_functional/performance/test_simulation_sans_timeout.py
   │  DESCRIPTION  : La simulation s'est-elle terminée avant le timeout de 300s ?
-  │  ASSERT       : La simulation s'est-elle terminée avant le timeout de 300s ?
   │  JSON KEYS    : duration
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -199,7 +176,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_simulation_termine_normalement
   │  FILE         : tests/non_functional/performance/test_simulation_termine_normalement.py
   │  DESCRIPTION  : La simulation s'est-elle terminée normalement (sequence_complete) ?
-  │  ASSERT       : La simulation s'est-elle terminée normalement (sequence_complete) ?
   │  JSON KEYS    : sequence_complete
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -208,7 +184,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_timestep_controleur_multiple_wbt
   │  FILE         : tests/non_functional/performance/test_timestep_controleur_multiple_wbt.py
   │  DESCRIPTION  : Le TIME_STEP du contrôleur est-il un multiple du basicTimeStep ?
-  │  ASSERT       : Le TIME_STEP du contrôleur est-il un multiple du basicTimeStep ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c
   └──────────────────────────────────────────────────────────────
 
@@ -216,7 +191,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_timestep_dans_source_c
   │  FILE         : tests/non_functional/performance/test_timestep_dans_source_c.py
   │  DESCRIPTION  : La macro TIME_STEP est-elle bien définie à 32 dans le contrôleur C ?
-  │  ASSERT       : La macro TIME_STEP est-elle bien définie à 32 dans le contrôleur C ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c
   └──────────────────────────────────────────────────────────────
 
@@ -224,7 +198,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_timestep_ure_wbt_conforme
   │  FILE         : tests/non_functional/performance/test_timestep_ure_wbt_conforme.py
   │  DESCRIPTION  : Le basicTimeStep de ure.wbt est-il bien 8 ms ?
-  │  ASSERT       : Le basicTimeStep de ure.wbt est-il bien 8 ms ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c
   └──────────────────────────────────────────────────────────────
 
@@ -232,7 +205,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_vitesse_bras_non_nulle
   │  FILE         : tests/non_functional/performance/test_vitesse_bras_non_nulle.py
   │  DESCRIPTION  : La vitesse du bras ne doit pas être nulle (blocage simulation).
-  │  ASSERT       : La vitesse du bras ne doit pas être nulle (blocage simulation).
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c
   └──────────────────────────────────────────────────────────────
 
@@ -240,7 +212,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_vitesse_bras_par_defaut
   │  FILE         : tests/non_functional/performance/test_vitesse_bras_par_defaut.py
   │  DESCRIPTION  : La vitesse par défaut du bras (1.0 rad/s) est-elle dans les limites ?
-  │  ASSERT       : La vitesse par défaut du bras (1.0 rad/s) est-elle dans les limites ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c
   └──────────────────────────────────────────────────────────────
 
@@ -248,7 +219,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_vitesse_configurable_via_argv
   │  FILE         : tests/non_functional/performance/test_vitesse_configurable_via_argv.py
   │  DESCRIPTION  : La vitesse est-elle configurable via argument au lancement ?
-  │  ASSERT       : La vitesse est-elle configurable via argument au lancement ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c
   └──────────────────────────────────────────────────────────────
 
@@ -260,7 +230,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_reliability_1000_validations_completes
   │  FILE         : tests/non_functional/stress/test_reliability_1000_validations_completes.py
   │  DESCRIPTION  : Tests de stress lourd : 1 000 validations complètes de la structure JSON.
-  │  ASSERT       : La structure complète du JSON est-elle valide sur 1 000 vérifications ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
 
@@ -268,7 +237,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_reliability_100_lectures_json
   │  FILE         : tests/non_functional/stress/test_reliability_100_lectures_json.py
   │  DESCRIPTION  : Tests de fiabilité : 100 lectures du JSON de résultats sans erreur.
-  │  ASSERT       : Le JSON peut-il être lu 100 fois consécutivement sans erreur ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
 
@@ -276,7 +244,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_reliability_300_validations_json
   │  FILE         : tests/non_functional/stress/test_reliability_300_validations_json.py
   │  DESCRIPTION  : Tests de fiabilité : 300 validations de la structure JSON.
-  │  ASSERT       : La structure JSON est-elle valide 300 fois consécutivement ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
 
@@ -284,7 +251,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_reliability_500_coherences_positions
   │  FILE         : tests/non_functional/stress/test_reliability_500_coherences_positions.py
   │  DESCRIPTION  : Tests de fiabilité : 500 vérifications de cohérence des positions.
-  │  ASSERT       : Les positions initiales/finales sont-elles cohérentes sur 500 vérifications ?
   │  JSON KEYS    : can_initial_positions|can_final_positions
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -293,7 +259,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_reliability_calculs_numeriques_stables
   │  FILE         : tests/non_functional/stress/test_reliability_calculs_numeriques_stables.py
   │  DESCRIPTION  : Tests de fiabilité : calculs numériques stables sur les positions UR.
-  │  ASSERT       : Les calculs de norme de vecteurs 3D sont-ils stables sur 1000 itérations ?
   │  DEPENDS ON   : conftest.py
   └──────────────────────────────────────────────────────────────
 
@@ -301,7 +266,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_reliability_json_non_corrompu
   │  FILE         : tests/non_functional/stress/test_reliability_json_non_corrompu.py
   │  DESCRIPTION  : Le JSON est-il parseable et non corrompu ?
-  │  ASSERT       : Le JSON est-il parseable et non corrompu ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
 
@@ -309,7 +273,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_reliability_json_toujours_present
   │  FILE         : tests/non_functional/stress/test_reliability_json_toujours_present.py
   │  DESCRIPTION  : Le JSON est-il toujours présent après la simulation ?
-  │  ASSERT       : Le JSON est-il toujours présent après la simulation ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
 
@@ -317,7 +280,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_reliability_resultats_reproductibles
   │  FILE         : tests/non_functional/stress/test_reliability_resultats_reproductibles.py
   │  DESCRIPTION  : Tests de fiabilité : résultats reproductibles (lecture idempotente).
-  │  ASSERT       : Le JSON produit-il les mêmes résultats à chaque lecture ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
 
@@ -325,7 +287,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_stress_10000_positions_joints
   │  FILE         : tests/non_functional/stress/test_stress_10000_positions_joints.py
   │  DESCRIPTION  : Tests de stress lourd : validation de 10 000 positions joints UR.
-  │  ASSERT       : 10 000 positions joints aléatoires dans [-3.14159, 3.14159] sont-elles toutes valides ?
   │  DEPENDS ON   : conftest.py
   └──────────────────────────────────────────────────────────────
 
@@ -333,7 +294,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_stress_10000_timesteps
   │  FILE         : tests/non_functional/stress/test_stress_10000_timesteps.py
   │  DESCRIPTION  : Tests de stress : accumulation 10 000 timesteps sans dérive numérique.
-  │  ASSERT       : 10 000 timesteps URe (8ms) s'accumulent-ils sans dérive ?
   │  DEPENDS ON   : conftest.py
   └──────────────────────────────────────────────────────────────
 
@@ -341,7 +301,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_stress_1000_vitesses_bras
   │  FILE         : tests/non_functional/stress/test_stress_1000_vitesses.py
   │  DESCRIPTION  : Tests de stress : validation de 1 000 valeurs de vitesse bras UR.
-  │  ASSERT       : 1 000 valeurs de vitesse bras [0.1, 3.14] sont-elles toutes valides ?
   │  DEPENDS ON   : conftest.py
   └──────────────────────────────────────────────────────────────
 
@@ -349,7 +308,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_stress_20000_calculs_trigo
   │  FILE         : tests/non_functional/stress/test_stress_20000_calculs_trigo.py
   │  DESCRIPTION  : Tests de stress lourd : 20 000 calculs trigonométriques pour cinématique UR.
-  │  ASSERT       : 20 000 calculs sin/cos/atan2 pour cinématique UR sont-ils tous stables ?
   │  DEPENDS ON   : conftest.py
   └──────────────────────────────────────────────────────────────
 
@@ -357,7 +315,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_stress_2000_distances_3d
   │  FILE         : tests/non_functional/stress/test_stress_2000_distances.py
   │  DESCRIPTION  : Tests de stress : calcul de 2 000 distances euclidiennes 3D sans erreur.
-  │  ASSERT       : 2 000 distances euclidiennes 3D sont-elles calculées sans erreur numérique ?
   │  DEPENDS ON   : conftest.py
   └──────────────────────────────────────────────────────────────
 
@@ -365,7 +322,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_stress_200_positions_gripper
   │  FILE         : tests/non_functional/stress/test_stress_200_positions_gripper.py
   │  DESCRIPTION  : 200 positions du gripper Robotiq 3F sont-elles toutes valides ?
-  │  ASSERT       : 200 positions du gripper Robotiq 3F sont-elles toutes valides ?
   │  DEPENDS ON   : conftest.py
   └──────────────────────────────────────────────────────────────
 
@@ -373,7 +329,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_stress_3000_calculs_trigo
   │  FILE         : tests/non_functional/stress/test_stress_3000_calculs_trigo.py
   │  DESCRIPTION  : Tests de stress : 3 000 calculs trigonométriques pour cinématique UR.
-  │  ASSERT       : 3 000 calculs sin/cos pour cinématique inversée UR sont-ils stables ?
   │  DEPENDS ON   : conftest.py
   └──────────────────────────────────────────────────────────────
 
@@ -381,7 +336,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_stress_50000_timesteps
   │  FILE         : tests/non_functional/stress/test_stress_50000_timesteps.py
   │  DESCRIPTION  : Tests de stress lourd : accumulation de 50 000 timesteps sans dérive numérique.
-  │  ASSERT       : 50 000 timesteps URe (8ms) s'accumulent-ils sans dérive ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c
   └──────────────────────────────────────────────────────────────
 
@@ -389,7 +343,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_stress_5000_lectures_json
   │  FILE         : tests/non_functional/stress/test_stress_5000_lectures_json.py
   │  DESCRIPTION  : Tests de stress lourd : 5 000 lectures consécutives du JSON sans erreur.
-  │  ASSERT       : Le fichier simulation_results.json supporte-t-il 5 000 lectures consécutives ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
 
@@ -397,7 +350,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_stress_500_positions_joints
   │  FILE         : tests/non_functional/stress/test_stress_500_positions_joints.py
   │  DESCRIPTION  : Tests de stress : validation de 500 positions joints UR sans erreur.
-  │  ASSERT       : 500 positions joints aléatoires sont-elles toutes dans les limites UR ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c
   └──────────────────────────────────────────────────────────────
 
@@ -405,7 +357,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_stress_longue_duree_1
   │  FILE         : tests/non_functional/stress/test_stress_longue_duree_1.py
   │  DESCRIPTION  : Tests de stress longue durée — partie 1/3.
-  │  ASSERT       : Stress longue durée 1/3 : grasp_events stable après attente.
   │  JSON KEYS    : grasp_events
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -414,7 +365,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_stress_longue_duree_2
   │  FILE         : tests/non_functional/stress/test_stress_longue_duree_2.py
   │  DESCRIPTION  : Tests de stress longue durée — partie 2/3.
-  │  ASSERT       : Stress longue durée 2/3 : release_events stable après attente.
   │  JSON KEYS    : release_events
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -423,7 +373,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_stress_longue_duree_3
   │  FILE         : tests/non_functional/stress/test_stress_longue_duree_3.py
   │  DESCRIPTION  : Tests de stress longue durée — partie 3/3.
-  │  ASSERT       : Stress longue durée 3/3 : séquence complète stable après attente prolongée.
   │  JSON KEYS    : sequence_complete
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -432,7 +381,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_stress_positions_gripper_coherentes
   │  FILE         : tests/non_functional/stress/test_stress_positions_gripper_coherentes.py
   │  DESCRIPTION  : Les 3 doigts du gripper ont-ils des positions identiques lors de la saisie ?
-  │  ASSERT       : Les 3 doigts du gripper ont-ils des positions identiques lors de la saisie ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c
   └──────────────────────────────────────────────────────────────
 
@@ -444,7 +392,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_duree_attente_canette
   │  FILE         : tests/non_functional/realtime/test_duree_attente_canette.py
   │  DESCRIPTION  : La durée d'attente maximale avant détection est-elle < 20s ?
-  │  ASSERT       : La durée d'attente maximale avant détection est-elle < 20s ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c
   └──────────────────────────────────────────────────────────────
 
@@ -452,7 +399,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_duree_attente_non_nulle
   │  FILE         : tests/non_functional/realtime/test_duree_attente_non_nulle.py
   │  DESCRIPTION  : La durée d'attente est-elle positive (simulation ne démarre pas instantanément) ?
-  │  ASSERT       : La durée d'attente est-elle positive (simulation ne démarre pas instantanément) ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c
   └──────────────────────────────────────────────────────────────
 
@@ -460,7 +406,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_duree_cycle_total_simulation
   │  FILE         : tests/non_functional/realtime/test_duree_cycle_total_simulation.py
   │  DESCRIPTION  : La durée totale de simulation (JSON) est-elle dans les limites temps réel ?
-  │  ASSERT       : La durée totale de simulation (JSON) est-elle dans les limites temps réel ?
   │  JSON KEYS    : duration
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -469,7 +414,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_duree_par_canette_acceptable
   │  FILE         : tests/non_functional/realtime/test_duree_par_canette_acceptable.py
   │  DESCRIPTION  : La durée moyenne par canette est-elle < 100s ?
-  │  ASSERT       : La durée moyenne par canette est-elle < 100s ?
   │  JSON KEYS    : duration|grasp_events
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -478,7 +422,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_duree_phase_grasping
   │  FILE         : tests/non_functional/realtime/test_duree_phase_grasping.py
   │  DESCRIPTION  : La durée de la phase GRASPING (counter=8 steps) est-elle < 1s ?
-  │  ASSERT       : La durée de la phase GRASPING (counter=8 steps) est-elle < 1s ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c
   └──────────────────────────────────────────────────────────────
 
@@ -486,7 +429,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_duree_phase_releasing
   │  FILE         : tests/non_functional/realtime/test_duree_phase_releasing.py
   │  DESCRIPTION  : La durée de la phase RELEASING (counter=8 steps) est-elle < 1s ?
-  │  ASSERT       : La durée de la phase RELEASING (counter=8 steps) est-elle < 1s ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c
   └──────────────────────────────────────────────────────────────
 
@@ -494,7 +436,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_duree_retour_position
   │  FILE         : tests/non_functional/realtime/test_duree_retour_position.py
   │  DESCRIPTION  : La durée de retour en position d'attente est-elle < 15s ?
-  │  ASSERT       : La durée de retour en position d'attente est-elle < 15s ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c
   └──────────────────────────────────────────────────────────────
 
@@ -502,7 +443,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_duree_rotation_bras
   │  FILE         : tests/non_functional/realtime/test_duree_rotation_bras.py
   │  DESCRIPTION  : La durée de rotation du bras vers la position de dépôt est-elle < 15s ?
-  │  ASSERT       : La durée de rotation du bras vers la position de dépôt est-elle < 15s ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c
   └──────────────────────────────────────────────────────────────
 
@@ -514,7 +454,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_boundary_canette_detectee_sous_seuil
   │  FILE         : tests/non_functional/boundary/test_boundary_canette_detectee_sous_seuil.py
   │  DESCRIPTION  : Une valeur sous le seuil → canette détectée.
-  │  ASSERT       : Une valeur sous le seuil → canette détectée.
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c
   └──────────────────────────────────────────────────────────────
 
@@ -522,7 +461,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_boundary_canette_non_detectee_au_dessus
   │  FILE         : tests/non_functional/boundary/test_boundary_canette_non_detectee_au_dessus.py
   │  DESCRIPTION  : Une valeur au-dessus du seuil → pas de canette.
-  │  ASSERT       : Une valeur au-dessus du seuil → pas de canette.
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c
   └──────────────────────────────────────────────────────────────
 
@@ -530,7 +468,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_boundary_deplacement_can_maximum
   │  FILE         : tests/non_functional/boundary/test_boundary_deplacement_can_maximum.py
   │  DESCRIPTION  : Aucune canette n'a-t-elle été éjectée hors de la scène (< 7.5m) ?
-  │  ASSERT       : Aucune canette n'a-t-elle été éjectée hors de la scène (< 7.5m) ?
   │  JSON KEYS    : can_initial_positions|can_final_positions|can_names
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -539,7 +476,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_boundary_deplacement_can_minimum
   │  FILE         : tests/non_functional/boundary/test_boundary_deplacement_can_minimum.py
   │  DESCRIPTION  : Au moins une canette s'est-elle déplacée d'au moins 1 mm ?
-  │  ASSERT       : Au moins une canette s'est-elle déplacée d'au moins 1 mm ?
   │  JSON KEYS    : can_initial_positions|can_final_positions
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -548,7 +484,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_boundary_joint_hors_limites_negatif
   │  FILE         : tests/non_functional/boundary/test_boundary_joint_hors_limites_negatif.py
   │  DESCRIPTION  : Position en dessous du minimum → hors limite détectée.
-  │  ASSERT       : Position en dessous du minimum → hors limite détectée.
   │  DEPENDS ON   : conftest.py
   └──────────────────────────────────────────────────────────────
 
@@ -556,7 +491,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_boundary_joint_hors_limites_positif
   │  FILE         : tests/non_functional/boundary/test_boundary_joint_hors_limites_positif.py
   │  DESCRIPTION  : Position au-dessus du maximum → hors limite détectée.
-  │  ASSERT       : Position au-dessus du maximum → hors limite détectée.
   │  DEPENDS ON   : conftest.py
   └──────────────────────────────────────────────────────────────
 
@@ -564,7 +498,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_boundary_joint_maximum
   │  FILE         : tests/non_functional/boundary/test_boundary_joint_maximum.py
   │  DESCRIPTION  : Position exactement au maximum → doit passer.
-  │  ASSERT       : Position exactement au maximum → doit passer.
   │  DEPENDS ON   : conftest.py
   └──────────────────────────────────────────────────────────────
 
@@ -572,7 +505,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_boundary_joint_minimum
   │  FILE         : tests/non_functional/boundary/test_boundary_joint_minimum.py
   │  DESCRIPTION  : Position exactement au minimum → doit passer.
-  │  ASSERT       : Position exactement au minimum → doit passer.
   │  DEPENDS ON   : conftest.py
   └──────────────────────────────────────────────────────────────
 
@@ -580,7 +512,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_boundary_joint_zero
   │  FILE         : tests/non_functional/boundary/test_boundary_joint_zero.py
   │  DESCRIPTION  : Position zéro (position neutre) → doit passer.
-  │  ASSERT       : Position zéro (position neutre) → doit passer.
   │  DEPENDS ON   : conftest.py
   └──────────────────────────────────────────────────────────────
 
@@ -588,7 +519,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_boundary_positions_cibles_dans_limites
   │  FILE         : tests/non_functional/boundary/test_boundary_positions_cibles_dans_limites.py
   │  DESCRIPTION  : Toutes les positions cibles du contrôleur sont-elles dans les limites ?
-  │  ASSERT       : Toutes les positions cibles du contrôleur sont-elles dans les limites ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c
   └──────────────────────────────────────────────────────────────
 
@@ -596,7 +526,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_boundary_seuil_capteur_valide
   │  FILE         : tests/non_functional/boundary/test_boundary_seuil_capteur_valide.py
   │  DESCRIPTION  : Le seuil de détection (500) est-il dans la plage capteur ?
-  │  ASSERT       : Le seuil de détection (500) est-il dans la plage capteur ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c
   └──────────────────────────────────────────────────────────────
 
@@ -604,7 +533,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_boundary_valeur_exactement_au_seuil
   │  FILE         : tests/non_functional/boundary/test_boundary_valeur_exactement_au_seuil.py
   │  DESCRIPTION  : Une valeur exactement égale au seuil → cas limite (non déclenché).
-  │  ASSERT       : Une valeur exactement égale au seuil → cas limite (non déclenché).
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c
   └──────────────────────────────────────────────────────────────
 
@@ -612,7 +540,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_boundary_wrist_position_rotation
   │  FILE         : tests/non_functional/boundary/test_boundary_wrist_position_rotation.py
   │  DESCRIPTION  : Le seuil de rotation du poignet (-2.3 rad) est-il dans les limites ?
-  │  ASSERT       : Le seuil de rotation du poignet (-2.3 rad) est-il dans les limites ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
 
@@ -624,7 +551,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_all_cans_grasped
   │  FILE         : tests/functional/test_all_cans_grasped.py
   │  DESCRIPTION  : Test fonctionnel : toutes les canettes ont-elles été saisies ?
-  │  ASSERT       : Toutes les canettes de la scène ont-elles été saisies (grasp_events == total_cans) ?
   │  JSON KEYS    : total_cans|grasp_events
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -633,7 +559,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_arm_returns_to_waiting
   │  FILE         : tests/functional/test_arm_returns_to_waiting.py
   │  DESCRIPTION  : Test fonctionnel : le bras retourne-t-il en position d'attente après chaque dépôt ?
-  │  ASSERT       : Le bras retourne-t-il en position WAITING pour chaque canette traitée ?
   │  JSON KEYS    : total_cans|return_events
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -642,7 +567,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_arm_rotates
   │  FILE         : tests/functional/test_arm_rotates.py
   │  DESCRIPTION  : Test fonctionnel : le bras a-t-il effectué toutes les rotations ?
-  │  ASSERT       : Le bras a-t-il effectué une rotation vers la position de dépôt pour chaque canette ?
   │  JSON KEYS    : total_cans|rotation_events
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -651,7 +575,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_arm_target_positions_conformes
   │  FILE         : tests/functional/test_arm_target_positions_conformes.py
   │  DESCRIPTION  : Test fonctionnel : les positions cibles du bras sont-elles dans les limites UR ?
-  │  ASSERT       : Les 4 positions cibles [-1.88, -2.14, -2.38, -1.51] sont-elles dans [-3.14, 3.14] ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c
   └──────────────────────────────────────────────────────────────
 
@@ -659,7 +582,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_distance_sensor_triggered
   │  FILE         : tests/functional/test_distance_sensor_triggered.py
   │  DESCRIPTION  : Test fonctionnel : le capteur de distance a-t-il détecté une canette ?
-  │  ASSERT       : Le capteur de distance a-t-il détecté une canette ?
   │  JSON KEYS    : distance_sensor_triggered
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -668,7 +590,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_full_state_machine_cycle
   │  FILE         : tests/functional/test_full_state_machine_cycle.py
   │  DESCRIPTION  : Test fonctionnel : le cycle complet de la machine d'états est-il réalisé ?
-  │  ASSERT       : Le cycle WAITING→GRASPING→ROTATING→RELEASING→ROTATING_BACK est-il complet pour toutes les canettes ?
   │  JSON KEYS    : total_cans|grasp_events|rotation_events|release_events|return_events
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -677,7 +598,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_gripper_closed_on_can
   │  FILE         : tests/functional/test_gripper_closed_on_can.py
   │  DESCRIPTION  : Test fonctionnel : le gripper s'est-il fermé sur toutes les canettes ?
-  │  ASSERT       : Le gripper s'est-il fermé sur toutes les canettes de la scène ?
   │  JSON KEYS    : total_cans|grasp_events|gripper_closed
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -686,7 +606,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_gripper_releases_can
   │  FILE         : tests/functional/test_gripper_releases_can.py
   │  DESCRIPTION  : Test fonctionnel : le gripper s'est-il ouvert pour relâcher les canettes ?
-  │  ASSERT       : Le gripper s'est-il ouvert pour relâcher toutes les canettes ?
   │  JSON KEYS    : total_cans|release_events|gripper_opened
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -695,7 +614,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_release_after_grasp
   │  FILE         : tests/functional/test_release_after_grasp.py
   │  DESCRIPTION  : Test fonctionnel : les relâches se produisent-elles après les saisies ?
-  │  ASSERT       : Les relâches se produisent-elles après les saisies et en nombre égal ?
   │  JSON KEYS    : total_cans|grasp_events|release_events
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -704,7 +622,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_wrist_reaches_target
   │  FILE         : tests/functional/test_wrist_reaches_target.py
   │  DESCRIPTION  : Test fonctionnel : le poignet a-t-il atteint la position cible ?
-  │  ASSERT       : Le poignet (wrist_1_joint) a-t-il atteint la position cible (-2.3 rad) ?
   │  JSON KEYS    : wrist_reached_target|total_cans|release_events
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -717,7 +634,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_capteur_distance_declenche_grasping
   │  FILE         : tests/functional/communication/test_capteur_distance_declenche_grasping.py
   │  DESCRIPTION  : Le signal du capteur a-t-il bien déclenché la phase GRASPING ?
-  │  ASSERT       : Le signal du capteur a-t-il bien déclenché la phase GRASPING ?
   │  JSON KEYS    : grasp_events
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -726,7 +642,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_capteur_distance_repond_a_toutes_les_canettes
   │  FILE         : tests/functional/communication/test_capteur_distance_repond_a_toutes_les_canettes.py
   │  DESCRIPTION  : Le capteur a-t-il répondu à toutes les canettes qui sont passées devant lui ?
-  │  ASSERT       : Le capteur a-t-il répondu à toutes les canettes qui sont passées devant lui ?
   │  JSON KEYS    : total_cans|grasp_events
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -735,7 +650,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_capteur_distance_signal_recu
   │  FILE         : tests/functional/communication/test_capteur_distance_signal_recu.py
   │  DESCRIPTION  : Le capteur de distance a-t-il transmis un signal au contrôleur ?
-  │  ASSERT       : Le capteur de distance a-t-il transmis un signal au contrôleur ?
   │  JSON KEYS    : distance_sensor_triggered
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -744,7 +658,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_capteur_wrist_coherence_releasing_retour
   │  FILE         : tests/functional/communication/test_capteur_wrist_coherence_releasing_retour.py
   │  DESCRIPTION  : Les transitions releasing et retour sont-elles en nombre cohérent ?
-  │  ASSERT       : Les transitions releasing et retour sont-elles en nombre cohérent ?
   │  JSON KEYS    : release_events|return_events
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -753,7 +666,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_capteur_wrist_declenche_retour_waiting
   │  FILE         : tests/functional/communication/test_capteur_wrist_declenche_retour_waiting.py
   │  DESCRIPTION  : Le capteur wrist a-t-il déclenché la transition ROTATING_BACK→WAITING ?
-  │  ASSERT       : Le capteur wrist a-t-il déclenché la transition ROTATING_BACK→WAITING ?
   │  JSON KEYS    : return_events
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -762,7 +674,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_capteur_wrist_declenche_transition_releasing
   │  FILE         : tests/functional/communication/test_capteur_wrist_declenche_transition_releasing.py
   │  DESCRIPTION  : Le capteur wrist a-t-il déclenché la transition ROTATING→RELEASING ?
-  │  ASSERT       : Le capteur wrist a-t-il déclenché la transition ROTATING→RELEASING ?
   │  JSON KEYS    : release_events
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -771,7 +682,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_capteur_wrist_signal_recu_par_controleur
   │  FILE         : tests/functional/communication/test_capteur_wrist_signal_recu_par_controleur.py
   │  DESCRIPTION  : Le capteur wrist a-t-il transmis sa position au contrôleur ?
-  │  ASSERT       : Le capteur wrist a-t-il transmis sa position au contrôleur ?
   │  JSON KEYS    : wrist_reached_target
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -780,7 +690,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_consignes_retour_transmises
   │  FILE         : tests/functional/communication/test_consignes_retour_transmises.py
   │  DESCRIPTION  : Le contrôleur a-t-il transmis les consignes de retour (0.0 rad) aux moteurs ?
-  │  ASSERT       : Le contrôleur a-t-il transmis les consignes de retour (0.0 rad) aux moteurs ?
   │  JSON KEYS    : return_events
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -789,7 +698,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_controleur_envoie_consigne_fermeture_gripper
   │  FILE         : tests/functional/communication/test_controleur_envoie_consigne_fermeture_gripper.py
   │  DESCRIPTION  : Le contrôleur a-t-il envoyé la consigne de fermeture aux moteurs du gripper ?
-  │  ASSERT       : Le contrôleur a-t-il envoyé la consigne de fermeture aux moteurs du gripper ?
   │  JSON KEYS    : gripper_closed
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -798,7 +706,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_controleur_envoie_consigne_ouverture_gripper
   │  FILE         : tests/functional/communication/test_controleur_envoie_consigne_ouverture_gripper.py
   │  DESCRIPTION  : Le contrôleur a-t-il envoyé la consigne d'ouverture aux moteurs du gripper ?
-  │  ASSERT       : Le contrôleur a-t-il envoyé la consigne d'ouverture aux moteurs du gripper ?
   │  JSON KEYS    : gripper_opened
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -807,7 +714,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_controleur_transmet_consignes_rotation_bras
   │  FILE         : tests/functional/communication/test_controleur_transmet_consignes_rotation_bras.py
   │  DESCRIPTION  : Le contrôleur a-t-il transmis les consignes de rotation aux moteurs du bras ?
-  │  ASSERT       : Le contrôleur a-t-il transmis les consignes de rotation aux moteurs du bras ?
   │  JSON KEYS    : rotation_events
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -816,7 +722,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_fermeture_puis_ouverture_gripper
   │  FILE         : tests/functional/communication/test_fermeture_puis_ouverture_gripper.py
   │  DESCRIPTION  : La séquence fermeture→ouverture est-elle respectée ?
-  │  ASSERT       : La séquence fermeture→ouverture est-elle respectée ?
   │  JSON KEYS    : gripper_closed|gripper_opened|grasp_events|release_events
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -825,7 +730,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_gripper_communique_sur_toutes_les_canettes
   │  FILE         : tests/functional/communication/test_gripper_communique_sur_toutes_les_canettes.py
   │  DESCRIPTION  : Le gripper a-t-il été commandé pour chaque canette de la scène ?
-  │  ASSERT       : Le gripper a-t-il été commandé pour chaque canette de la scène ?
   │  JSON KEYS    : total_cans|grasp_events
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -834,7 +738,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_json_has_required_keys
   │  FILE         : tests/functional/communication/test_json_has_required_keys.py
   │  DESCRIPTION  : Le JSON contient-il toutes les clés obligatoires ?
-  │  ASSERT       : Le JSON contient-il toutes les clés obligatoires ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
 
@@ -842,7 +745,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_json_readable_by_pytest
   │  FILE         : tests/functional/communication/test_json_readable_by_pytest.py
   │  DESCRIPTION  : Le JSON de résultats est-il présent et lisible ?
-  │  ASSERT       : Le JSON de résultats est-il présent et lisible ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
 
@@ -850,7 +752,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_moteurs_bras_lèvent_canettes
   │  FILE         : tests/functional/communication/test_moteurs_bras_l#U251c#U00bfvent_canettes.py
   │  DESCRIPTION  : Les moteurs du bras ont-ils physiquement soulevé les canettes ?
-  │  ASSERT       : Les moteurs du bras ont-ils physiquement soulevé les canettes ?
   │  JSON KEYS    : max_can_heights
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -859,7 +760,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_superviseur_a_decouvert_tous_les_noeuds
   │  FILE         : tests/functional/communication/test_superviseur_a_decouvert_tous_les_noeuds.py
   │  DESCRIPTION  : Le superviseur a-t-il découvert dynamiquement tous les nœuds Can de la scène ?
-  │  ASSERT       : Le superviseur a-t-il découvert dynamiquement tous les nœuds Can de la scène ?
   │  JSON KEYS    : total_cans|can_names
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -868,7 +768,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_superviseur_a_lu_positions_finales
   │  FILE         : tests/functional/communication/test_superviseur_a_lu_positions_finales.py
   │  DESCRIPTION  : Le superviseur a-t-il lu les positions finales des canettes après simulation ?
-  │  ASSERT       : Le superviseur a-t-il lu les positions finales des canettes après simulation ?
   │  JSON KEYS    : can_initial_positions|can_final_positions|total_cans
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -877,7 +776,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_superviseur_a_lu_positions_initiales
   │  FILE         : tests/functional/communication/test_superviseur_a_lu_positions_initiales.py
   │  DESCRIPTION  : Le superviseur a-t-il lu les positions initiales des canettes dans la scène ?
-  │  ASSERT       : Le superviseur a-t-il lu les positions initiales des canettes dans la scène ?
   │  JSON KEYS    : can_initial_positions|total_cans
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -886,7 +784,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_superviseur_a_suivi_hauteurs_en_temps_reel
   │  FILE         : tests/functional/communication/test_superviseur_a_suivi_hauteurs_en_temps_reel.py
   │  DESCRIPTION  : Le superviseur a-t-il suivi les hauteurs Z des canettes en temps réel ?
-  │  ASSERT       : Le superviseur a-t-il suivi les hauteurs Z des canettes en temps réel ?
   │  JSON KEYS    : max_can_heights|can_initial_positions
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -895,7 +792,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_superviseur_transmet_donnees_a_pytest
   │  FILE         : tests/functional/communication/test_superviseur_transmet_donnees_a_pytest.py
   │  DESCRIPTION  : Le superviseur a-t-il bien transmis toutes les données à pytest via le JSON ?
-  │  ASSERT       : Le superviseur a-t-il bien transmis toutes les données à pytest via le JSON ?
   │  JSON KEYS    : total_cans|per_can
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
@@ -904,7 +800,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_supervisor_json_has_duration
   │  FILE         : tests/functional/communication/test_supervisor_json_has_duration.py
   │  DESCRIPTION  : Le JSON contient-il une durée de simulation valide ?
-  │  ASSERT       : Le JSON contient-il une durée de simulation valide ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
 
@@ -912,7 +807,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_supervisor_writes_json
   │  FILE         : tests/functional/communication/test_supervisor_writes_json.py
   │  DESCRIPTION  : Le superviseur a-t-il généré le fichier de résultats ?
-  │  ASSERT       : Le superviseur a-t-il généré le fichier de résultats ?
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────
 
@@ -920,7 +814,6 @@ NOTE : Ce fichier ne change que si tu ajoutes/modifies/supprimes des tests.
   │  FUNCTION     : test_trois_robots_recoivent_consignes
   │  FILE         : tests/functional/communication/test_trois_robots_recoivent_consignes.py
   │  DESCRIPTION  : Les 3 robots ont-ils chacun reçu et exécuté les consignes du contrôleur ?
-  │  ASSERT       : Les 3 robots ont-ils chacun reçu et exécuté les consignes du contrôleur ?
   │  JSON KEYS    : ur3e_grasped|ur5e_grasped|ur10e_grasped
   │  DEPENDS ON   : conftest.py|controllers/ure_can_grasper/ure_can_grasper.c|controllers/ure_supervisor/ure_supervisor.py|reports/simulation_results.json
   └──────────────────────────────────────────────────────────────

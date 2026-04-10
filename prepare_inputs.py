@@ -121,7 +121,7 @@ removed = [l[1:].strip() for l in full_diff.split('\n') if l.startswith('-') and
 added   = [l[1:].strip() for l in full_diff.split('\n') if l.startswith('+') and not l.startswith('+++')]
 
 lines = []
-lines += ["="*100, "GIT DIFF — ur-simulation  [FICHIER DYNAMIQUE]",
+lines += ["="*100, "GIT DIFF — ur-simulation",
           f"Generated : {NOW}",
           f"HEAD      : {HEAD['hash'][:8]}  {HEAD['date'][:19]}  \"{HEAD['msg']}\"",
           "="*100, ""]
@@ -229,10 +229,10 @@ for tid in history_by_test:
 total_commits = len(set(e['commit_hash'] for e in history_store.values()))
 
 lines = []
-lines += ["="*110, "TEST HISTORY — ur-simulation  [FICHIER DYNAMIQUE]",
+lines += ["="*110, "TEST HISTORY — ur-simulation",
           f"Generated : {NOW}",
           f"HEAD      : {HEAD['hash'][:8]}  {HEAD['date'][:19]}  speed={HEAD.get('speed')}  \"{HEAD['msg']}\"",
-          f"Commits en mémoire : {total_commits}  |  Tests : {len(tests_data)}  |  Nouvelles entrées : {new_entries}",
+          f"Commits en mémoire : {total_commits}  |  Tests : {len(tests_data)}",
           "="*110, ""]
 
 lines += ["─"*110, "RÉSUMÉ PAR TEST", "─"*110,
@@ -264,8 +264,12 @@ for t in tests_data:
     lines.append(f"  │  LAST      : {last}  (commit {h[0]['commit_hash'] if h else '-'}, {h[0]['commit_date'] if h else '-'})")
     lines.append(f"  │  BILAN     : {passed}/{len(h)} PASSED | {len(h)-passed} FAILED")
     lines.append(f"  │  TIMELINE  : {tl}  ← récent à gauche")
+    lines.append(f"  │  HISTORIQUE PAR COMMIT :")
+    for r in h:
+        status_icon = "✓ PASSED" if r['result'] == 'PASSED' else "✗ FAILED"
+        lines.append(f"  │    {r['commit_hash']} | {r['commit_date']} | speed={r['speed']} | {status_icon} | \"{r['commit_message']}\"")
     if fails:
-        lines.append(f"  │  ÉCHECS    :")
+        lines.append(f"  │  COMMITS EN ÉCHEC :")
         for fh, fd, fs, fm in fails[:8]: lines.append(f"  │    {fh} | {fd} | speed={fs} | \"{fm}\"")
     lines.append(f"  └──────────────────────────────────────────────────────")
     lines.append("")
