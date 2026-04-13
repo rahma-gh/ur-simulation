@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """
 prepare_inputs.py — ur-simulation
-Génère les 2 fichiers dynamiques à chaque push sur main :
+Génère les fichiers dynamiques à chaque push sur main :
   - ai_inputs/git_diff.txt
-  - ai_inputs/test_history.txt
+  - ai_inputs/tests_merged.txt     (fusion de test_cases + test_history)
+  - ai_inputs/codebase_map.txt     (version allégée : file_path, module, function, dependencies)
 """
 
 import os, re, json, subprocess
@@ -33,10 +34,10 @@ def parse_tests():
             rel   = os.path.relpath(fpath, PROJECT_ROOT).replace('\\','/')
             with open(fpath, encoding='utf-8') as f: src = f.read()
 
-            # Nouvelle structure : functional/ ou non_functional/
-            parts    = rel.split('/')          # ['tests','functional','communication','test_x.py']
+            # Deux catégories uniquement : functional ou non_functional
+            parts    = rel.split('/')
             category = parts[1] if len(parts) >= 2 else 'root'
-            subcat   = parts[2] if len(parts) >= 4 else ''
+            # subcategory supprimée — on garde seulement functional / non_functional
 
             fn   = re.search(r'def (test_\w+)\(', src)
             fn   = fn.group(1) if fn else fname.replace('.py','')
@@ -63,7 +64,6 @@ def parse_tests():
                 'test_id':            fname.replace('.py',''),
                 'test_function':      fn,
                 'category':           category,
-                'subcategory':        subcat,
                 'file_path':          rel,
                 'short_description':  doc1 or doc2,
                 'assert_description': doc2,
@@ -74,7 +74,7 @@ def parse_tests():
             })
     return tests
 
-print("  [1/3] Parsing des tests...")
+print("  [1/4] Parsing des tests...")
 tests_data = parse_tests()
 print(f"        {len(tests_data)} tests  |  functional: {sum(1 for t in tests_data if t['category']=='functional')}  |  non_functional: {sum(1 for t in tests_data if t['category']=='non_functional')}")
 
@@ -97,7 +97,7 @@ def get_commits(n=30):
         commits.append(c)
     return commits
 
-print("  [2/3] Lecture du git log...")
+print("  [2/4] Lecture du git log...")
 commits = get_commits(30)
 HEAD    = commits[0]
 PREV    = commits[1] if len(commits) > 1 else commits[0]
@@ -109,7 +109,7 @@ for t in tests_data:
     for dep in t['source_dependencies'].split('|'):
         if dep.strip(): dep_map[dep.strip()].append(t['test_id'])
 
-print("  [3/3] Génération des fichiers dynamiques...")
+print("  [3/4] Génération git_diff + tests_merged...")
 
 # ════════════════════════════════════════════════════════════
 # git_diff.txt
@@ -121,7 +121,7 @@ removed = [l[1:].strip() for l in full_diff.split('\n') if l.startswith('-') and
 added   = [l[1:].strip() for l in full_diff.split('\n') if l.startswith('+') and not l.startswith('+++')]
 
 lines = []
-lines += ["="*100, "GIT DIFF — ur-simulation",
+lines += ["="*100, "GIT DIFF — ur-simulation  [FICHIER DYNAMIQUE]",
           f"Generated : {NOW}",
           f"HEAD      : {HEAD['hash'][:8]}  {HEAD['date'][:19]}  \"{HEAD['msg']}\"",
           "="*100, ""]
@@ -151,8 +151,7 @@ for cf in changed_files:
     for tid in affected:
         for t in tests_data:
             if t['test_id'] == tid:
-                cat = f"{t['category']}/{t['subcategory']}" if t['subcategory'] else t['category']
-                by_cat[cat].append(tid); break
+                by_cat[t['category']].append(tid); break
     lines.append(f"  FICHIER: {cf}  →  {len(affected)} tests potentiellement impactés")
     for cat, tids in sorted(by_cat.items()):
         lines.append(f"    [{cat}]  ({len(tids)})")
@@ -171,7 +170,7 @@ with open(os.path.join(OUTPUT_DIR, 'git_diff.txt'), 'w', encoding='utf-8') as f:
 print(f"        ✓ ai_inputs/git_diff.txt")
 
 # ════════════════════════════════════════════════════════════
-# test_history.txt
+# Historique — mise à jour du store
 # ════════════════════════════════════════════════════════════
 SIM_KEYS = {'grasp_events','release_events','return_events','rotation_events',
             'all_cans_grasped','all_cans_released','sequence_complete','gripper_closed',
@@ -183,7 +182,7 @@ def infer_result(test, commit):
     reads_json = test['_reads_json']
     reads_c    = test['_reads_c']
     if not reads_json and not reads_c: return 'PASSED'
-    if test['category'] == 'non_functional' and test['subcategory'] == 'stress' and not reads_json:
+    if test['category'] == 'non_functional' and not reads_json:
         return 'PASSED'
     if reads_c and not reads_json:
         if speed == 0.0 and any(k in test['test_id'] for k in
@@ -213,7 +212,6 @@ for c in commits:
                 'changed_files':  '|'.join(c.get('changed_files', [])),
                 'test_id':        t['test_id'],
                 'category':       t['category'],
-                'subcategory':    t['subcategory'],
                 'result':         infer_result(t, c),
             }
             new_entries += 1
@@ -228,53 +226,188 @@ for tid in history_by_test:
 
 total_commits = len(set(e['commit_hash'] for e in history_store.values()))
 
-lines = []
-lines += ["="*110, "TEST HISTORY — ur-simulation",
-          f"Generated : {NOW}",
-          f"HEAD      : {HEAD['hash'][:8]}  {HEAD['date'][:19]}  speed={HEAD.get('speed')}  \"{HEAD['msg']}\"",
-          f"Commits en mémoire : {total_commits}  |  Tests : {len(tests_data)}",
-          "="*110, ""]
+# ════════════════════════════════════════════════════════════
+# tests_merged.txt  (fusion test_cases + test_history, sans doublon test_id)
+# ════════════════════════════════════════════════════════════
+n_func    = sum(1 for t in tests_data if t['category'] == 'functional')
+n_nonfunc = sum(1 for t in tests_data if t['category'] == 'non_functional')
 
-lines += ["─"*110, "RÉSUMÉ PAR TEST", "─"*110,
-          f"  {'TEST_ID':<55} {'CATÉGORIE':<30} {'LAST':<7} {'PASS':>4} {'FAIL':>4} {'RUNS':>4}  TIMELINE",
-          f"  {'─'*55} {'─'*30} {'─'*7} {'─'*4} {'─'*4} {'─'*4}  {'─'*25}"]
+lines = []
+lines += ["="*100,
+          "TESTS MERGED — ur-simulation  [FICHIER DYNAMIQUE]",
+          f"Generated  : {NOW}",
+          f"HEAD       : {HEAD['hash'][:8]}  {HEAD['date'][:19]}  speed={HEAD.get('speed')}  \"{HEAD['msg']}\"",
+          f"Total      : {len(tests_data)} tests  |  functional: {n_func}  |  non_functional: {n_nonfunc}",
+          f"Commits    : {total_commits}  |  Nouvelles entrées : {new_entries}",
+          "="*100,
+          "NOTE : Ce fichier fusionne description statique et historique d'exécution par test.",
+          "       Classification : functional | non_functional uniquement (sans sous-catégorie).",
+          ""]
+
+# Résumé global
+lines += ["─"*100, "RÉSUMÉ PAR TEST", "─"*100,
+          f"  {'TEST_ID':<55} {'CATÉGORIE':<18} {'LAST':<7} {'PASS':>4} {'FAIL':>4} {'RUNS':>4}  TIMELINE",
+          f"  {'─'*55} {'─'*18} {'─'*7} {'─'*4} {'─'*4} {'─'*4}  {'─'*25}"]
 
 for t in tests_data:
     h      = history_by_test[t['test_id']]
     passed = sum(1 for r in h if r['result'] == 'PASSED')
     last   = h[0]['result'] if h else '?'
-    cat    = f"{t['category']}/{t['subcategory']}" if t['subcategory'] else t['category']
     tl     = ''.join('P' if r['result']=='PASSED' else 'F' for r in h[:25])
-    lines.append(f"  {t['test_id']:<55} {cat:<30} {last:<7} {passed:>4} {len(h)-passed:>4} {len(h):>4}  {tl}")
+    lines.append(f"  {t['test_id']:<55} {t['category']:<18} {last:<7} {passed:>4} {len(h)-passed:>4} {len(h):>4}  {tl}")
 lines.append("")
 
-lines += ["─"*110, "DÉTAIL PAR TEST", "─"*110, ""]
+# Détail par catégorie (functional puis non_functional)
+lines += ["─"*100, "DÉTAIL PAR TEST", "─"*100, ""]
 current_cat = None
 for t in tests_data:
-    cat_key = f"{t['category']}/{t['subcategory']}" if t['subcategory'] else t['category']
-    if cat_key != current_cat:
-        lines += ["", "━"*110, f"  CATEGORY: {cat_key.upper()}", "━"*110]
-        current_cat = cat_key
+    if t['category'] != current_cat:
+        lines += ["", "━"*100, f"  CATEGORY: {t['category'].upper()}", "━"*100]
+        current_cat = t['category']
+
     h      = history_by_test[t['test_id']]
     passed = sum(1 for r in h if r['result'] == 'PASSED')
     last   = h[0]['result'] if h else 'UNKNOWN'
     tl     = ''.join('P' if r['result']=='PASSED' else 'F' for r in h)
     fails  = [(r['commit_hash'],r['commit_date'],r['speed'],r['commit_message']) for r in h if r['result']=='FAILED']
-    lines.append(f"  ┌─ TEST_ID   : {t['test_id']}")
-    lines.append(f"  │  LAST      : {last}  (commit {h[0]['commit_hash'] if h else '-'}, {h[0]['commit_date'] if h else '-'})")
-    lines.append(f"  │  BILAN     : {passed}/{len(h)} PASSED | {len(h)-passed} FAILED")
-    lines.append(f"  │  TIMELINE  : {tl}  ← récent à gauche")
-    lines.append(f"  │  HISTORIQUE PAR COMMIT :")
-    for r in h:
-        status_icon = "✓ PASSED" if r['result'] == 'PASSED' else "✗ FAILED"
-        lines.append(f"  │    {r['commit_hash']} | {r['commit_date']} | speed={r['speed']} | {status_icon} | \"{r['commit_message']}\"")
+
+    lines.append(f"  ┌─ TEST_ID     : {t['test_id']}")
+    lines.append(f"  │  FUNCTION    : {t['test_function']}")
+    lines.append(f"  │  FILE        : {t['file_path']}")
+    lines.append(f"  │  CATEGORY    : {t['category']}")
+    if t['short_description']:
+        lines.append(f"  │  DESCRIPTION : {t['short_description']}")
+    if t['assert_description'] and t['assert_description'] != t['short_description']:
+        lines.append(f"  │  ASSERT      : {t['assert_description']}")
+    if t['json_keys_used']:
+        lines.append(f"  │  JSON KEYS   : {t['json_keys_used']}")
+    lines.append(f"  │  DEPENDS ON  : {t['source_dependencies']}")
+    lines.append(f"  │  LAST RESULT : {last}  (commit {h[0]['commit_hash'] if h else '-'}, {h[0]['commit_date'] if h else '-'})")
+    lines.append(f"  │  BILAN       : {passed}/{len(h)} PASSED | {len(h)-passed} FAILED")
+    lines.append(f"  │  TIMELINE    : {tl}  <- recent a gauche")
     if fails:
-        lines.append(f"  │  COMMITS EN ÉCHEC :")
+        lines.append(f"  │  ECHECS      :")
         for fh, fd, fs, fm in fails[:8]: lines.append(f"  │    {fh} | {fd} | speed={fs} | \"{fm}\"")
     lines.append(f"  └──────────────────────────────────────────────────────")
     lines.append("")
 
-with open(os.path.join(OUTPUT_DIR, 'test_history.txt'), 'w', encoding='utf-8') as f:
+with open(os.path.join(OUTPUT_DIR, 'tests_merged.txt'), 'w', encoding='utf-8') as f:
     f.write('\n'.join(lines))
-print(f"        ✓ ai_inputs/test_history.txt")
-print(f"\n  Terminé. store={len(history_store)} entrées, +{new_entries} nouvelles\n")
+print(f"        ✓ ai_inputs/tests_merged.txt")
+
+# ════════════════════════════════════════════════════════════
+# codebase_map.txt  (allégé : file_path, module_name, function_name, dependencies)
+# ════════════════════════════════════════════════════════════
+print("  [4/4] Generation codebase_map...")
+
+SOURCE_FILES = [
+    ('controllers/ure_can_grasper/ure_can_grasper.c', 'ure_can_grasper', 'c'),
+    ('controllers/ure_supervisor/ure_supervisor.py',  'ure_supervisor',  'python'),
+    ('conftest.py',                                    'conftest',        'python'),
+]
+
+# Dépendances inter-fichiers : quelles fonctions interagissent avec d'autres fichiers
+CROSS_FILE_DEPS = {
+    'ure_can_grasper': {
+        '<defines_enums>': [],
+        'main':            ['controllers/ure_supervisor/ure_supervisor.py'],
+    },
+    'ure_supervisor': {
+        '<module_constants>': [],
+        'dist2d':             [],
+        'discover_all_cans':  ['worlds/ure.wbt'],
+        'write_results':      ['reports/simulation_results.json'],
+        'run':                ['controllers/ure_can_grasper/ure_can_grasper.c',
+                               'reports/simulation_results.json'],
+    },
+    'conftest': {
+        'pytest_sessionstart':       ['reports/simulation_results.json'],
+        'pytest_runtest_makereport': [],
+        'pytest_sessionfinish':      ['reports/simulation_results.json'],
+        '_generate_report':          ['reports/simulation_results.json',
+                                      'controllers/ure_can_grasper/ure_can_grasper.c',
+                                      'controllers/ure_supervisor/ure_supervisor.py'],
+    },
+}
+
+def extract_functions_c(src):
+    fns = []
+    if re.search(r'#define|enum\s+\w+', src):
+        fns.append('<defines_enums>')
+    for m in re.finditer(r'^[\w\s\*]+\s+(\w+)\s*\([^)]*\)\s*\{', src, re.MULTILINE):
+        name = m.group(1)
+        if name not in ('if','for','while','switch'): fns.append(name)
+    return list(dict.fromkeys(fns))
+
+def extract_functions_py(src):
+    fns = []
+    if re.search(r'^[A-Z_]{3,}\s*=', src, re.MULTILINE):
+        fns.append('<module_constants>')
+    for m in re.finditer(r'^def (\w+)\(', src, re.MULTILINE):
+        fns.append(m.group(1))
+    return list(dict.fromkeys(fns))
+
+file_to_tests = defaultdict(lambda: defaultdict(list))
+for t in tests_data:
+    for dep in t['source_dependencies'].split('|'):
+        dep = dep.strip()
+        if dep: file_to_tests[dep][t['category']].append(t['test_id'])
+
+codebase_lines = []
+codebase_lines += ["="*100,
+                   "CODEBASE MAP — ur-simulation  [FICHIER STATIQUE]",
+                   f"Fichiers sources : {len(SOURCE_FILES)}  |  Tests couverts : {len(tests_data)}",
+                   "Colonnes : file_path | module_name | function_name | dependencies",
+                   "NOTE : Ce fichier ne change que si tu modifies le code source ou les tests.",
+                   "       'dependencies' = autres fichiers du projet avec lesquels",
+                   "       cette fonction interagit (vide = fonction autonome).",
+                   "="*100, ""]
+
+for src_rel, module_name, lang in SOURCE_FILES:
+    src_abs = os.path.join(PROJECT_ROOT, src_rel)
+    if not os.path.exists(src_abs):
+        continue
+    with open(src_abs, encoding='utf-8', errors='replace') as f:
+        src_content = f.read()
+
+    fns = extract_functions_c(src_content) if lang == 'c' else extract_functions_py(src_content)
+    cross_deps = CROSS_FILE_DEPS.get(module_name, {})
+
+    related_by_cat = file_to_tests.get(src_rel, {})
+    total_related  = sum(len(v) for v in related_by_cat.values())
+
+    codebase_lines += ["━"*100,
+                       f"FILE PATH   : {src_rel}",
+                       f"MODULE NAME : {module_name}",
+                       f"LANGUAGE    : {lang}",
+                       f"TESTS LIES  : {total_related}",
+                       "─"*100]
+
+    for fn in fns:
+        fn_deps = cross_deps.get(fn, [])
+        codebase_lines.append(f"  FUNCTION NAME : {fn}")
+        if fn_deps:
+            codebase_lines.append(f"  DEPENDENCIES  : {' | '.join(fn_deps)}")
+        else:
+            codebase_lines.append(f"  DEPENDENCIES  : (aucune)")
+        codebase_lines.append("")
+
+    if related_by_cat:
+        codebase_lines.append("  TESTS LIES PAR CATEGORIE :")
+        for cat in ['functional', 'non_functional']:
+            tids = related_by_cat.get(cat, [])
+            if tids:
+                codebase_lines.append(f"    [{cat}]  ({len(tids)})")
+                for tid in tids:
+                    codebase_lines.append(f"      - {tid}")
+    codebase_lines.append("")
+
+with open(os.path.join(OUTPUT_DIR, 'codebase_map.txt'), 'w', encoding='utf-8') as f:
+    f.write('\n'.join(codebase_lines))
+print(f"        ✓ ai_inputs/codebase_map.txt")
+
+print(f"\n  Termine. store={len(history_store)} entrees, +{new_entries} nouvelles\n")
+print("  Fichiers generes :")
+print("    - ai_inputs/git_diff.txt")
+print("    - ai_inputs/tests_merged.txt    (fusion test_cases + test_history)")
+print("    - ai_inputs/codebase_map.txt    (file_path | module | function | dependencies)")
