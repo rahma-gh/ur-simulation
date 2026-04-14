@@ -3,7 +3,7 @@
 prepare_inputs.py — ur-simulation
 Génère les fichiers dynamiques à chaque push sur main :
   - ai_inputs/git_diff.txt
-  - ai_inputs/tests_merged.txt     (fusion de test_cases + test_history)
+  - ai_inputs/tests_history.txt    (fusion de test_cases + test_history)
   - ai_inputs/codebase_map.txt     (version allégée : file_path, module, function, dependencies)
 """
 
@@ -109,7 +109,7 @@ for t in tests_data:
     for dep in t['source_dependencies'].split('|'):
         if dep.strip(): dep_map[dep.strip()].append(t['test_id'])
 
-print("  [3/4] Génération git_diff + tests_merged...")
+print("  [3/4] Génération git_diff + tests_history...")
 
 # ════════════════════════════════════════════════════════════
 # git_diff.txt
@@ -121,12 +121,12 @@ removed = [l[1:].strip() for l in full_diff.split('\n') if l.startswith('-') and
 added   = [l[1:].strip() for l in full_diff.split('\n') if l.startswith('+') and not l.startswith('+++')]
 
 lines = []
-lines += ["="*100, "GIT DIFF — ur-simulation  [FICHIER DYNAMIQUE]",
+lines += ["="*100, "GIT DIFF — ur-simulation",
           f"Generated : {NOW}",
           f"HEAD      : {HEAD['hash'][:8]}  {HEAD['date'][:19]}  \"{HEAD['msg']}\"",
           "="*100, ""]
 
-for label, c in [("LATEST COMMIT (HEAD)", HEAD), ("PREVIOUS COMMIT (HEAD~1)", PREV)]:
+for label, c in [("DERNIER COMMIT (HEAD)", HEAD), ("AVANT-DERNIER COMMIT (HEAD~1)", PREV)]:
     lines += ["─"*80, label, "─"*80]
     lines.append(f"  Hash    : {c['hash']}")
     lines.append(f"  Date    : {c['date']}")
@@ -137,8 +137,6 @@ for label, c in [("LATEST COMMIT (HEAD)", HEAD), ("PREVIOUS COMMIT (HEAD~1)", PR
 
 lines += ["─"*80, "FICHIERS MODIFIÉS", "─"*80]
 for cf in changed_files: lines.append(f"  {cf}")
-lines += ["", "─"*80, "STAT", "─"*80]
-lines.append(diff_stat)
 lines += ["", "─"*80, "LIGNES MODIFIÉES", "─"*80, "  SUPPRIMÉES:"]
 for l in removed[:20]: lines.append(f"    - {l}")
 lines += ["  AJOUTÉES:"]
@@ -227,35 +225,18 @@ for tid in history_by_test:
 total_commits = len(set(e['commit_hash'] for e in history_store.values()))
 
 # ════════════════════════════════════════════════════════════
-# tests_merged.txt  (fusion test_cases + test_history, sans doublon test_id)
+# tests_history.txt  (fusion test_cases + test_history, sans doublon test_id)
 # ════════════════════════════════════════════════════════════
 n_func    = sum(1 for t in tests_data if t['category'] == 'functional')
 n_nonfunc = sum(1 for t in tests_data if t['category'] == 'non_functional')
 
 lines = []
 lines += ["="*100,
-          "TESTS MERGED — ur-simulation  [FICHIER DYNAMIQUE]",
+          "TESTS HISTORY — ur-simulation",
           f"Generated  : {NOW}",
           f"HEAD       : {HEAD['hash'][:8]}  {HEAD['date'][:19]}  speed={HEAD.get('speed')}  \"{HEAD['msg']}\"",
-          f"Total      : {len(tests_data)} tests  |  functional: {n_func}  |  non_functional: {n_nonfunc}",
-          f"Commits    : {total_commits}  |  Nouvelles entrées : {new_entries}",
           "="*100,
-          "NOTE : Ce fichier fusionne description statique et historique d'exécution par test.",
-          "       Classification : functional | non_functional uniquement (sans sous-catégorie).",
           ""]
-
-# Résumé global
-lines += ["─"*100, "RÉSUMÉ PAR TEST", "─"*100,
-          f"  {'TEST_ID':<55} {'CATÉGORIE':<18} {'LAST':<7} {'PASS':>4} {'FAIL':>4} {'RUNS':>4}  TIMELINE",
-          f"  {'─'*55} {'─'*18} {'─'*7} {'─'*4} {'─'*4} {'─'*4}  {'─'*25}"]
-
-for t in tests_data:
-    h      = history_by_test[t['test_id']]
-    passed = sum(1 for r in h if r['result'] == 'PASSED')
-    last   = h[0]['result'] if h else '?'
-    tl     = ''.join('P' if r['result']=='PASSED' else 'F' for r in h[:25])
-    lines.append(f"  {t['test_id']:<55} {t['category']:<18} {last:<7} {passed:>4} {len(h)-passed:>4} {len(h):>4}  {tl}")
-lines.append("")
 
 # Détail par catégorie (functional puis non_functional)
 lines += ["─"*100, "DÉTAIL PAR TEST", "─"*100, ""]
@@ -266,34 +247,24 @@ for t in tests_data:
         current_cat = t['category']
 
     h      = history_by_test[t['test_id']]
-    passed = sum(1 for r in h if r['result'] == 'PASSED')
-    last   = h[0]['result'] if h else 'UNKNOWN'
-    tl     = ''.join('P' if r['result']=='PASSED' else 'F' for r in h)
     fails  = [(r['commit_hash'],r['commit_date'],r['speed'],r['commit_message']) for r in h if r['result']=='FAILED']
 
     lines.append(f"  ┌─ TEST_ID     : {t['test_id']}")
-    lines.append(f"  │  FUNCTION    : {t['test_function']}")
     lines.append(f"  │  FILE        : {t['file_path']}")
-    lines.append(f"  │  CATEGORY    : {t['category']}")
     if t['short_description']:
         lines.append(f"  │  DESCRIPTION : {t['short_description']}")
-    if t['assert_description'] and t['assert_description'] != t['short_description']:
-        lines.append(f"  │  ASSERT      : {t['assert_description']}")
     if t['json_keys_used']:
         lines.append(f"  │  JSON KEYS   : {t['json_keys_used']}")
     lines.append(f"  │  DEPENDS ON  : {t['source_dependencies']}")
-    lines.append(f"  │  LAST RESULT : {last}  (commit {h[0]['commit_hash'] if h else '-'}, {h[0]['commit_date'] if h else '-'})")
-    lines.append(f"  │  BILAN       : {passed}/{len(h)} PASSED | {len(h)-passed} FAILED")
-    lines.append(f"  │  TIMELINE    : {tl}  <- recent a gauche")
     if fails:
         lines.append(f"  │  ECHECS      :")
         for fh, fd, fs, fm in fails[:8]: lines.append(f"  │    {fh} | {fd} | speed={fs} | \"{fm}\"")
     lines.append(f"  └──────────────────────────────────────────────────────")
     lines.append("")
 
-with open(os.path.join(OUTPUT_DIR, 'tests_merged.txt'), 'w', encoding='utf-8') as f:
+with open(os.path.join(OUTPUT_DIR, 'tests_history.txt'), 'w', encoding='utf-8') as f:
     f.write('\n'.join(lines))
-print(f"        ✓ ai_inputs/tests_merged.txt")
+print(f"        ✓ ai_inputs/tests_history.txt")
 
 # ════════════════════════════════════════════════════════════
 # codebase_map.txt  (allégé : file_path, module_name, function_name, dependencies)
@@ -355,12 +326,8 @@ for t in tests_data:
 
 codebase_lines = []
 codebase_lines += ["="*100,
-                   "CODEBASE MAP — ur-simulation  [FICHIER STATIQUE]",
-                   f"Fichiers sources : {len(SOURCE_FILES)}  |  Tests couverts : {len(tests_data)}",
+                   "CODEBASE MAP — ur-simulation",
                    "Colonnes : file_path | module_name | function_name | dependencies",
-                   "NOTE : Ce fichier ne change que si tu modifies le code source ou les tests.",
-                   "       'dependencies' = autres fichiers du projet avec lesquels",
-                   "       cette fonction interagit (vide = fonction autonome).",
                    "="*100, ""]
 
 for src_rel, module_name, lang in SOURCE_FILES:
@@ -379,8 +346,6 @@ for src_rel, module_name, lang in SOURCE_FILES:
     codebase_lines += ["━"*100,
                        f"FILE PATH   : {src_rel}",
                        f"MODULE NAME : {module_name}",
-                       f"LANGUAGE    : {lang}",
-                       f"TESTS LIES  : {total_related}",
                        "─"*100]
 
     for fn in fns:
@@ -392,14 +357,6 @@ for src_rel, module_name, lang in SOURCE_FILES:
             codebase_lines.append(f"  DEPENDENCIES  : (aucune)")
         codebase_lines.append("")
 
-    if related_by_cat:
-        codebase_lines.append("  TESTS LIES PAR CATEGORIE :")
-        for cat in ['functional', 'non_functional']:
-            tids = related_by_cat.get(cat, [])
-            if tids:
-                codebase_lines.append(f"    [{cat}]  ({len(tids)})")
-                for tid in tids:
-                    codebase_lines.append(f"      - {tid}")
     codebase_lines.append("")
 
 with open(os.path.join(OUTPUT_DIR, 'codebase_map.txt'), 'w', encoding='utf-8') as f:
@@ -409,5 +366,5 @@ print(f"        ✓ ai_inputs/codebase_map.txt")
 print(f"\n  Termine. store={len(history_store)} entrees, +{new_entries} nouvelles\n")
 print("  Fichiers generes :")
 print("    - ai_inputs/git_diff.txt")
-print("    - ai_inputs/tests_merged.txt    (fusion test_cases + test_history)")
-print("    - ai_inputs/codebase_map.txt    (file_path | module | function | dependencies)")
+print("    - ai_inputs/tests_history.txt    (fusion test_cases + test_history)")
+print("    - ai_inputs/codebase_map.txt     (file_path | module | function | dependencies)")
