@@ -1,4 +1,4 @@
-"""Test fonctionnel : les positions cibles du bras sont-elles dans les limites UR ?"""
+"""Les positions cibles du bras sont-elles dans les limites UR ?"""
 import pytest
 
 TARGET_POSITIONS = [-1.88, -2.14, -2.38, -1.51]

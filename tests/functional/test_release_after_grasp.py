@@ -1,4 +1,4 @@
-"""Test fonctionnel : les relâches se produisent-elles après les saisies ?"""
+"""Les relâches se produisent-elles après les saisies ?"""
 import pytest, os, json
 
 RESULTS_PATH = os.path.abspath("reports/simulation_results.json")

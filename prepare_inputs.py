@@ -230,6 +230,19 @@ total_commits = len(set(e['commit_hash'] for e in history_store.values()))
 n_func    = sum(1 for t in tests_data if t['category'] == 'functional')
 n_nonfunc = sum(1 for t in tests_data if t['category'] == 'non_functional')
 
+def clean_description(desc):
+    """Supprime les préfixes de catégorie dans les descriptions (ex: 'Test fonctionnel : ')."""
+    prefixes = [
+        r'^Tests?\s+fonctionnel[s]?\s*(?:\([^)]+\))?\s*[:\-]\s*',
+        r'^Tests?\s+non[\s_]fonctionnel[s]?\s*(?:\([^)]+\))?\s*[:\-]\s*',
+    ]
+    for pattern in prefixes:
+        desc = re.sub(pattern, '', desc, flags=re.IGNORECASE).strip()
+    # Capitalize first letter if lowercased after stripping
+    if desc and desc[0].islower():
+        desc = desc[0].upper() + desc[1:]
+    return desc
+
 lines = []
 lines += ["="*100,
           "TESTS HISTORY — ur-simulation",
@@ -238,7 +251,36 @@ lines += ["="*100,
           "="*100,
           ""]
 
-# Détail par catégorie (functional puis non_functional)
+# ── Tableau RÉSUMÉ PAR TEST ──────────────────────────────────
+lines += ["─"*100, "RÉSUMÉ PAR TEST", "─"*100, ""]
+
+# Construire les stats par test
+col_id    = max((len(t['test_id']) for t in tests_data), default=20)
+col_cat   = max((len(t['category']) for t in tests_data), default=12)
+col_last  = 10   # LAST PASS
+col_fail  = 6    # FAIL
+col_runs  = 6    # RUNS
+col_tl    = 20   # TIMELINE
+
+header = (f"  {'TEST_ID':<{col_id}}  {'CATÉGORIE':<{col_cat}}  "
+          f"{'LAST PASS':<{col_last}}  {'FAIL':>{col_fail}}  {'RUNS':>{col_runs}}  TIMELINE")
+lines.append(header)
+lines.append("  " + "─"*(len(header)-2))
+
+for t in tests_data:
+    h       = history_by_test[t['test_id']]
+    runs    = len(h)
+    fails   = sum(1 for r in h if r['result'] == 'FAILED')
+    passes  = [r['commit_date'] for r in h if r['result'] == 'PASSED']
+    last_pass = passes[0] if passes else '—'
+    # Timeline: chaque run = P (passed) ou F (failed), le plus récent en premier
+    timeline_chars = ''.join('P' if r['result'] == 'PASSED' else 'F' for r in h[:20])
+    lines.append(f"  {t['test_id']:<{col_id}}  {t['category']:<{col_cat}}  "
+                 f"{last_pass:<{col_last}}  {fails:>{col_fail}}  {runs:>{col_runs}}  {timeline_chars}")
+
+lines.append("")
+
+# ── Détail par catégorie (functional puis non_functional) ────
 lines += ["─"*100, "DÉTAIL PAR TEST", "─"*100, ""]
 current_cat = None
 for t in tests_data:
@@ -252,7 +294,8 @@ for t in tests_data:
     lines.append(f"  ┌─ TEST_ID     : {t['test_id']}")
     lines.append(f"  │  FILE        : {t['file_path']}")
     if t['short_description']:
-        lines.append(f"  │  DESCRIPTION : {t['short_description']}")
+        desc = clean_description(t['short_description'])
+        lines.append(f"  │  DESCRIPTION : {desc}")
     if t['json_keys_used']:
         lines.append(f"  │  JSON KEYS   : {t['json_keys_used']}")
     lines.append(f"  │  DEPENDS ON  : {t['source_dependencies']}")

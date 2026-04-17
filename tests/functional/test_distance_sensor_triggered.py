@@ -1,4 +1,4 @@
-"""Test fonctionnel : le capteur de distance a-t-il détecté une canette ?"""
+"""Le capteur de distance a-t-il détecté une canette ?"""
 import pytest, os, json
 
 RESULTS_PATH = os.path.abspath("reports/simulation_results.json")

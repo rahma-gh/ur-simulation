@@ -1,4 +1,4 @@
-"""Test fonctionnel : toutes les canettes ont-elles été saisies ?"""
+"""Toutes les canettes ont-elles été saisies ?"""
 import pytest, os, json
 
 RESULTS_PATH = os.path.abspath("reports/simulation_results.json")

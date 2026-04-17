@@ -1,4 +1,4 @@
-"""Test fonctionnel : le bras retourne-t-il en position d'attente après chaque dépôt ?"""
+"""Le bras retourne-t-il en position d'attente après chaque dépôt ?"""
 import pytest, os, json
 
 RESULTS_PATH = os.path.abspath("reports/simulation_results.json")

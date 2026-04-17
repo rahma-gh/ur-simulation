@@ -1,0 +1,69 @@
+====================================================================================================
+GIT DIFF — ur-simulation
+Generated : 2026-04-17 11:57:51
+HEAD      : eeab6a11  2026-04-14 16:23:53  "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation"
+====================================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+DERNIER COMMIT (HEAD)
+────────────────────────────────────────────────────────────────────────────────
+  Hash    : eeab6a11a0e78545d2cf582a72d7d759db8b841c
+  Date    : 2026-04-14 16:23:53 +0200
+  Message : Merge branch 'main' of https://github.com/rahma-gh/ur-simulation
+  speed   : 1.0  (wb_motor_set_velocity dans ure_can_grasper.c)
+
+────────────────────────────────────────────────────────────────────────────────
+AVANT-DERNIER COMMIT (HEAD~1)
+────────────────────────────────────────────────────────────────────────────────
+  Hash    : 0eb31206bc76bc8850300153c10f418e7ce3cd4b
+  Date    : 2026-04-14 16:22:13 +0200
+  Message : refactor: update ci.yml & prepare_inputs.py
+  speed   : 1.0  (wb_motor_set_velocity dans ure_can_grasper.c)
+
+────────────────────────────────────────────────────────────────────────────────
+FICHIERS MODIFIÉS
+────────────────────────────────────────────────────────────────────────────────
+
+────────────────────────────────────────────────────────────────────────────────
+LIGNES MODIFIÉES
+────────────────────────────────────────────────────────────────────────────────
+  SUPPRIMÉES:
+  AJOUTÉES:
+
+────────────────────────────────────────────────────────────────────────────────
+ANALYSE D'IMPACT
+────────────────────────────────────────────────────────────────────────────────
+
+────────────────────────────────────────────────────────────────────────────────
+DIFF COMPLET
+────────────────────────────────────────────────────────────────────────────────
+
+
+────────────────────────────────────────────────────────────────────────────────
+HISTORIQUE DES 15 DERNIERS COMMITS
+────────────────────────────────────────────────────────────────────────────────
+  eeab6a11  2026-04-14 16:23:53  [speed=1.0]     Merge branch 'main' of https://github.com/rahma-gh/ur-simulation
+  0eb31206  2026-04-14 16:22:13  [speed=1.0]     refactor: update ci.yml & prepare_inputs.py
+               └─ .github/workflows/ci.yml
+               └─ ai_inputs/codebase_intelligent.txt
+               └─ ai_inputs/test_cases.txt
+  f7a131b8  2026-04-13 15:59:00  [speed=1.0]     Delete ai_inputs directory
+               └─ ai_inputs/codebase_intelligent.txt
+               └─ ai_inputs/test_cases.txt
+  e2928015  2026-04-13 14:13:23  [speed=1.0]     refactor: simplify AI inputs structure
+               └─ .github/workflows/ci.yml
+               └─ prepare_inputs.py
+  b8a74fec  2026-04-10 19:18:26  [speed=1.0]     Change the gripper closing position
+               └─ controllers/ure_can_grasper/ure_can_grasper.c
+  bbdc346e  2026-04-10 18:48:40  [speed=1.0]     Change the arm target positions
+               └─ controllers/ure_can_grasper/ure_can_grasper.c
+  317f0afb  2026-04-10 18:10:32  [speed=1.0]     update:prepare_inputs.py & ai_inputs/test_cases.txt & ai_inputs/codebase_intelligent.txt
+               └─ ai_inputs/codebase_intelligent.txt
+               └─ ai_inputs/test_cases.txt
+               └─ prepare_inputs.py
+  d2fa44a0  2026-04-09 21:47:07  [speed=1.0]     fix: restore speed to 1.0
+               └─ controllers/ure_can_grasper/ure_can_grasper.c
+  d956b3cb  2026-04-09 13:28:43  [speed=0.0]     refactor: restructure tests functional/non_functional + switch to main+ai_inputs/+prepare_inputs+ci.yml updated
+               └─ .github/workflows/ci.yml
+               └─ .gitignore
+               └─ Dockerfile
