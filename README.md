@@ -52,7 +52,7 @@ WAITING ──(distance < 500)──► GRASPING ──(counter=0)──► ROTA
 ## 📁 Structure du projet
 
 ```
-ur-simulation/
+ur-worlds/
 ├── .github/
 │   └── workflows/
 │       └── ci.yml                    ← Pipeline GitHub Actions
@@ -65,8 +65,15 @@ ur-simulation/
 │   └── ure.wbt                       ← Scène Webots
 ├── reports/                          ← Rapports générés (ignorés par git)
 ├── tests/
-│   ├── functional/                   ← Comportements, communication, capteurs, moteurs
-│   └── non_functional/               ← Performance, temps réel, sécurité, limites, stress
+│   ├── communication/                ← Tests capteurs & moteurs déclarés
+│   ├── functional/                   ← Tests comportements fonctionnels
+│   ├── integration/                  ← Tests intégration scène+pipeline
+│   ├── non_functional/
+│   │   ├── performance/              ← Durées, timestep, vitesses
+│   │   ├── realtime/                 ← Contraintes temps réel
+│   │   ├── safety/                   ← Sécurité gripper & joints
+│   │   └── boundary/                 ← Analyse aux valeurs limites
+│   └── stress/                       ← Fiabilité & charge
 ├── conftest.py                       ← Hooks pytest + rapport HTML custom
 ├── Dockerfile                        ← Image Ubuntu 22.04 + Webots + GCC
 ├── requirements.txt
@@ -75,13 +82,16 @@ ur-simulation/
 
 ---
 
-## 🧪 Suite de tests (106 tests)
+## 🧪 Suite de tests (83 tests)
 
-| Catégorie        | Fichiers | Tests |
-|------------------|----------|-------|
-| Functional       | 35       | 35    |
-| Non-functional   | 71       | 71    |
-| **Total**        | **106**  | **106** |
+| Catégorie            | Fichiers | Tests |
+|----------------------|----------|-------|
+| Communication        | 6        | ~12   |
+| Functional           | 4        | ~10   |
+| Integration          | 7        | ~16   |
+| Non-functional       | 12       | ~24   |
+| Stress / Fiabilité   | 15       | ~21   |
+| **Total**            | **44**   | **~83** |
 
 ---
 

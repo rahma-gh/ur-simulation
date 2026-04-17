@@ -1,4 +1,4 @@
-"""Le poignet a-t-il atteint la position cible ?"""
+"""Test fonctionnel : le poignet a-t-il atteint la position cible ?"""
 import pytest, os, json
 
 RESULTS_PATH = os.path.abspath("reports/simulation_results.json")

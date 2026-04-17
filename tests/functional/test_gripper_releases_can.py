@@ -1,4 +1,4 @@
-"""Le gripper s'est-il ouvert pour relâcher les canettes ?"""
+"""Test fonctionnel : le gripper s'est-il ouvert pour relâcher les canettes ?"""
 import pytest, os, json
 
 RESULTS_PATH = os.path.abspath("reports/simulation_results.json")

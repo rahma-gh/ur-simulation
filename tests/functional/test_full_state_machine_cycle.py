@@ -1,4 +1,4 @@
-"""Le cycle complet de la machine d'états est-il réalisé ?"""
+"""Test fonctionnel : le cycle complet de la machine d'états est-il réalisé ?"""
 import pytest, os, json
 
 RESULTS_PATH = os.path.abspath("reports/simulation_results.json")

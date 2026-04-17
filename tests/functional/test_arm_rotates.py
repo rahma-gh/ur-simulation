@@ -1,4 +1,4 @@
-"""Le bras a-t-il effectué toutes les rotations ?"""
+"""Test fonctionnel : le bras a-t-il effectué toutes les rotations ?"""
 import pytest, os, json
 
 RESULTS_PATH = os.path.abspath("reports/simulation_results.json")

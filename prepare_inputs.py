@@ -4,7 +4,7 @@ prepare_inputs.py — ur-simulation
 Génère les fichiers dynamiques à chaque push sur main :
   - ai_inputs/git_diff.txt
   - ai_inputs/tests_history.txt    (fusion de test_cases + test_history)
-  - ai_inputs/codebase_map.txt     (version plus allégée : file_path, module, function, dependencies)
+  - ai_inputs/codebase_map.txt     (version allégée : file_path, module, function, dependencies)
 """
 
 import os, re, json, subprocess
