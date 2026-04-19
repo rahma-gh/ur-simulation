@@ -39,8 +39,11 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).parent.resolve()
 AI_INPUTS    = PROJECT_ROOT / "ai_inputs"
 
-# Modèle unique : DeepSeek R1 gratuit via OpenRouter
-DEEPSEEK_MODEL = "deepseek/deepseek-r1:free"
+# Modèle : Free Models Router d'OpenRouter
+# Route automatiquement vers le meilleur modèle gratuit disponible
+# (DeepSeek R1, Llama, Qwen...) sans gérer la disponibilité manuellement.
+# Doc : https://openrouter.ai/docs/guides/routing/routers/free-models-router
+DEEPSEEK_MODEL = "openrouter/auto"
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 
 # Troncature des inputs pour rester dans le context window de DeepSeek R1 (gratuit)
@@ -418,7 +421,7 @@ def save_selection_log(data: dict) -> None:
         "selection_rationale": data.get("selection_rationale"),
     }
     log_path.write_text(json.dumps(log, indent=2, ensure_ascii=False), encoding="utf-8")
-    print(f"   Sélection sauvegardée : ai_inputs/last_selection.json")
+    print(f"  ✓ Sélection sauvegardée : ai_inputs/last_selection.json")
 
 
 # ── Point d'entrée ────────────────────────────────────────────────────────────
