@@ -29,7 +29,7 @@ int main(int argc, char **argv) {
   wb_robot_init();
   int counter = 0, i = 0;
   int state = WAITING;
-  const double target_positions[] = {-5.0, -5.0, -5.0, -5.0}; //{-1.88, -2.14, -2.38, -1.51}
+  const double target_positions[] ={-1.88, -2.14, -2.38, -1.51} ; 
   double speed = 1.0; 
 
   if (argc == 2)
@@ -57,13 +57,13 @@ int main(int argc, char **argv) {
     if (counter <= 0) {
       switch (state) {
         case WAITING:
-          if (wb_distance_sensor_get_value(distance_sensor) < 500) {
+          if (wb_distance_sensor_get_value(distance_sensor) < 50) {
             state = GRASPING;
             counter = 8;
             printf("Grasping can\n");
             for (i = 0; i < 3; ++i)
               wb_motor_set_position(hand_motors[i], 0.85); 
-          }
+          } //500
           break;
         case GRASPING:
           for (i = 0; i < 4; ++i)
