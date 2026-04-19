@@ -1,12 +1,39 @@
-name: CI Pipeline - Universal Robots URe
+name: CI Pipeline — ur-simulation (Classique + IA)
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  TROIS jobs à chaque git push sur main :
+#
+#  JOB 1 — tests-classiques  (approche SANS IA)
+#    Appartenance : dossier reports/
+#    → Build Docker + lance les 106 tests + produit classic_results.json
+#    → Ne touche PAS ai_inputs/, ne lance PAS prepare_inputs.py
+#
+#  JOB 2 — tests-ia           (approche AVEC IA)
+#    Appartenance : dossier ai_inputs/
+#    → Lance prepare_inputs.py → génère les 3 fichiers ai_inputs/*.txt
+#    → Appelle DeepSeek R1 via ai_test_selector.py
+#    → Lance uniquement les tests sélectionnés + produit ia_results.json
+#
+#  JOB 1 et JOB 2 tournent EN PARALLÈLE (indépendants)
+#
+#  JOB 3 — validation-ia      (comparaison)
+#    → Attend JOB 1 + JOB 2
+#    → Vérifie que tous les FAILED du JOB 1 sont retrouvés par le JOB 2
+#    → Calcule taux de couverture et taux de réduction
+# ══════════════════════════════════════════════════════════════════════════════
 
 on:
   push:
     branches: [main]
 
 jobs:
-  tests-complets:
-    name: "Tests Complets — Architecture Classique Sans IA — Ure"
+
+  # ────────────────────────────────────────────────────────────────────────────
+  # JOB 1 — PIPELINE CLASSIQUE (sans IA)
+  # Périmètre : dossier reports/ uniquement
+  # ────────────────────────────────────────────────────────────────────────────
+  tests-classiques:
+    name: "JOB 1 — Tests Complets Sans IA (référence)"
     runs-on: ubuntu-22.04
 
     steps:
@@ -15,72 +42,391 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Python
+      - name: Setup Python 3.10
         uses: actions/setup-python@v4
         with:
           python-version: "3.10"
 
-      - name: "Générer les fichiers IA dynamiques"
-        run: python prepare_inputs.py
-
-      - name: "Commit les fichiers IA générés"
-        run: |
-          git config user.name  "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add ai_inputs/git_diff.txt
-          git add ai_inputs/tests_history.txt
-          git add ai_inputs/codebase_map.txt
-          git add ai_inputs/test_history_store.json
-          git diff --staged --quiet || git commit -m "ci: update AI inputs [skip ci]"
-          git push || true
-
-      - name: Build image Docker
+      - name: "Build image Docker"
         run: docker build -t ur-simulation .
 
-      - name: Lancer tous les tests dans Docker
-        run: docker run --name ur-test ur-simulation
+      - name: "Lancer TOUS les tests (106) dans Docker"
+        run: docker run --name ur-test-classic ur-simulation
+        continue-on-error: true
 
-      - name: Récupérer les rapports
+      - name: "Récupérer le dossier reports/ depuis Docker"
         if: always()
-        run: docker cp ur-test:/app/reports/. reports/
+        run: docker cp ur-test-classic:/app/reports/. reports/
+
+      - name: "Extraire les résultats — classic_results.json"
+        if: always()
+        run: |
+          python3 - <<'EOF'
+          import json, re, os, glob
+
+          results = {
+              "approach":  "classic",
+              "total_run": 0,
+              "passed":    [],
+              "failed":    [],
+              "errors":    [],
+          }
+
+          html_files = glob.glob("reports/report*.html")
+          for html_path in html_files:
+              with open(html_path, encoding="utf-8", errors="replace") as f:
+                  content = f.read()
+              names    = re.findall(r'<td class="col-name"[^>]*>(.*?)</td>', content)
+              statuses = re.findall(r'<td class="col-result">(.*?)</td>', content)
+              for name, status in zip(names, statuses):
+                  name   = re.sub(r'<[^>]+>', '', name).strip()
+                  status = status.strip().lower()
+                  results["total_run"] += 1
+                  if   status == "passed": results["passed"].append(name)
+                  elif status == "failed": results["failed"].append(name)
+                  elif status == "error":  results["errors"].append(name)
+              break
+
+          with open("reports/classic_results.json", "w") as f:
+              json.dump(results, f, indent=2)
+
+          print(f"Classic → total: {results['total_run']}  "
+                f"passed: {len(results['passed'])}  "
+                f"failed: {len(results['failed'])}")
+          EOF
 
       - name: "DIAGNOSTIC — Build log"
         if: always()
-        run: |
-          echo "=========================================="
-          echo " BUILD LOG"
-          echo "=========================================="
-          cat reports/build.log || echo "(absent)"
-
-      - name: "DIAGNOSTIC — Webots stdout"
-        if: always()
-        run: |
-          echo "=========================================="
-          echo " WEBOTS STDOUT"
-          echo "=========================================="
-          cat reports/webots_stdout.log || echo "(absent)"
-
-      - name: "DIAGNOSTIC — Webots stderr"
-        if: always()
-        run: |
-          echo "=========================================="
-          echo " WEBOTS STDERR"
-          echo "=========================================="
-          cat reports/webots_stderr.log || echo "(absent)"
+        run: cat reports/build.log || echo "(absent)"
 
       - name: "DIAGNOSTIC — simulation_results.json"
         if: always()
-        run: |
-          echo "=========================================="
-          echo " simulation_results.json"
-          echo "=========================================="
-          cat reports/simulation_results.json || echo "(absent)"
+        run: cat reports/simulation_results.json || echo "(absent)"
 
-      - name: Upload rapport
+      - name: "DIAGNOSTIC — Webots stderr"
+        if: always()
+        run: tail -20 reports/webots_stderr.log || echo "(absent)"
+
+      - name: "DIAGNOSTIC — Webots stdout"
+        if: always()
+        run: tail -20 reports/webots_stdout.log || echo "(absent)"
+
+      - name: "Upload artefacts — pipeline classique (reports/)"
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: rapport-tests-ure
-          path: |
-            reports/
-            ai_inputs/
+          name: resultats-classique
+          path: reports/
+
+
+  # ────────────────────────────────────────────────────────────────────────────
+  # JOB 2 — PIPELINE IA
+  # Périmètre : dossier ai_inputs/ + tests sélectionnés
+  # ────────────────────────────────────────────────────────────────────────────
+  tests-ia:
+    name: "JOB 2 — Tests Sélectionnés par IA (DeepSeek R1)"
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: pip install pytest pytest-html
+
+      # ── Étape IA 1 : générer les 3 fichiers ai_inputs/ ───────────────────
+      - name: "Générer les fichiers ai_inputs/ (prepare_inputs.py)"
+        run: python prepare_inputs.py
+
+      # ── Étape IA 2 : sélection par DeepSeek R1 ───────────────────────────
+      - name: "Sélection IA — DeepSeek R1 (dry-run : sélection sans pytest)"
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        run: python ai_test_selector.py --skip-prepare --dry-run --verbose
+
+      - name: "Afficher la sélection produite par le LLM"
+        run: |
+          python3 -c "
+          import json
+          with open('ai_inputs/last_selection.json') as f:
+              s = json.load(f)
+          print(f\"Modele    : {s['model']}\")
+          print(f\"Diff      : {s.get('diff_summary', '')}\")
+          print(f\"Selection : {len(s['selected'])} tests choisis, {s['skipped']} ignores\n\")
+          for t in s['selected']:
+              print(f\"  [{t['priority']:>2}] {t['test_id']:<50}  {t.get('reason','')[:60]}\")
+          "
+
+      # ── Étape IA 3 : préparer les chemins de fichiers pytest ─────────────
+      - name: "Préparer la liste des tests sélectionnés"
+        run: |
+          python3 - <<'EOF'
+          import json
+          from pathlib import Path
+
+          with open("ai_inputs/last_selection.json") as f:
+              sel = json.load(f)
+
+          test_dir = Path("tests")
+          paths, not_found = [], []
+          for entry in sel["selected"]:
+              tid     = entry["test_id"]
+              matches = list(test_dir.rglob(f"{tid}.py"))
+              if matches:
+                  paths.append(str(matches[0]))
+              else:
+                  not_found.append(tid)
+
+          if not_found:
+              print(f"Tests introuvables (ignores) : {not_found}")
+
+          with open("ai_inputs/selected_test_paths.txt", "w") as f:
+              f.write(" ".join(paths))
+
+          print(f"{len(paths)} chemins prepares :")
+          for p in paths:
+              print(f"  {p}")
+          EOF
+
+      # ── Étape IA 4 : build Docker + lancer les tests sélectionnés ────────
+      - name: "Build image Docker"
+        run: docker build -t ur-simulation .
+
+      - name: "Lancer les tests IA sélectionnés dans Docker"
+        run: |
+          SELECTED_PATHS=$(cat ai_inputs/selected_test_paths.txt)
+          echo "Tests a lancer : $SELECTED_PATHS"
+          docker run --name ur-test-ia ur-simulation bash -c "
+            export DISPLAY=:99
+            Xvfb :99 -screen 0 1280x1024x24 -ac +extension GLX +render -noreset &
+            sleep 3
+            webots --mode=fast --batch --no-rendering worlds/ure.wbt \
+                1>/app/reports/webots_stdout_ia.log \
+                2>/app/reports/webots_stderr_ia.log &
+            WEBOTS_PID=\$!
+            WAITED=0
+            while [ \$WAITED -lt 270 ]; do
+              sleep 5; WAITED=\$((WAITED + 5))
+              if [ -f /app/reports/simulation_results.json ]; then
+                DONE=\$(python3 -c \"import json; d=json.load(open('/app/reports/simulation_results.json')); print(d.get('sequence_complete',False))\" 2>/dev/null)
+                echo \"[\${WAITED}s] sequence_complete=\${DONE}\"
+                [ \"\$DONE\" = \"True\" ] && break
+              else
+                echo \"[\${WAITED}s] JSON pas encore cree...\"
+              fi
+              kill -0 \$WEBOTS_PID 2>/dev/null || break
+            done
+            kill \$WEBOTS_PID 2>/dev/null || true
+            sleep 2
+            pytest $SELECTED_PATHS -v \
+              --html=/app/reports/report_ia.html \
+              --self-contained-html || true
+          "
+        continue-on-error: true
+
+      - name: "Récupérer les rapports Docker IA"
+        if: always()
+        run: docker cp ur-test-ia:/app/reports/. reports_ia/
+
+      # ── Étape IA 5 : extraire les résultats en JSON ───────────────────────
+      - name: "Extraire les résultats — ia_results.json"
+        if: always()
+        run: |
+          python3 - <<'EOF'
+          import json, re, os, glob
+
+          with open("ai_inputs/last_selection.json") as f:
+              sel = json.load(f)
+
+          results = {
+              "approach":          "ia",
+              "model":             sel["model"],
+              "total_selected":    len(sel["selected"]),
+              "total_skipped":     sel.get("skipped", 0),
+              "selected_test_ids": [t["test_id"] for t in sel["selected"]],
+              "passed":            [],
+              "failed":            [],
+              "errors":            [],
+          }
+
+          html_files = glob.glob("reports_ia/report_ia*.html") + glob.glob("reports_ia/report*.html")
+          for html_path in html_files:
+              with open(html_path, encoding="utf-8", errors="replace") as f:
+                  content = f.read()
+              names    = re.findall(r'<td class="col-name"[^>]*>(.*?)</td>', content)
+              statuses = re.findall(r'<td class="col-result">(.*?)</td>', content)
+              for name, status in zip(names, statuses):
+                  name   = re.sub(r'<[^>]+>', '', name).strip()
+                  status = status.strip().lower()
+                  if   status == "passed": results["passed"].append(name)
+                  elif status == "failed": results["failed"].append(name)
+                  elif status == "error":  results["errors"].append(name)
+              break
+
+          os.makedirs("ai_inputs", exist_ok=True)
+          with open("ai_inputs/ia_results.json", "w") as f:
+              json.dump(results, f, indent=2)
+
+          print(f"IA → selectionnes: {results['total_selected']}  "
+                f"passed: {len(results['passed'])}  "
+                f"failed: {len(results['failed'])}")
+          EOF
+
+      - name: "Upload artefacts — pipeline IA (ai_inputs/)"
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: resultats-ia
+          path: ai_inputs/
+
+
+  # ────────────────────────────────────────────────────────────────────────────
+  # JOB 3 — VALIDATION — comparaison IA vs Classique
+  # Attend JOB 1 et JOB 2 (qui tournaient en parallèle)
+  # ────────────────────────────────────────────────────────────────────────────
+  validation-ia:
+    name: "JOB 3 — Validation : IA vs Classique"
+    runs-on: ubuntu-22.04
+    needs: [tests-classiques, tests-ia]
+    if: always()
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: "Télécharger les résultats classiques (reports/)"
+        uses: actions/download-artifact@v4
+        with:
+          name: resultats-classique
+          path: resultats-classique/
+
+      - name: "Télécharger les résultats IA (ai_inputs/)"
+        uses: actions/download-artifact@v4
+        with:
+          name: resultats-ia
+          path: resultats-ia/
+
+      - name: "Comparer les résultats — IA vs Classique"
+        run: |
+          python3 - <<'EOF'
+          import json, sys, os, re
+
+          def load(path):
+              if not os.path.exists(path):
+                  print(f"  [!] Fichier absent : {path}")
+                  return None
+              with open(path) as f:
+                  return json.load(f)
+
+          classic = load("resultats-classique/classic_results.json")
+          ia      = load("resultats-ia/ia_results.json")
+
+          SEP = "=" * 70
+          print(f"\n{SEP}")
+          print("  RAPPORT DE VALIDATION — IA vs CLASSIQUE")
+          print(f"{SEP}\n")
+
+          if classic:
+              c_total  = classic.get("total_run", 0)
+              c_passed = len(classic.get("passed", []))
+              c_failed = classic.get("failed", [])
+              print(f"  CLASSIQUE : {c_total} tests lancés")
+              print(f"              ✅ {c_passed} passés   ❌ {len(c_failed)} échoués")
+          else:
+              c_failed = []
+
+          print()
+
+          reduction = 0
+          if ia:
+              ia_total   = ia.get("total_selected", 0)
+              ia_skipped = ia.get("total_skipped", 0)
+              ia_passed  = len(ia.get("passed", []))
+              ia_failed  = ia.get("failed", [])
+              total_all  = ia_total + ia_skipped
+              reduction  = round((1 - ia_total / total_all) * 100, 1) if total_all > 0 else 0
+              print(f"  IA        : {ia_total}/{total_all} tests lancés ({reduction}% de réduction)")
+              print(f"              ✅ {ia_passed} passés   ❌ {len(ia_failed)} échoués")
+          else:
+              ia_failed = []
+
+          def normalize(name):
+              if "::" in name:
+                  name = name.split("::")[-1]
+              m = re.search(r'(test_[\w]+)', name)
+              return m.group(1) if m else name.strip()
+
+          c_failed_ids    = set(normalize(n) for n in c_failed)
+          ia_failed_ids   = set(normalize(n) for n in ia_failed)
+          ia_selected_ids = set(normalize(n) for n in (ia.get("selected_test_ids", []) if ia else []))
+
+          detected            = c_failed_ids & ia_failed_ids
+          false_alarms        = ia_failed_ids - c_failed_ids
+          missed_not_selected = c_failed_ids - ia_selected_ids
+          missed_selected     = (c_failed_ids & ia_selected_ids) - ia_failed_ids
+
+          print(f"\n{'─' * 70}")
+          print(f"\n  ANALYSE DE COUVERTURE DES ÉCHECS\n")
+
+          if not c_failed_ids:
+              print("  ℹ️  Aucun test échoué dans le pipeline classique.")
+              print("      La sélection IA est correcte par défaut.")
+              coverage = 100.0
+          else:
+              coverage = round(len(detected) / len(c_failed_ids) * 100, 1)
+              print(f"  Échecs classique              : {sorted(c_failed_ids)}")
+              print(f"  Échecs détectés par l'IA      : {sorted(detected)}")
+              if missed_not_selected:
+                  print(f"  ❌ MANQUÉS (non sélectionnés)  : {sorted(missed_not_selected)}")
+              if missed_selected:
+                  print(f"  ⚠️  MANQUÉS (sélectionnés mais pas échoués IA) : {sorted(missed_selected)}")
+              if false_alarms:
+                  print(f"  ℹ️  Fausses alarmes IA          : {sorted(false_alarms)}")
+
+          print(f"\n{'─' * 70}")
+          print(f"\n  ┌──────────────────────────────────────────────────┐")
+          print(f"  │  TAUX DE COUVERTURE DES ÉCHECS : {coverage:>5.1f}%          │")
+          print(f"  │  RÉDUCTION DU NOMBRE DE TESTS  : {reduction:>5.1f}%          │")
+          print(f"  └──────────────────────────────────────────────────┘\n")
+
+          if coverage == 100.0:
+              print("  ✅ VALIDATION RÉUSSIE")
+              print("     L'IA a détecté TOUS les tests en échec avec moins de tests.\n")
+              exit_code = 0
+          else:
+              print("  ❌ VALIDATION ÉCHOUÉE")
+              print(f"     L'IA a manqué {len(c_failed_ids) - len(detected)} test(s) en échec.")
+              print("     Améliorer le prompt ou les critères de sélection.\n")
+              exit_code = 1
+
+          print(f"{SEP}\n")
+
+          summary = {
+              "coverage_rate":     coverage,
+              "reduction_rate":    reduction,
+              "classic_failed":    sorted(c_failed_ids),
+              "ia_detected":       sorted(detected),
+              "missed_tests":      sorted(missed_not_selected | missed_selected),
+              "false_alarms":      sorted(false_alarms),
+              "validation_passed": coverage == 100.0,
+          }
+          os.makedirs("reports", exist_ok=True)
+          with open("reports/validation_summary.json", "w") as f:
+              json.dump(summary, f, indent=2)
+
+          sys.exit(exit_code)
+          EOF
+
+      - name: "Upload rapport de validation"
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: rapport-validation
+          path: reports/validation_summary.json
