@@ -62,7 +62,7 @@ int main(int argc, char **argv) {
             counter = 8;
             printf("Grasping can\n");
             for (i = 0; i < 3; ++i)
-              wb_motor_set_position(hand_motors[i], 2.0); //0.85
+              wb_motor_set_position(hand_motors[i], 0.85); 
           } 
           break;
         case GRASPING:

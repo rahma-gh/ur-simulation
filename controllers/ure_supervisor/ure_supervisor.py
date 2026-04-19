@@ -19,7 +19,7 @@ import math
 TIME_STEP = 8   # basicTimeStep de ure.wbt (ms)
 
 # ── Seuils de détection ──────────────────────────────────────
-HAUTEUR_SAISIE    = 0.80   # Z (m) — canettes démarrent à 0.66m ou 0.96m
+HAUTEUR_SAISIE    = 5.0 #0.80   # Z (m) — canettes démarrent à 0.66m ou 0.96m
 DEPLACEMENT_DEPOT = 0.30   # distance XY (m) depuis position initiale
 STEPS_STABLE      = 30     # steps consécutifs pour valider l'état
 
