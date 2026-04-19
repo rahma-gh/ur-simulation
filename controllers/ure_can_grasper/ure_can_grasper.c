@@ -21,7 +21,7 @@
 
 #include <stdio.h>
 
-#define TIME_STEP 32
+#define TIME_STEP 64 //32
 
 enum State { WAITING, GRASPING, ROTATING, RELEASING, ROTATING_BACK };
 
