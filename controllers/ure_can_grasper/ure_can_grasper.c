@@ -21,7 +21,7 @@
 
 #include <stdio.h>
 
-#define TIME_STEP 64 //32
+#define TIME_STEP 32
 
 enum State { WAITING, GRASPING, ROTATING, RELEASING, ROTATING_BACK };
 
@@ -29,7 +29,7 @@ int main(int argc, char **argv) {
   wb_robot_init();
   int counter = 0, i = 0;
   int state = WAITING;
-  const double target_positions[] = {-1.88, -2.14, -2.38, -1.51}; 
+  const double target_positions[] = {-5.0, -5.0, -5.0, -5.0}; //{-1.88, -2.14, -2.38, -1.51}
   double speed = 1.0; 
 
   if (argc == 2)
