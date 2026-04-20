@@ -168,53 +168,21 @@ with open(os.path.join(OUTPUT_DIR, 'git_diff.txt'), 'w', encoding='utf-8') as f:
 print(f"        ✓ ai_inputs/git_diff.txt")
 
 # ════════════════════════════════════════════════════════════
-# Historique — mise à jour du store
+# Historique — lecture du store réel (alimenté par le JOB 1)
+# Le store contient les vrais résultats PASSED/FAILED issus
+# des rapports pytest du pipeline classique (JOB 1).
+# Ce script ne remplit JAMAIS le store — il le lit seulement.
 # ════════════════════════════════════════════════════════════
-SIM_KEYS = {'grasp_events','release_events','return_events','rotation_events',
-            'all_cans_grasped','all_cans_released','sequence_complete','gripper_closed',
-            'gripper_opened','wrist_reached_target','distance_sensor_triggered',
-            'ur3e_grasped','ur5e_grasped','ur10e_grasped'}
-
-def infer_result(test, commit):
-    speed      = commit.get('speed')
-    reads_json = test['_reads_json']
-    reads_c    = test['_reads_c']
-    if not reads_json and not reads_c: return 'PASSED'
-    if test['category'] == 'non_functional' and not reads_json:
-        return 'PASSED'
-    if reads_c and not reads_json:
-        if speed == 0.0 and any(k in test['test_id'] for k in
-            ['vitesse_bras_non_nulle','vitesse_bras_par_defaut','vitesse_bras_securisee',
-             'vitesse_dans_limites','vitesse_configurable','vitesse_bras_dans_source']):
-            return 'FAILED'
-        return 'PASSED'
-    if reads_json and speed == 0.0:
-        if set(test['json_keys_used'].split('|')) & SIM_KEYS: return 'FAILED'
-    return 'PASSED'
-
 history_store = {}
 if os.path.exists(HISTORY_STORE):
-    with open(HISTORY_STORE) as f: history_store = json.load(f)
+    with open(HISTORY_STORE) as f:
+        history_store = json.load(f)
+    print(f"        store chargé : {len(history_store)} entrées réelles")
+else:
+    print("        store absent — premier push, aucun historique disponible")
+    print("        Le LLM se basera uniquement sur le diff et la codebase map.")
 
-new_entries = 0
-for c in commits:
-    chash = c['hash'][:8]
-    for t in tests_data:
-        key = f"{chash}::{t['test_id']}"
-        if key not in history_store:
-            history_store[key] = {
-                'commit_hash':    chash,
-                'commit_date':    c['date'][:10],
-                'commit_message': c['msg'],
-                'speed':          c.get('speed'),
-                'changed_files':  '|'.join(c.get('changed_files', [])),
-                'test_id':        t['test_id'],
-                'category':       t['category'],
-                'result':         infer_result(t, c),
-            }
-            new_entries += 1
-
-with open(HISTORY_STORE, 'w') as f: json.dump(history_store, f, indent=2)
+new_entries = 0  # le store est en lecture seule dans ce script
 
 history_by_test = defaultdict(list)
 for entry in history_store.values():
