@@ -21,6 +21,7 @@ else:  # Linux (GitHub Actions / Docker)
 # Collecte des résultats pour le rapport custom
 # ─────────────────────────────────────────────
 _failed_tests = []
+_passed_tests = []
 _total = 0
 _passed = 0
 _failed = 0
@@ -61,6 +62,10 @@ def pytest_runtest_makereport(item, call):
             })
         elif report.passed:
             _passed += 1
+            _passed_tests.append({
+                "name": item.name,
+                "nodeid": report.nodeid,
+            })
 
 
 def pytest_sessionfinish(session, exitstatus):
@@ -493,3 +498,16 @@ def _generate_report(duration):
     with open("reports/report_failures.html", "w", encoding="utf-8") as f:
         f.write(html)
     print(f"\n📊 Rapport échecs généré : reports/report_failures.html")
+
+    # ── Exporter les résultats en JSON pour alimenter le store ───────────
+    import json as _json
+    results_json = {
+        "total":   _total,
+        "passed":  _passed,
+        "failed":  _failed,
+        "passed_tests": [t["name"] for t in _passed_tests],
+        "failed_tests": [t["name"] for t in _failed_tests],
+    }
+    with open("reports/test_results.json", "w", encoding="utf-8") as f:
+        _json.dump(results_json, f, indent=2)
+    print(f"📄 Résultats JSON exportés : reports/test_results.json")

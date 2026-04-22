@@ -42,6 +42,19 @@ jobs:
         if: always()
         run: docker cp ur-test-classic:/app/reports/. reports/
 
+      # ── Diagnostic : voir ce que contient reports/ ──────────────────────
+      - name: "DIAGNOSTIC — Contenu du dossier reports/"
+        if: always()
+        run: |
+          echo "=== Fichiers dans reports/ ==="
+          find reports/ -type f | sort
+          echo ""
+          echo "=== Noms des fichiers HTML ==="
+          find reports/ -name "*.html" | sort
+          echo ""
+          echo "=== Aperçu du premier HTML (50 premières lignes) ==="
+          find reports/ -name "*.html" | head -1 | xargs head -50 || echo "Aucun HTML trouvé"
+
       - name: "Alimenter test_history_store.json avec les vrais résultats"
         if: always()
         run: |
@@ -49,19 +62,19 @@ jobs:
           import json, re, os, glob, subprocess
 
           passed, failed, errors = [], [], []
-          html_files = glob.glob("reports/report*.html")
-          for html_path in html_files:
-              with open(html_path, encoding="utf-8", errors="replace") as f:
-                  content = f.read()
-              names    = re.findall(r'<td class="col-name"[^>]*>(.*?)</td>', content)
-              statuses = re.findall(r'<td class="col-result">(.*?)</td>', content)
-              for name, status in zip(names, statuses):
-                  name   = re.sub(r'<[^>]+>', '', name).strip()
-                  status = status.strip().lower()
-                  if   status == "passed": passed.append(name)
-                  elif status == "failed": failed.append(name)
-                  elif status == "error":  errors.append(name)
-              break
+
+          print(f"Contenu reports/ : {os.listdir('reports') if os.path.exists('reports') else 'ABSENT'}")
+
+          # Lire test_results.json généré par conftest.py (source la plus fiable)
+          json_path = "reports/test_results.json"
+          if os.path.exists(json_path):
+              with open(json_path) as f:
+                  data = json.load(f)
+              passed = data.get("passed_tests", [])
+              failed = data.get("failed_tests", [])
+              print(f"test_results.json lu : {data['total']} total, {data['passed']} passed, {data['failed']} failed")
+          else:
+              print(f"ATTENTION : test_results.json absent — conftest.py n a pas généré les résultats")
 
           print(f"Résultats lus : {len(passed)} passed, {len(failed)} failed")
 
