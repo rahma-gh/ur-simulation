@@ -257,7 +257,7 @@ for t in tests_data:
         current_cat = t['category']
 
     h      = history_by_test[t['test_id']]
-    fails  = [(r['commit_hash'],r['commit_date'],r['speed'],r['commit_message']) for r in h if r['result']=='FAILED']
+    fails  = [(r['commit_hash'], r['commit_date'], r.get('changed_files',[]), r['commit_message']) for r in h if r['result']=='FAILED']
 
     lines.append(f"  ┌─ TEST_ID     : {t['test_id']}")
     lines.append(f"  │  FILE        : {t['file_path']}")
@@ -269,7 +269,9 @@ for t in tests_data:
     lines.append(f"  │  DEPENDS ON  : {t['source_dependencies']}")
     if fails:
         lines.append(f"  │  ECHECS      :")
-        for fh, fd, fs, fm in fails[:8]: lines.append(f"  │    {fh} | {fd} | speed={fs} | \"{fm}\"")
+        for fh, fd, cf, fm in fails[:8]:
+            cf_str = ', '.join(cf[:3]) if cf else '—'
+            lines.append(f"  │    {fh} | {fd} | changed: {cf_str} | \"{fm}\"")
     lines.append(f"  └──────────────────────────────────────────────────────")
     lines.append("")
 

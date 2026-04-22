@@ -1,0 +1,281 @@
+name: CI Phase 2 — Classique + IA (comparaison)
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  PHASE 2 — Activer après avoir accumulé l historique via ci_phase1.yml.
+#
+#  DEUX jobs INDÉPENDANTS et PARALLÈLES :
+#
+#  JOB 1 — tests-classiques
+#    - Lance les 106 tests
+#    - NE TOUCHE PAS au store  (son rôle se limite à la comparaison)
+#
+#  JOB 2 — tests-ia
+#    - Lit le store (alimenté en phase 1, puis enrichi par le JOB 2 lui-même)
+#    - prepare_inputs.py génère les 3 fichiers ai_inputs/
+#    - DeepSeek sélectionne et priorise les tests
+#    - Lance uniquement les tests sélectionnés
+#    - Ajoute les résultats des tests sélectionnés au store
+#    - Commite le store  →  l historique s enrichit push après push
+#
+#  Évolution du store :
+#    Phase 1 push 1..N  →  résultats des 106 tests (source: classic)
+#    Phase 2 push N+1   →  + résultats des tests choisis par LLM (source: ia)
+#    Phase 2 push N+2   →  + résultats des tests choisis par LLM (source: ia)
+#    ...
+# ══════════════════════════════════════════════════════════════════════════════
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+
+  # ────────────────────────────────────────────────────────────────────────────
+  # JOB 1 — PIPELINE CLASSIQUE — comparaison uniquement, ne touche pas au store
+  # ────────────────────────────────────────────────────────────────────────────
+  tests-classiques:
+    name: "JOB 1 — Tests Complets Sans IA (comparaison)"
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: "Build image Docker"
+        run: docker build -t ur-simulation .
+
+      - name: "Lancer TOUS les tests (106) dans Docker"
+        run: docker run --name ur-test-classic ur-simulation
+        continue-on-error: true
+
+      - name: "Récupérer le dossier reports/ depuis Docker"
+        if: always()
+        run: docker cp ur-test-classic:/app/reports/. reports/
+
+      - name: "DIAGNOSTIC — simulation_results.json"
+        if: always()
+        run: cat reports/simulation_results.json || echo "(absent)"
+
+      - name: "DIAGNOSTIC — Webots stderr"
+        if: always()
+        run: tail -20 reports/webots_stderr.log || echo "(absent)"
+
+      - name: "DIAGNOSTIC — Webots stdout"
+        if: always()
+        run: tail -20 reports/webots_stdout.log || echo "(absent)"
+
+      - name: "Upload artefacts — pipeline classique"
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: resultats-classique
+          path: reports/
+
+
+  # ────────────────────────────────────────────────────────────────────────────
+  # JOB 2 — PIPELINE IA — sélection + alimentation du store
+  # ────────────────────────────────────────────────────────────────────────────
+  tests-ia:
+    name: "JOB 2 — Tests Sélectionnés par IA (DeepSeek)"
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: pip install pytest pytest-html
+
+      - name: "Générer les fichiers ai_inputs/ (prepare_inputs.py)"
+        run: python prepare_inputs.py
+
+      - name: "Sélection IA — DeepSeek"
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        run: python ai_test_selector.py --skip-prepare --dry-run --verbose
+
+      - name: "Afficher la sélection produite par le LLM"
+        run: |
+          python3 -c "
+          import json
+          with open('ai_inputs/last_selection.json') as f:
+              s = json.load(f)
+          print(f\"Modele    : {s['model']}\")
+          print(f\"Diff      : {s.get('diff_summary', '')}\")
+          print(f\"Selection : {len(s['selected'])} tests choisis, {s['skipped']} ignores\n\")
+          for t in s['selected']:
+              print(f\"  [{t['priority']:>2}] {t['test_id']:<50}  {t.get('reason','')[:60]}\")
+          "
+
+      - name: "Préparer la liste des tests sélectionnés"
+        run: |
+          python3 - <<'EOF'
+          import json
+          from pathlib import Path
+
+          with open("ai_inputs/last_selection.json") as f:
+              sel = json.load(f)
+
+          test_dir = Path("tests")
+          paths, not_found = [], []
+          for entry in sel["selected"]:
+              tid     = entry["test_id"]
+              matches = list(test_dir.rglob(f"{tid}.py"))
+              if matches:
+                  paths.append(str(matches[0]))
+              else:
+                  not_found.append(tid)
+
+          if not_found:
+              print(f"Tests introuvables : {not_found}")
+
+          with open("ai_inputs/selected_test_paths.txt", "w") as f:
+              f.write(" ".join(paths))
+
+          print(f"{len(paths)} chemins préparés :")
+          for p in paths: print(f"  {p}")
+          EOF
+
+      - name: "Build image Docker"
+        run: docker build -t ur-simulation .
+
+      - name: "Lancer les tests IA sélectionnés dans Docker"
+        run: |
+          SELECTED_PATHS=$(cat ai_inputs/selected_test_paths.txt)
+          echo "Tests à lancer : $SELECTED_PATHS"
+          docker run --name ur-test-ia ur-simulation bash -c "
+            export DISPLAY=:99
+            Xvfb :99 -screen 0 1280x1024x24 -ac +extension GLX +render -noreset &
+            sleep 3
+            webots --mode=fast --batch --no-rendering worlds/ure.wbt \
+                1>/app/reports/webots_stdout_ia.log \
+                2>/app/reports/webots_stderr_ia.log &
+            WEBOTS_PID=\$!
+            WAITED=0
+            while [ \$WAITED -lt 270 ]; do
+              sleep 5; WAITED=\$((WAITED + 5))
+              if [ -f /app/reports/simulation_results.json ]; then
+                DONE=\$(python3 -c \"import json; d=json.load(open('/app/reports/simulation_results.json')); print(d.get('sequence_complete',False))\" 2>/dev/null)
+                echo \"[\${WAITED}s] sequence_complete=\${DONE}\"
+                [ \"\$DONE\" = \"True\" ] && break
+              else
+                echo \"[\${WAITED}s] simulation_results.json pas encore créé...\"
+              fi
+              kill -0 \$WEBOTS_PID 2>/dev/null || break
+            done
+            kill \$WEBOTS_PID 2>/dev/null || true
+            sleep 2
+            pytest $SELECTED_PATHS -v \
+              --html=/app/reports/report_ia.html \
+              --self-contained-html || true
+          "
+        continue-on-error: true
+
+      - name: "Récupérer les rapports Docker IA"
+        if: always()
+        run: docker cp ur-test-ia:/app/reports/. reports_ia/
+
+      # ── Alimenter le store avec les résultats des tests sélectionnés par l'IA
+      - name: "Alimenter test_history_store.json — résultats IA"
+        if: always()
+        run: |
+          python3 - <<'EOF'
+          import json, re, os, glob, subprocess
+
+          passed, failed, errors = [], [], []
+          html_files = glob.glob("reports_ia/report_ia*.html") + glob.glob("reports_ia/report*.html")
+          for html_path in html_files:
+              with open(html_path, encoding="utf-8", errors="replace") as f:
+                  content = f.read()
+              names    = re.findall(r'<td class="col-name"[^>]*>(.*?)</td>', content)
+              statuses = re.findall(r'<td class="col-result">(.*?)</td>', content)
+              for name, status in zip(names, statuses):
+                  name   = re.sub(r'<[^>]+>', '', name).strip()
+                  status = status.strip().lower()
+                  if   status == "passed": passed.append(name)
+                  elif status == "failed": failed.append(name)
+                  elif status == "error":  errors.append(name)
+              break
+
+          print(f"Résultats IA lus : {len(passed)} passed, {len(failed)} failed")
+
+          def git(cmd):
+              return subprocess.run(cmd, shell=True, capture_output=True, text=True).stdout.strip()
+
+          commit_hash   = git("git rev-parse --short HEAD")
+          commit_date   = git("git log -1 --format=%ai")[:10]
+          commit_msg    = git("git log -1 --format=%s")
+          changed_files = git("git diff-tree --no-commit-id -r --name-only HEAD").splitlines()
+
+          def normalize(name):
+              if "::" in name: name = name.split("::")[-1]
+              m = re.search(r'(test_\w+)', name)
+              return m.group(1) if m else name.strip()
+
+          with open("ai_inputs/last_selection.json") as f:
+              sel = json.load(f)
+          priority_map = {t["test_id"]: t["priority"] for t in sel["selected"]}
+
+          store_path = "ai_inputs/test_history_store.json"
+          store = {}
+          if os.path.exists(store_path):
+              with open(store_path) as f:
+                  store = json.load(f)
+
+          new_entries = 0
+          for name in passed + failed + errors:
+              test_id  = normalize(name)
+              result   = "PASSED" if name in passed else ("FAILED" if name in failed else "ERROR")
+              key      = f"{commit_hash}::{test_id}::ia"
+              if key not in store:
+                  store[key] = {
+                      "commit_hash":    commit_hash,
+                      "commit_date":    commit_date,
+                      "commit_message": commit_msg,
+                      "changed_files":  changed_files,
+                      "test_id":        test_id,
+                      "result":         result,
+                      "source":         "ia",
+                      "llm_priority":   priority_map.get(test_id),
+                  }
+                  new_entries += 1
+
+          with open(store_path, "w") as f:
+              json.dump(store, f, indent=2)
+
+          print(f"Store : {len(store)} entrées totales, +{new_entries} nouvelles (ia)")
+          EOF
+
+      - name: "Commiter test_history_store.json mis à jour"
+        if: always()
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase || true
+          git add ai_inputs/test_history_store.json
+          git diff --staged --quiet \
+            && echo "Aucune nouvelle entrée." \
+            || (git commit -m "ci: update store ia [skip ci]" && git push)
+
+      - name: "Upload artefacts — pipeline IA"
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: resultats-ia
+          path: |
+            ai_inputs/
+            reports_ia/

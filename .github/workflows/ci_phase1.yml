@@ -1,0 +1,138 @@
+name: CI Phase 1 — Construction de l'historique (Sans IA)
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  PHASE 1 — Faire tourner ce pipeline plusieurs pushes (3 à 5)
+#  pour construire un historique réel dans test_history_store.json.
+#
+#  Quand le store est suffisamment riche, basculer vers la phase 2 :
+#    git mv .github/workflows/ci_phase1.yml .github/workflows/ci_phase1.yml.disabled
+#    git mv .github/workflows/ci_phase2.yml.disabled .github/workflows/ci_phase2.yml
+#    git commit -m "ci: switch to phase 2" && git push
+# ══════════════════════════════════════════════════════════════════════════════
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+
+  tests-classiques:
+    name: "Phase 1 — 106 tests + alimentation du store"
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: "Build image Docker"
+        run: docker build -t ur-simulation .
+
+      - name: "Lancer TOUS les tests (106) dans Docker"
+        run: docker run --name ur-test-classic ur-simulation
+        continue-on-error: true
+
+      - name: "Récupérer le dossier reports/ depuis Docker"
+        if: always()
+        run: docker cp ur-test-classic:/app/reports/. reports/
+
+      - name: "Alimenter test_history_store.json avec les vrais résultats"
+        if: always()
+        run: |
+          python3 - <<'EOF'
+          import json, re, os, glob, subprocess
+
+          passed, failed, errors = [], [], []
+          html_files = glob.glob("reports/report*.html")
+          for html_path in html_files:
+              with open(html_path, encoding="utf-8", errors="replace") as f:
+                  content = f.read()
+              names    = re.findall(r'<td class="col-name"[^>]*>(.*?)</td>', content)
+              statuses = re.findall(r'<td class="col-result">(.*?)</td>', content)
+              for name, status in zip(names, statuses):
+                  name   = re.sub(r'<[^>]+>', '', name).strip()
+                  status = status.strip().lower()
+                  if   status == "passed": passed.append(name)
+                  elif status == "failed": failed.append(name)
+                  elif status == "error":  errors.append(name)
+              break
+
+          print(f"Résultats lus : {len(passed)} passed, {len(failed)} failed")
+
+          def git(cmd):
+              return subprocess.run(cmd, shell=True, capture_output=True, text=True).stdout.strip()
+
+          commit_hash   = git("git rev-parse --short HEAD")
+          commit_date   = git("git log -1 --format=%ai")[:10]
+          commit_msg    = git("git log -1 --format=%s")
+          changed_files = git("git diff-tree --no-commit-id -r --name-only HEAD").splitlines()
+
+          def normalize(name):
+              if "::" in name: name = name.split("::")[-1]
+              m = re.search(r'(test_\w+)', name)
+              return m.group(1) if m else name.strip()
+
+          os.makedirs("ai_inputs", exist_ok=True)
+          store_path = "ai_inputs/test_history_store.json"
+          store = {}
+          if os.path.exists(store_path):
+              with open(store_path) as f:
+                  store = json.load(f)
+
+          new_entries = 0
+          for name in passed + failed + errors:
+              test_id = normalize(name)
+              result  = "PASSED" if name in passed else ("FAILED" if name in failed else "ERROR")
+              key     = f"{commit_hash}::{test_id}"
+              if key not in store:
+                  store[key] = {
+                      "commit_hash":    commit_hash,
+                      "commit_date":    commit_date,
+                      "commit_message": commit_msg,
+                      "changed_files":  changed_files,
+                      "test_id":        test_id,
+                      "result":         result,
+                  }
+                  new_entries += 1
+
+          with open(store_path, "w") as f:
+              json.dump(store, f, indent=2)
+
+          print(f"Store : {len(store)} entrées totales, +{new_entries} nouvelles")
+          print(f"Commit : {commit_hash} | {commit_date} | {commit_msg}")
+          EOF
+
+      - name: "Commiter test_history_store.json"
+        if: always()
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add ai_inputs/test_history_store.json
+          git diff --staged --quiet \
+            && echo "Aucune nouvelle entrée." \
+            || (git commit -m "ci: update store phase1 [skip ci]" && git push)
+
+      - name: "DIAGNOSTIC — simulation_results.json"
+        if: always()
+        run: cat reports/simulation_results.json || echo "(absent)"
+
+      - name: "DIAGNOSTIC — Webots stderr"
+        if: always()
+        run: tail -20 reports/webots_stderr.log || echo "(absent)"
+
+      - name: "DIAGNOSTIC — Webots stdout"
+        if: always()
+        run: tail -20 reports/webots_stdout.log || echo "(absent)"
+
+      - name: "Upload artefacts — phase 1"
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: resultats-phase1
+          path: reports/
