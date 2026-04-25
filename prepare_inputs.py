@@ -258,34 +258,6 @@ for t in tests_data:
                  f"{last_pass:<{col_last}}  {fails:>{col_fail}}  {runs:>{col_runs}}  {timeline_chars}")
 
 lines.append("")
-
-# ── Détail par catégorie (functional puis non_functional) ────
-lines += ["─"*100, "DÉTAIL PAR TEST", "─"*100, ""]
-current_cat = None
-for t in tests_data:
-    if t['category'] != current_cat:
-        lines += ["", "━"*100, f"  CATEGORY: {t['category'].upper()}", "━"*100]
-        current_cat = t['category']
-
-    h      = history_by_test[t['test_id']]
-    fails  = [(r.get('commit_message','—')[:40], r.get('changed_files',[]), r.get('commit_message','—')) for r in h if r['result']=='FAILED']
-
-    lines.append(f"  ┌─ TEST_ID     : {t['test_id']}")
-    lines.append(f"  │  FILE        : {t['file_path']}")
-    if t['short_description']:
-        desc = clean_description(t['short_description'])
-        lines.append(f"  │  DESCRIPTION : {desc}")
-    if t['json_keys_used']:
-        lines.append(f"  │  JSON KEYS   : {t['json_keys_used']}")
-    lines.append(f"  │  DEPENDS ON  : {t['source_dependencies']}")
-    if fails:
-        lines.append(f"  │  ECHECS      :")
-        for fm_short, cf, fm in fails[:8]:
-            cf_str = ', '.join(cf[:3]) if cf else '—'
-            lines.append(f"  │    changed: {cf_str} | \"{fm_short}\"")
-    lines.append(f"  └──────────────────────────────────────────────────────")
-    lines.append("")
-
 with open(os.path.join(OUTPUT_DIR, 'tests_history.txt'), 'w', encoding='utf-8') as f:
     f.write('\n'.join(lines))
 print(f"        ✓ ai_inputs/tests_history.txt")
