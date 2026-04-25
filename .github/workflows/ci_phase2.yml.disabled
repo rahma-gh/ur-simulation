@@ -132,7 +132,7 @@ jobs:
       - name: "Sélection IA — DeepSeek"
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-        run: python ai_test_selector.py --skip-prepare --dry-run --verbose
+        run: python ai_test_selector.py --skip-prepare --verbose
 
       - name: "Afficher la sélection produite par le LLM"
         run: |
@@ -223,19 +223,18 @@ jobs:
           import json, re, os, glob, subprocess
 
           passed, failed, errors = [], [], []
-          html_files = glob.glob("reports_ia/report_ia*.html") + glob.glob("reports_ia/report*.html")
-          for html_path in html_files:
-              with open(html_path, encoding="utf-8", errors="replace") as f:
-                  content = f.read()
-              names    = re.findall(r'<td class="col-name"[^>]*>(.*?)</td>', content)
-              statuses = re.findall(r'<td class="col-result">(.*?)</td>', content)
-              for name, status in zip(names, statuses):
-                  name   = re.sub(r'<[^>]+>', '', name).strip()
-                  status = status.strip().lower()
-                  if   status == "passed": passed.append(name)
-                  elif status == "failed": failed.append(name)
-                  elif status == "error":  errors.append(name)
-              break
+
+          # Lire test_results.json généré par conftest.py (source fiable)
+          json_path = "reports_ia/test_results.json"
+          if os.path.exists(json_path):
+              with open(json_path) as f:
+                  data = json.load(f)
+              passed = data.get("passed_tests", [])
+              failed = data.get("failed_tests", [])
+              print(f"test_results.json lu : passed={len(passed)}, failed={len(failed)}")
+          else:
+              print(f"ATTENTION : test_results.json absent dans reports_ia/")
+              print(f"Contenu reports_ia/ : {os.listdir('reports_ia') if os.path.exists('reports_ia') else 'ABSENT'}")
 
           print(f"Résultats IA lus : {len(passed)} passed, {len(failed)} failed")
 
@@ -246,6 +245,11 @@ jobs:
           commit_date   = git("git log -1 --format=%ai")[:10]
           commit_msg    = git("git log -1 --format=%s")
           changed_files = git("git diff-tree --no-commit-id -r --name-only HEAD").splitlines()
+          if not changed_files:
+              changed_files = git("git diff --name-only HEAD~1 HEAD").splitlines()
+          if not changed_files:
+              changed_files = git("git log -1 --name-only --pretty=format: HEAD").splitlines()
+          changed_files = [f for f in changed_files if f.strip()]
 
           def normalize(name):
               if "::" in name: name = name.split("::")[-1]
@@ -264,26 +268,33 @@ jobs:
 
           new_entries = 0
           for name in passed + failed + errors:
-              test_id  = normalize(name)
-              result   = "PASSED" if name in passed else ("FAILED" if name in failed else "ERROR")
-              key      = f"{commit_hash}::{test_id}::ia"
-              if key not in store:
-                  store[key] = {
-                      "commit_hash":    commit_hash,
-                      "commit_date":    commit_date,
+              test_id = normalize(name)
+              result  = "PASSED" if name in passed else ("FAILED" if name in failed else "ERROR")
+
+              # Nouvelle structure : regrouper par test_id
+              if test_id not in store:
+                  store[test_id] = {
+                      "test_id": test_id,
+                      "history": []
+                  }
+
+              # Ajouter seulement si ce commit n est pas déjà enregistré
+              already = any(h.get("commit_message") == commit_msg and h.get("result") == result
+                            for h in store[test_id]["history"])
+              if not already:
+                  store[test_id]["history"].append({
                       "commit_message": commit_msg,
                       "changed_files":  changed_files,
-                      "test_id":        test_id,
                       "result":         result,
                       "source":         "ia",
                       "llm_priority":   priority_map.get(test_id),
-                  }
+                  })
                   new_entries += 1
 
           with open(store_path, "w") as f:
               json.dump(store, f, indent=2)
 
-          print(f"Store : {len(store)} entrées totales, +{new_entries} nouvelles (ia)")
+          print(f"Store : {len(store)} tests uniques, +{new_entries} nouvelles entrées d historique (ia)")
           EOF
 
       - name: "Commiter test_history_store.json mis à jour"
