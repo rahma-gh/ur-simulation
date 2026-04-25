@@ -184,13 +184,24 @@ else:
 
 new_entries = 0  # le store est en lecture seule dans ce script
 
+# Nouvelle structure : le store est organisé par test_id avec un champ "history"
+# On construit history_by_test en lisant directement cette structure
 history_by_test = defaultdict(list)
-for entry in history_store.values():
-    history_by_test[entry['test_id']].append(entry)
-for tid in history_by_test:
-    history_by_test[tid].sort(key=lambda x: x['commit_date'], reverse=True)
+for test_id, entry in history_store.items():
+    if isinstance(entry, dict) and "history" in entry:
+        # Nouvelle structure : {"test_id": ..., "history": [...]}
+        for h in entry["history"]:
+            history_by_test[test_id].append(h)
+    else:
+        # Ancienne structure (compatibilité) : entrée plate
+        history_by_test[entry.get('test_id', test_id)].append(entry)
 
-total_commits = len(set(e['commit_hash'] for e in history_store.values()))
+total_commits = len(set(
+    h.get("commit_message", "")
+    for entry in history_store.values()
+    if isinstance(entry, dict) and "history" in entry
+    for h in entry["history"]
+))
 
 # ════════════════════════════════════════════════════════════
 # tests_history.txt  (fusion test_cases + test_history, sans doublon test_id)
@@ -239,7 +250,7 @@ for t in tests_data:
     h       = history_by_test[t['test_id']]
     runs    = len(h)
     fails   = sum(1 for r in h if r['result'] == 'FAILED')
-    passes  = [r['commit_date'] for r in h if r['result'] == 'PASSED']
+    passes  = [r.get('commit_message', '—')[:30] for r in h if r['result'] == 'PASSED']
     last_pass = passes[0] if passes else '—'
     # Timeline: chaque run = P (passed) ou F (failed), le plus récent en premier
     timeline_chars = ''.join('P' if r['result'] == 'PASSED' else 'F' for r in h[:20])
@@ -257,7 +268,7 @@ for t in tests_data:
         current_cat = t['category']
 
     h      = history_by_test[t['test_id']]
-    fails  = [(r['commit_hash'], r['commit_date'], r.get('changed_files',[]), r['commit_message']) for r in h if r['result']=='FAILED']
+    fails  = [(r.get('commit_message','—')[:40], r.get('changed_files',[]), r.get('commit_message','—')) for r in h if r['result']=='FAILED']
 
     lines.append(f"  ┌─ TEST_ID     : {t['test_id']}")
     lines.append(f"  │  FILE        : {t['file_path']}")
@@ -269,9 +280,9 @@ for t in tests_data:
     lines.append(f"  │  DEPENDS ON  : {t['source_dependencies']}")
     if fails:
         lines.append(f"  │  ECHECS      :")
-        for fh, fd, cf, fm in fails[:8]:
+        for fm_short, cf, fm in fails[:8]:
             cf_str = ', '.join(cf[:3]) if cf else '—'
-            lines.append(f"  │    {fh} | {fd} | changed: {cf_str} | \"{fm}\"")
+            lines.append(f"  │    changed: {cf_str} | \"{fm_short}\"")
     lines.append(f"  └──────────────────────────────────────────────────────")
     lines.append("")
 
