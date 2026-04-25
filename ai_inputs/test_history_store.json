@@ -1,1 +1,842 @@
-{}
+{
+  "b4de5e7::test_capteur_distance_declenche_grasping": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_capteur_distance_declenche_grasping",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_capteur_distance_signal_recu": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_capteur_distance_signal_recu",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_capteur_wrist_coherence_releasing_retour": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_capteur_wrist_coherence_releasing_retour",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_capteur_wrist_declenche_retour_waiting": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_capteur_wrist_declenche_retour_waiting",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_capteur_wrist_declenche_transition_releasing": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_capteur_wrist_declenche_transition_releasing",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_capteur_wrist_signal_recu_par_controleur": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_capteur_wrist_signal_recu_par_controleur",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_consignes_retour_transmises": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_consignes_retour_transmises",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_controleur_envoie_consigne_fermeture_gripper": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_controleur_envoie_consigne_fermeture_gripper",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_controleur_envoie_consigne_ouverture_gripper": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_controleur_envoie_consigne_ouverture_gripper",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_controleur_transmet_consignes_rotation_bras": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_controleur_transmet_consignes_rotation_bras",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_fermeture_puis_ouverture_gripper": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_fermeture_puis_ouverture_gripper",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_json_has_required_keys": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_json_has_required_keys",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_json_readable_by_pytest": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_json_readable_by_pytest",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_moteurs_bras_l\u00e8vent_canettes": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_moteurs_bras_l\u00e8vent_canettes",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_superviseur_a_decouvert_tous_les_noeuds": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_superviseur_a_decouvert_tous_les_noeuds",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_superviseur_a_lu_positions_finales": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_superviseur_a_lu_positions_finales",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_superviseur_a_lu_positions_initiales": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_superviseur_a_lu_positions_initiales",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_superviseur_a_suivi_hauteurs_en_temps_reel": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_superviseur_a_suivi_hauteurs_en_temps_reel",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_superviseur_transmet_donnees_a_pytest": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_superviseur_transmet_donnees_a_pytest",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_supervisor_json_has_duration": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_supervisor_json_has_duration",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_supervisor_writes_json": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_supervisor_writes_json",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_arm_target_positions_conformes": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_arm_target_positions_conformes",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_distance_sensor_triggered": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_distance_sensor_triggered",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_boundary_canette_detectee_sous_seuil": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_boundary_canette_detectee_sous_seuil",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_boundary_canette_non_detectee_au_dessus": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_boundary_canette_non_detectee_au_dessus",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_boundary_deplacement_can_minimum": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_boundary_deplacement_can_minimum",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_boundary_joint_hors_limites_negatif": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_boundary_joint_hors_limites_negatif",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_boundary_joint_hors_limites_positif": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_boundary_joint_hors_limites_positif",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_boundary_joint_maximum": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_boundary_joint_maximum",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_boundary_joint_minimum": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_boundary_joint_minimum",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_boundary_joint_zero": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_boundary_joint_zero",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_boundary_positions_cibles_dans_limites": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_boundary_positions_cibles_dans_limites",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_boundary_seuil_capteur_valide": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_boundary_seuil_capteur_valide",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_boundary_valeur_exactement_au_seuil": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_boundary_valeur_exactement_au_seuil",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_boundary_wrist_position_rotation": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_boundary_wrist_position_rotation",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_can_souleve_au_dessus_table": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_can_souleve_au_dessus_table",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_duree_cycle_complet_ure": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_duree_cycle_complet_ure",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_duree_simulation_totale_raisonnable": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_duree_simulation_totale_raisonnable",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_duree_trois_cycles": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_duree_trois_cycles",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_hauteur_can_lors_saisie": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_hauteur_can_lors_saisie",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_nombre_phases_mouvement": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_nombre_phases_mouvement",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_phases_presentes_dans_source": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_phases_presentes_dans_source",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_ratio_efficacite": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_ratio_efficacite",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_ratio_phases_actives": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_ratio_phases_actives",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_simulation_sans_timeout": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_simulation_sans_timeout",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_timestep_controleur_multiple_wbt": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_timestep_controleur_multiple_wbt",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_timestep_dans_source_c": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_timestep_dans_source_c",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_timestep_ure_wbt_conforme": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_timestep_ure_wbt_conforme",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_vitesse_bras_non_nulle": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_vitesse_bras_non_nulle",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_vitesse_bras_par_defaut": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_vitesse_bras_par_defaut",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_vitesse_configurable_via_argv": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_vitesse_configurable_via_argv",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_duree_attente_canette": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_duree_attente_canette",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_duree_attente_non_nulle": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_duree_attente_non_nulle",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_duree_cycle_total_simulation": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_duree_cycle_total_simulation",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_duree_par_canette_acceptable": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_duree_par_canette_acceptable",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_duree_phase_grasping": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_duree_phase_grasping",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_duree_phase_releasing": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_duree_phase_releasing",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_duree_retour_position": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_duree_retour_position",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_duree_rotation_bras": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_duree_rotation_bras",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_gripper_position_dans_limites": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_gripper_position_dans_limites",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_gripper_position_dans_source_c": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_gripper_position_dans_source_c",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_gripper_sans_ecrasement": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_gripper_sans_ecrasement",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_hauteurs_can_positives": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_hauteurs_can_positives",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_positions_cibles_securisees": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_positions_cibles_securisees",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_positions_finales_differentes_initiales": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_positions_finales_differentes_initiales",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_positions_retour_zero_securisees": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_positions_retour_zero_securisees",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_seuil_detection_distance_sensor": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_seuil_detection_distance_sensor",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_vitesse_bras_securisee": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_vitesse_bras_securisee",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_vitesse_dans_limites_absolues": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_vitesse_dans_limites_absolues",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_reliability_100_lectures_json": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_reliability_100_lectures_json",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_reliability_300_validations_json": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_reliability_300_validations_json",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_reliability_500_coherences_positions": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_reliability_500_coherences_positions",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_reliability_calculs_numeriques_stables": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_reliability_calculs_numeriques_stables",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_reliability_json_non_corrompu": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_reliability_json_non_corrompu",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_reliability_json_toujours_present": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_reliability_json_toujours_present",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_reliability_resultats_reproductibles": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_reliability_resultats_reproductibles",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_stress_10000_positions_joints": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_stress_10000_positions_joints",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_stress_10000_timesteps": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_stress_10000_timesteps",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_stress_1000_vitesses_bras": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_stress_1000_vitesses_bras",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_stress_20000_calculs_trigo": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_stress_20000_calculs_trigo",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_stress_2000_distances_3d": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_stress_2000_distances_3d",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_stress_200_positions_gripper": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_stress_200_positions_gripper",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_stress_3000_calculs_trigo": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_stress_3000_calculs_trigo",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_stress_50000_timesteps": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_stress_50000_timesteps",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_stress_5000_lectures_json": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_stress_5000_lectures_json",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_stress_500_positions_joints": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_stress_500_positions_joints",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_stress_longue_duree_1": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_stress_longue_duree_1",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_stress_longue_duree_2": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_stress_longue_duree_2",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_stress_positions_gripper_coherentes": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_stress_positions_gripper_coherentes",
+    "result": "PASSED"
+  },
+  "b4de5e7::test_capteur_distance_repond_a_toutes_les_canettes": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_capteur_distance_repond_a_toutes_les_canettes",
+    "result": "FAILED"
+  },
+  "b4de5e7::test_gripper_communique_sur_toutes_les_canettes": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_gripper_communique_sur_toutes_les_canettes",
+    "result": "FAILED"
+  },
+  "b4de5e7::test_trois_robots_recoivent_consignes": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_trois_robots_recoivent_consignes",
+    "result": "FAILED"
+  },
+  "b4de5e7::test_all_cans_grasped": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_all_cans_grasped",
+    "result": "FAILED"
+  },
+  "b4de5e7::test_arm_returns_to_waiting": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_arm_returns_to_waiting",
+    "result": "FAILED"
+  },
+  "b4de5e7::test_arm_rotates": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_arm_rotates",
+    "result": "FAILED"
+  },
+  "b4de5e7::test_full_state_machine_cycle": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_full_state_machine_cycle",
+    "result": "FAILED"
+  },
+  "b4de5e7::test_gripper_closed_on_can": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_gripper_closed_on_can",
+    "result": "FAILED"
+  },
+  "b4de5e7::test_gripper_releases_can": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_gripper_releases_can",
+    "result": "FAILED"
+  },
+  "b4de5e7::test_release_after_grasp": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_release_after_grasp",
+    "result": "FAILED"
+  },
+  "b4de5e7::test_wrist_reaches_target": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_wrist_reaches_target",
+    "result": "FAILED"
+  },
+  "b4de5e7::test_boundary_deplacement_can_maximum": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_boundary_deplacement_can_maximum",
+    "result": "FAILED"
+  },
+  "b4de5e7::test_simulation_termine_normalement": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_simulation_termine_normalement",
+    "result": "FAILED"
+  },
+  "b4de5e7::test_vitesse_bras_dans_source_c": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_vitesse_bras_dans_source_c",
+    "result": "FAILED"
+  },
+  "b4de5e7::test_reliability_1000_validations_completes": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_reliability_1000_validations_completes",
+    "result": "FAILED"
+  },
+  "b4de5e7::test_stress_longue_duree_3": {
+    "commit_hash": "b4de5e7",
+    "commit_date": "2026-04-22",
+    "commit_message": "Merge branch 'main' of https://github.com/rahma-gh/ur-simulation",
+    "changed_files": [],
+    "test_id": "test_stress_longue_duree_3",
+    "result": "FAILED"
+  }
+}
