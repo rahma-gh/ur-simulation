@@ -182,6 +182,15 @@
           "controllers/ure_supervisor/ure_supervisor.py"
         ],
         "result": "FAILED"
+      },
+      {
+        "commit_message": "Change initial speed from 0.0 to 1.0",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED",
+        "source": "ia",
+        "llm_priority": 18
       }
     ]
   },
@@ -306,6 +315,15 @@
           "controllers/ure_supervisor/ure_supervisor.py"
         ],
         "result": "FAILED"
+      },
+      {
+        "commit_message": "Change initial speed from 0.0 to 1.0",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED",
+        "source": "ia",
+        "llm_priority": 19
       }
     ]
   },
@@ -771,6 +789,15 @@
           "controllers/ure_supervisor/ure_supervisor.py"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Change initial speed from 0.0 to 1.0",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED",
+        "source": "ia",
+        "llm_priority": 14
       }
     ]
   },
@@ -802,6 +829,15 @@
           "controllers/ure_supervisor/ure_supervisor.py"
         ],
         "result": "FAILED"
+      },
+      {
+        "commit_message": "Change initial speed from 0.0 to 1.0",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED",
+        "source": "ia",
+        "llm_priority": 1
       }
     ]
   },
@@ -833,6 +869,15 @@
           "controllers/ure_supervisor/ure_supervisor.py"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Change initial speed from 0.0 to 1.0",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED",
+        "source": "ia",
+        "llm_priority": 9
       }
     ]
   },
@@ -926,6 +971,15 @@
           "controllers/ure_supervisor/ure_supervisor.py"
         ],
         "result": "FAILED"
+      },
+      {
+        "commit_message": "Change initial speed from 0.0 to 1.0",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED",
+        "source": "ia",
+        "llm_priority": 2
       }
     ]
   },
@@ -957,6 +1011,15 @@
           "controllers/ure_supervisor/ure_supervisor.py"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Change initial speed from 0.0 to 1.0",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED",
+        "source": "ia",
+        "llm_priority": 13
       }
     ]
   },
@@ -988,6 +1051,15 @@
           "controllers/ure_supervisor/ure_supervisor.py"
         ],
         "result": "FAILED"
+      },
+      {
+        "commit_message": "Change initial speed from 0.0 to 1.0",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED",
+        "source": "ia",
+        "llm_priority": 6
       }
     ]
   },
@@ -1019,6 +1091,15 @@
           "controllers/ure_supervisor/ure_supervisor.py"
         ],
         "result": "FAILED"
+      },
+      {
+        "commit_message": "Change initial speed from 0.0 to 1.0",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED",
+        "source": "ia",
+        "llm_priority": 7
       }
     ]
   },
@@ -1050,6 +1131,15 @@
           "controllers/ure_supervisor/ure_supervisor.py"
         ],
         "result": "FAILED"
+      },
+      {
+        "commit_message": "Change initial speed from 0.0 to 1.0",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED",
+        "source": "ia",
+        "llm_priority": 8
       }
     ]
   },
@@ -1515,6 +1605,15 @@
           "controllers/ure_supervisor/ure_supervisor.py"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Change initial speed from 0.0 to 1.0",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED",
+        "source": "ia",
+        "llm_priority": 10
       }
     ]
   },
@@ -1794,6 +1893,15 @@
           "controllers/ure_supervisor/ure_supervisor.py"
         ],
         "result": "FAILED"
+      },
+      {
+        "commit_message": "Change initial speed from 0.0 to 1.0",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED",
+        "source": "ia",
+        "llm_priority": 3
       }
     ]
   },
@@ -1918,6 +2026,15 @@
           "controllers/ure_supervisor/ure_supervisor.py"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Change initial speed from 0.0 to 1.0",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED",
+        "source": "ia",
+        "llm_priority": 4
       }
     ]
   },
@@ -1949,6 +2066,15 @@
           "controllers/ure_supervisor/ure_supervisor.py"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Change initial speed from 0.0 to 1.0",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED",
+        "source": "ia",
+        "llm_priority": 5
       }
     ]
   },
@@ -2073,6 +2199,15 @@
           "controllers/ure_supervisor/ure_supervisor.py"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Change initial speed from 0.0 to 1.0",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED",
+        "source": "ia",
+        "llm_priority": 20
       }
     ]
   },
@@ -2135,6 +2270,15 @@
           "controllers/ure_supervisor/ure_supervisor.py"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Change initial speed from 0.0 to 1.0",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED",
+        "source": "ia",
+        "llm_priority": 12
       }
     ]
   },
@@ -2166,6 +2310,15 @@
           "controllers/ure_supervisor/ure_supervisor.py"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Change initial speed from 0.0 to 1.0",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED",
+        "source": "ia",
+        "llm_priority": 15
       }
     ]
   },
@@ -2197,6 +2350,15 @@
           "controllers/ure_supervisor/ure_supervisor.py"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Change initial speed from 0.0 to 1.0",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED",
+        "source": "ia",
+        "llm_priority": 17
       }
     ]
   },
@@ -2228,6 +2390,15 @@
           "controllers/ure_supervisor/ure_supervisor.py"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Change initial speed from 0.0 to 1.0",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED",
+        "source": "ia",
+        "llm_priority": 11
       }
     ]
   },
@@ -2538,6 +2709,15 @@
           "controllers/ure_supervisor/ure_supervisor.py"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Change initial speed from 0.0 to 1.0",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED",
+        "source": "ia",
+        "llm_priority": 16
       }
     ]
   },
