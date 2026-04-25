@@ -11,6 +11,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -26,6 +33,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "FAILED"
       }
     ]
   },
@@ -38,6 +52,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -56,6 +77,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -68,6 +96,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -86,6 +121,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -98,6 +140,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -116,6 +165,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -128,6 +184,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -146,6 +209,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -158,6 +228,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -176,6 +253,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -191,6 +275,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "FAILED"
       }
     ]
   },
@@ -203,6 +294,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -221,6 +319,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -233,6 +338,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -251,6 +363,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -263,6 +382,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -281,6 +407,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -293,6 +426,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -311,6 +451,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -323,6 +470,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -341,6 +495,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -356,6 +517,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "FAILED"
       }
     ]
   },
@@ -371,6 +539,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "FAILED"
       }
     ]
   },
@@ -386,6 +561,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "FAILED"
       }
     ]
   },
@@ -401,6 +583,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "FAILED"
       }
     ]
   },
@@ -413,6 +602,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -431,6 +627,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -446,6 +649,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "FAILED"
       }
     ]
   },
@@ -461,6 +671,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "FAILED"
       }
     ]
   },
@@ -476,6 +693,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "FAILED"
       }
     ]
   },
@@ -491,6 +715,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "FAILED"
       }
     ]
   },
@@ -506,6 +737,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "FAILED"
       }
     ]
   },
@@ -518,6 +756,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -536,6 +781,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -551,6 +803,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "FAILED"
       }
     ]
   },
@@ -563,6 +822,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -581,6 +847,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -593,6 +866,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -611,6 +891,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -623,6 +910,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -641,6 +935,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -653,6 +954,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -671,6 +979,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -683,6 +998,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -701,6 +1023,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -713,6 +1042,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -731,6 +1067,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -743,6 +1086,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -761,6 +1111,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -773,6 +1130,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -791,6 +1155,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -803,6 +1174,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -821,6 +1199,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -833,6 +1218,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -851,6 +1243,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -866,6 +1265,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "FAILED"
       }
     ]
   },
@@ -878,6 +1284,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -896,6 +1309,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -908,6 +1328,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -926,6 +1353,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -938,6 +1372,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -956,6 +1397,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -968,6 +1416,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -986,6 +1441,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -998,6 +1460,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -1016,6 +1485,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -1028,6 +1504,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -1046,6 +1529,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -1058,6 +1548,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -1076,6 +1573,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -1088,6 +1592,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -1106,6 +1617,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -1118,6 +1636,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -1136,6 +1661,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -1148,6 +1680,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -1166,6 +1705,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -1178,6 +1724,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -1196,6 +1749,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -1211,6 +1771,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "FAILED"
       }
     ]
   },
@@ -1223,6 +1790,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -1241,6 +1815,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -1256,6 +1837,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "FAILED"
       }
     ]
   },
@@ -1268,6 +1856,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -1286,6 +1881,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -1298,6 +1900,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -1316,6 +1925,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -1328,6 +1944,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -1346,6 +1969,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -1358,6 +1988,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -1376,6 +2013,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -1388,6 +2032,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -1406,6 +2057,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -1418,6 +2076,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -1436,6 +2101,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -1448,6 +2120,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -1466,6 +2145,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -1478,6 +2164,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -1496,6 +2189,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -1508,6 +2208,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -1526,6 +2233,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
       }
     ]
   },
@@ -1538,6 +2252,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
@@ -1556,6 +2277,13 @@
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "FAILED"
       }
     ]
   },
@@ -1568,6 +2296,13 @@
           ".github/workflows/ci_phase1.yml",
           ".github/workflows/ci_phase2.yml.disabled",
           "ai_inputs/test_history_store.json",
+          "controllers/ure_can_grasper/ure_can_grasper.c"
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Set initial speed to 0.0 in ure_can_grasper.c",
+        "changed_files": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
         ],
         "result": "PASSED"
