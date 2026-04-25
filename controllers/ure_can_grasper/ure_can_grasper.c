@@ -29,8 +29,8 @@ int main(int argc, char **argv) {
   wb_robot_init();
   int counter = 0, i = 0;
   int state = WAITING;
-  const double target_positions[] ={-5.0, -5.0, -5.0, -5.0} //{-1.88, -2.14, -2.38, -1.51} ; 
-  double speed = 1.0; 
+  const double target_positions[] = {-1.88, -2.14, -2.38, -1.51} ; 
+  double speed = 0.0; 
 
   if (argc == 2)
     sscanf(argv[1], "%lf", &speed);
