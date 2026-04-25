@@ -103,6 +103,32 @@ jobs:
       - name: "Générer les fichiers ai_inputs/ (prepare_inputs.py)"
         run: python prepare_inputs.py
 
+      # ── Afficher les 3 fichiers avant envoi au LLM ──────────────────────
+      - name: "Aperçu des 3 fichiers envoyés au LLM"
+        run: |
+          echo "════════════════════════════════════════════════════════════"
+          echo "  FICHIER 1 — git_diff.txt"
+          echo "════════════════════════════════════════════════════════════"
+          cat ai_inputs/git_diff.txt
+
+          echo ""
+          echo "════════════════════════════════════════════════════════════"
+          echo "  FICHIER 2 — tests_history.txt"
+          echo "════════════════════════════════════════════════════════════"
+          cat ai_inputs/tests_history.txt
+
+          echo ""
+          echo "════════════════════════════════════════════════════════════"
+          echo "  FICHIER 3 — codebase_map.txt"
+          echo "════════════════════════════════════════════════════════════"
+          cat ai_inputs/codebase_map.txt
+
+          echo ""
+          echo "════════════════════════════════════════════════════════════"
+          echo "  TAILLES DES FICHIERS"
+          echo "════════════════════════════════════════════════════════════"
+          wc -c ai_inputs/git_diff.txt ai_inputs/tests_history.txt ai_inputs/codebase_map.txt
+
       - name: "Sélection IA — DeepSeek"
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
@@ -271,7 +297,19 @@ jobs:
             && echo "Aucune nouvelle entrée." \
             || (git commit -m "ci: update store ia [skip ci]" && git push)
 
-      - name: "Upload artefacts — pipeline IA"
+      # ── Upload des 3 fichiers input du LLM (téléchargeables) ────────────
+      - name: "Upload — fichiers envoyés au LLM (ai_inputs/)"
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: llm-inputs
+          path: |
+            ai_inputs/git_diff.txt
+            ai_inputs/tests_history.txt
+            ai_inputs/codebase_map.txt
+            ai_inputs/last_selection.json
+
+      - name: "Upload artefacts — pipeline IA complet"
         uses: actions/upload-artifact@v4
         if: always()
         with:

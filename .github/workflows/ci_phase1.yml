@@ -1,8 +1,6 @@
 name: CI Phase 1 — Construction de l'historique (Sans IA)
 
 # ══════════════════════════════════════════════════════════════════════════════
-#  PHASE 1 — Faire tourner ce pipeline plusieurs pushes (3 à 5)
-#  pour construire un historique réel dans test_history_store.json.
 #
 #  Quand le store est suffisamment riche, basculer vers la phase 2 :
 #    git mv .github/workflows/ci_phase1.yml .github/workflows/ci_phase1.yml.disabled
