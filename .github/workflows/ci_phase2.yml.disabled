@@ -263,8 +263,13 @@ jobs:
           store_path = "ai_inputs/test_history_store.json"
           store = {}
           if os.path.exists(store_path):
-              with open(store_path) as f:
-                  store = json.load(f)
+              try:
+                  with open(store_path, encoding="utf-8-sig") as f:
+                      content_store = f.read().strip()
+                  store = json.loads(content_store) if content_store else {}
+              except Exception as e:
+                  print(f"Store illisible ({e}) — on repart d un store vide")
+                  store = {}
 
           new_entries = 0
           for name in passed + failed + errors:
