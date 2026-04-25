@@ -464,8 +464,8 @@
       }
     ]
   },
-  "test_moteurs_bras_l\u00e8vent_canettes": {
-    "test_id": "test_moteurs_bras_l\u00e8vent_canettes",
+  "test_moteurs_bras_lèvent_canettes": {
+    "test_id": "test_moteurs_bras_lèvent_canettes",
     "history": [
       {
         "commit_message": "fix: store UTF-8 + nouvelle structure par test_id & reset initial speed value",
