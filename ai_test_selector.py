@@ -83,7 +83,7 @@ def load_all_inputs() -> dict:
 # Techniques de prompt engineering appliquées :
 #   [1] Role prompting        — identité précise avec domaine d'expertise
 #   [2] Context setting       — description du projet et des fichiers d'entrée
-#   [3] Chain of Thought       — raisonnement étape par étape obligatoire (<thinking>)
+#   [3] Reasoning bref         — analyse directe sans bloc <thinking>
 #   [4] Structured output     — schéma JSON strict avec règles de validation
 #   [5] Few-shot example      — exemple concret de bonne sélection
 #   [6] Negative prompting    — ce qu'il ne faut absolument PAS faire
@@ -129,41 +129,15 @@ SYSTEM_PROMPT = textwrap.dedent("""\
     [CODEBASE_MAP]
       Source files broken down by function, with cross-file dependency links.
 
-    ## YOUR REASONING PROCESS  (Chain of Thought — mandatory)
-    Before producing your final JSON answer, you MUST think step by step
-    inside a <thinking> block. Follow these steps exactly:
-
-    STEP 1 — DIFF ANALYSIS
-      List every source file that was modified (not test files, only source files).
-      For each file, identify the specific functions or values that changed.
-
-    STEP 2 — DIRECT IMPACT
-      For each modified source file, look up in TESTS_HISTORY which tests declare
-      that file in their DEPENDS ON field. These are directly impacted tests.
-
-    STEP 3 — HISTORICAL RISK
-      From TESTS_HISTORY, identify tests that have at least one FAILED entry
-      in commits that touched the same files modified in the current diff.
-      These are historically risky tests and must be prioritized.
-
-    STEP 4 — CRITICAL BEHAVIOUR COVERAGE
-      Even if a test is not directly impacted by the diff, include it if it
-      validates a behaviour that the changed code logically affects
-      (e.g., a speed change in the C controller affects timing tests).
-
-    STEP 5 — EXCLUSION
-      Explicitly list the tests you are NOT selecting and why
-      (e.g., "test_X depends only on file Y which was not modified").
-
-    STEP 6 — PRIORITY ASSIGNMENT
-      Assign priorities using this exact ranking logic:
-        Priority 1-3   → tests that have previously FAILED on similar changes
-        Priority 4-10  → tests directly impacted by the diff (never failed before)
-        Priority 11+   → tests with indirect/logical impact only
+    ## YOUR REASONING PROCESS  (brief and direct)
+    Analyse the inputs and select tests in this order:
+      1. Tests that have FAILED in TESTS_HISTORY when the modified files changed (highest priority)
+      2. Tests that DEPEND ON the modified files (direct impact)
+      3. Tests logically affected by the change (indirect impact)
+    Skip all other tests.
 
     ## OUTPUT FORMAT  (strict — do not deviate)
-    After your <thinking> block, output ONLY a valid JSON object.
-    No markdown fences. No prose. No comments. Only the raw JSON.
+    Output ONLY a valid JSON object. No markdown fences. No prose. No thinking block. Only raw JSON.
 
     Schema:
     {
@@ -206,7 +180,7 @@ SYSTEM_PROMPT = textwrap.dedent("""\
     - Never invent a test_id that does not exist in TESTS_HISTORY
     - Never select ALL tests — be selective; skipping irrelevant tests is correct
     - Never assign the same priority number to two different tests
-    - Never output anything outside the <thinking> block and the JSON object
+    - Never output anything other than the raw JSON object
     - Never wrap the JSON in markdown code fences (no ```json)
     - Never add explanatory text after the closing brace of the JSON
 """)
@@ -233,8 +207,7 @@ def build_user_prompt(inputs: dict) -> str:
         {inputs['codebase_map']}
 
         ═══════════════════════════════════════════════════════════════════════
-        Now follow your reasoning process (STEP 1 → STEP 6) inside <thinking>,
-        then output the raw JSON object. Nothing else after the JSON.
+        Output ONLY the raw JSON object. Nothing else.
         ═══════════════════════════════════════════════════════════════════════
     """)
 
