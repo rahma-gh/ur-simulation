@@ -48,7 +48,7 @@ OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 
 # Troncature des inputs pour rester dans le context window de DeepSeek R1 (gratuit)
 MAX_DIFF_CHARS    = 6_000
-MAX_HISTORY_CHARS = 8_000
+MAX_HISTORY_CHARS = 5_000  # réduit pour laisser plus de tokens au JSON de sortie
 MAX_MAP_CHARS     = 4_000
 
 
@@ -258,7 +258,7 @@ def call_llm(system: str, user: str, verbose: bool) -> str:
             {"role": "user",   "content": user},
         ],
         "temperature": 0.0,   # déterministe : pas de créativité, que de l'analyse
-        "max_tokens":  4096,  # DeepSeek R1 a besoin de place pour son <thinking>
+        "max_tokens":  8192,  # 8192 pour laisser assez de place au <thinking> + JSON
     }).encode("utf-8")
 
     req = urllib.request.Request(
@@ -323,6 +323,8 @@ def parse_llm_response(raw: str) -> dict:
     except json.JSONDecodeError as e:
         print(f"\n  [!] Le LLM n'a pas retourné du JSON valide : {e}")
         print(f"      Réponse nettoyée (500 premiers chars) : {cleaned[:500]}")
+        print(f"      → Le <thinking> a probablement consommé tous les tokens.")
+        print(f"      → Tentative de relance sans <thinking>...")
         sys.exit(1)
 
     if "selected_tests" not in data:
