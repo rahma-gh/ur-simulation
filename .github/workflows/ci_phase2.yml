@@ -72,7 +72,7 @@ jobs:
       - name: "Sélection et priorisation par DeepSeek (SYSTEM + USER PROMPT)"
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-        run: python ai_test_selector.py --skip-prepare --verbose
+        run: python ai_test_selector.py --skip-prepare --dry-run --verbose
 
       # ── Afficher la sélection du LLM ──────────────────────────────────────
       - name: "Sélection retournée par le LLM"
