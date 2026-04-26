@@ -21,7 +21,7 @@ Variables d'environnement :
   OPENROUTER_API_KEY   → clé API OpenRouter (gratuite sur https://openrouter.ai)
 
 Modèle utilisé :
-  qwen/qwen3.6-plus-preview:free  (via OpenRouter)
+  "openrouter/auto"
 """
 
 import os
@@ -41,7 +41,7 @@ PROJECT_ROOT = Path(__file__).parent.resolve()
 AI_INPUTS    = PROJECT_ROOT / "ai_inputs"
 
 # Modèle recommandé : Qwen 3.6 Plus Preview (gratuit, raisonnement intégré)
-DEEPSEEK_MODEL = "qwen/qwen3.6-plus-preview:free"
+DEEPSEEK_MODEL = "openrouter/auto"
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 
 # Troncature des inputs (réduite pour laisser plus de place à la sortie JSON)
