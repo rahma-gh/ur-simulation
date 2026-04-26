@@ -269,8 +269,10 @@ for t in tests_data:
     ))
     failed_when_str = ', '.join(failed_when[:3]) if failed_when else '—'
 
+    # Marquer clairement si ce test doit etre sélectionné pour ce type de changement
+    must_select = "YES — has failed when these files changed" if failed_when_str != "—" else "NO — never failed"
     lines.append(f"  {t['test_id']:<{col_id}}  {t['category']:<{col_cat}}  "
-                 f"{fails:>{col_fail}}  {runs:>{col_runs}}  {timeline_chars:<12}  FAILED_WHEN: {failed_when_str}")
+                 f"{fails:>{col_fail}}  {runs:>{col_runs}}  {timeline_chars:<12}  FAILED_WHEN:{failed_when_str}  SELECT_IF_DIFF_TOUCHES:{failed_when_str}")
 
 lines.append("")
 with open(os.path.join(OUTPUT_DIR, 'tests_history.txt'), 'w', encoding='utf-8') as f:
