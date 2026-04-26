@@ -242,7 +242,7 @@ col_runs  = 6    # RUNS
 col_tl    = 20   # TIMELINE
 
 header = (f"  {'TEST_ID':<{col_id}}  {'CATÉGORIE':<{col_cat}}  "
-          f"{'LAST PASS':<{col_last}}  {'FAIL':>{col_fail}}  {'RUNS':>{col_runs}}  TIMELINE")
+          f"{'FAIL':>{col_fail}}  {'RUNS':>{col_runs}}  {'TIMELINE':<12}  FAILED_WHEN (fichiers modifiés lors des echecs)")
 lines.append(header)
 lines.append("  " + "─"*(len(header)-2))
 
@@ -252,10 +252,25 @@ for t in tests_data:
     fails   = sum(1 for r in h if r['result'] == 'FAILED')
     passes  = [r.get('commit_message', '—')[:30] for r in h if r['result'] == 'PASSED']
     last_pass = passes[0] if passes else '—'
-    # Timeline: chaque run = P (passed) ou F (failed), le plus récent en premier
     timeline_chars = ''.join('P' if r['result'] == 'PASSED' else 'F' for r in h[:20])
+
+    # Extraire les fichiers modifiés lors des echecs — info cruciale pour le LLM
+    failed_when = []
+    for r in h:
+        if r['result'] == 'FAILED':
+            cf = r.get('changed_files', [])
+            # Garder seulement les fichiers source (pas les .yml)
+            src_files = [f for f in cf if not f.endswith('.yml') and not f.endswith('.disabled')]
+            if src_files:
+                failed_when += src_files
+    # Dédupliquer et raccourcir
+    failed_when = list(dict.fromkeys(
+        f.split('/')[-1].replace('.py','').replace('.c','') for f in failed_when
+    ))
+    failed_when_str = ', '.join(failed_when[:3]) if failed_when else '—'
+
     lines.append(f"  {t['test_id']:<{col_id}}  {t['category']:<{col_cat}}  "
-                 f"{last_pass:<{col_last}}  {fails:>{col_fail}}  {runs:>{col_runs}}  {timeline_chars}")
+                 f"{fails:>{col_fail}}  {runs:>{col_runs}}  {timeline_chars:<12}  FAILED_WHEN: {failed_when_str}")
 
 lines.append("")
 with open(os.path.join(OUTPUT_DIR, 'tests_history.txt'), 'w', encoding='utf-8') as f:
