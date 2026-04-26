@@ -9,7 +9,7 @@ Workflow :
        ai_inputs/git_diff.txt
        ai_inputs/tests_history.txt
        ai_inputs/codebase_map.txt
-  2. Construit un prompt structuré (prompt engineering) et l'envoie à DeepSeek
+  2. Construit un prompt structuré (prompt engineering) et l'envoie à Qwen 3.6
      via OpenRouter (clé API gratuite sur https://openrouter.ai)
   3. Parse la réponse JSON du LLM
   4. Lance uniquement les tests sélectionnés, dans l'ordre de priorité fourni
@@ -21,7 +21,7 @@ Variables d'environnement :
   OPENROUTER_API_KEY   → clé API OpenRouter (gratuite sur https://openrouter.ai)
 
 Modèle utilisé :
-  deepseek/deepseek-r1:free  (via OpenRouter)
+  qwen/qwen3.6-plus-preview:free  (via OpenRouter)
 """
 
 import os
@@ -32,6 +32,7 @@ import subprocess
 import textwrap
 import urllib.request
 import urllib.error
+import re
 from pathlib import Path
 
 # ── Configuration ────────────────────────────────────────────────────────────
@@ -39,17 +40,14 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).parent.resolve()
 AI_INPUTS    = PROJECT_ROOT / "ai_inputs"
 
-# Modèle : Free Models Router d'OpenRouter
-# Route automatiquement vers le meilleur modèle gratuit disponible
-# (DeepSeek R1, Llama, Qwen...) sans gérer la disponibilité manuellement.
-# Doc : https://openrouter.ai/docs/guides/routing/routers/free-models-router
-DEEPSEEK_MODEL = "openrouter/auto"
+# Modèle recommandé : Qwen 3.6 Plus Preview (gratuit, raisonnement intégré)
+DEEPSEEK_MODEL = "qwen/qwen3.6-plus-preview:free"
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 
-# Troncature des inputs pour rester dans le context window de DeepSeek R1 (gratuit)
-MAX_DIFF_CHARS    = 6_000
-MAX_HISTORY_CHARS = 5_000  # réduit pour laisser plus de tokens au JSON de sortie
-MAX_MAP_CHARS     = 4_000
+# Troncature des inputs (réduite pour laisser plus de place à la sortie JSON)
+MAX_DIFF_CHARS    = 4_000
+MAX_HISTORY_CHARS = 3_000
+MAX_MAP_CHARS     = 2_000
 
 
 # ── Lecture des fichiers d'entrée ─────────────────────────────────────────────
@@ -79,16 +77,6 @@ def load_all_inputs() -> dict:
 
 
 # ── Construction du prompt ────────────────────────────────────────────────────
-#
-# Techniques de prompt engineering appliquées :
-#   [1] Role prompting        — identité précise avec domaine d'expertise
-#   [2] Context setting       — description du projet et des fichiers d'entrée
-#   [3] Reasoning bref         — analyse directe sans bloc <thinking>
-#   [4] Structured output     — schéma JSON strict avec règles de validation
-#   [5] Few-shot example      — exemple concret de bonne sélection
-#   [6] Negative prompting    — ce qu'il ne faut absolument PAS faire
-#   [7] Critères numérotés    — règles de décision non-ambiguës
-# ─────────────────────────────────────────────────────────────────────────────
 
 SYSTEM_PROMPT = textwrap.dedent("""\
     ## ROLE
@@ -147,6 +135,7 @@ SYSTEM_PROMPT = textwrap.dedent("""\
 
     STEP 3 — Assign priorities.
       Sort selected tests by FAIL count descending (highest FAIL count = priority 1).
+      Limit to at most 8 tests total (prioritize highest FAIL counts).
 
     STEP 4 — Handle new files (no history).
       If a modified file NEVER appears in any FAILED_WHEN entry anywhere in the table,
@@ -163,6 +152,8 @@ SYSTEM_PROMPT = textwrap.dedent("""\
 
     ## OUTPUT FORMAT  (strict — do not deviate)
     Output ONLY a valid JSON object. No markdown fences. No prose. No thinking block. Only raw JSON.
+    Keep each "reason" under 80 characters (one short sentence).
+    Limit selected_tests to at most 8 items.
 
     Schema:
     {
@@ -171,7 +162,7 @@ SYSTEM_PROMPT = textwrap.dedent("""\
           "test_id":  "<exact test_id string from TESTS_HISTORY>",
           "priority": <integer, 1 = run first>,
           "category": "<functional | non_functional>",
-          "reason":   "<one precise sentence: what changed + why this test covers it>"
+          "reason":   "<one precise sentence under 80 chars: what changed + why this test covers it>"
         }
       ],
       "skipped_count": <integer — number of tests NOT selected>,
@@ -237,7 +228,7 @@ def build_user_prompt(inputs: dict) -> str:
     """)
 
 
-# ── Appel au LLM (DeepSeek R1 via OpenRouter — gratuit) ──────────────────────
+# ── Appel au LLM (via OpenRouter) ────────────────────────────────────────────
 
 def call_llm(system: str, user: str, verbose: bool) -> str:
     api_key = os.environ.get("OPENROUTER_API_KEY", "").strip()
@@ -255,8 +246,8 @@ def call_llm(system: str, user: str, verbose: bool) -> str:
             {"role": "system", "content": system},
             {"role": "user",   "content": user},
         ],
-        "temperature": 0.0,   # déterministe : pas de créativité, que de l'analyse
-        "max_tokens":  8192,  # 8192 pour laisser assez de place au <thinking> + JSON
+        "temperature": 0.0,
+        "max_tokens": 16384,   # augmenté pour éviter la troncature
     }).encode("utf-8")
 
     req = urllib.request.Request(
@@ -295,41 +286,61 @@ def call_llm(system: str, user: str, verbose: bool) -> str:
     return raw
 
 
+# ── Réparation d'un JSON tronqué ─────────────────────────────────────────────
+
+def repair_truncated_json(partial: str) -> str:
+    """Tente de fermer un JSON tronqué (ajoute accolades et crochets manquants)."""
+    # Enlever tout ce qui pourrait être après la dernière accolade complète
+    # On va simplement équilibrer les accolades et crochets ouverts
+    open_braces = partial.count('{') - partial.count('}')
+    open_brackets = partial.count('[') - partial.count(']')
+    # Ajouter les caractères fermants
+    repaired = partial.rstrip(',')  # enlever une virgule finale éventuelle
+    if open_braces > 0:
+        repaired += '}' * open_braces
+    if open_brackets > 0:
+        repaired += ']' * open_brackets
+    return repaired
+
+
 # ── Parsing de la réponse JSON ────────────────────────────────────────────────
 
 def parse_llm_response(raw: str) -> dict:
-    import re
     print("  [3/4] Parsing de la réponse LLM ...")
 
-    # DeepSeek R1 produit un bloc <thinking>...</thinking> avant le JSON.
-    # On le supprime pour isoler le JSON pur.
+    # Supprimer le bloc <thinking> (DeepSeek R1) – au cas où
     cleaned = re.sub(r"<thinking>[\s\S]*?</thinking>", "", raw).strip()
 
-    # Nettoyer les éventuels blocs markdown ```json ... ``` résiduels
+    # Nettoyer les éventuels blocs markdown ```json ... ```
     if "```" in cleaned:
         m = re.search(r"```(?:json)?\s*([\s\S]+?)```", cleaned)
         if m:
             cleaned = m.group(1).strip()
 
-    # Extraire le premier objet JSON trouvé (robustesse)
+    # Extraire le premier objet JSON
     m = re.search(r"\{[\s\S]+\}", cleaned)
     if m:
         cleaned = m.group(0)
 
+    # Tentative de parsing normal
     try:
         data = json.loads(cleaned)
     except json.JSONDecodeError as e:
-        print(f"\n  [!] Le LLM n'a pas retourné du JSON valide : {e}")
-        print(f"      Réponse nettoyée (500 premiers chars) : {cleaned[:500]}")
-        print(f"      → Le <thinking> a probablement consommé tous les tokens.")
-        print(f"      → Tentative de relance sans <thinking>...")
-        sys.exit(1)
+        print(f"  [!] JSON invalide, tentative de réparation... ({e})")
+        repaired = repair_truncated_json(cleaned)
+        try:
+            data = json.loads(repaired)
+            print("      ✓ JSON réparé avec succès (troncature détectée).")
+        except json.JSONDecodeError as e2:
+            print(f"\n  [!] Le LLM n'a pas retourné du JSON valide, même après réparation.")
+            print(f"      Réponse nettoyée (500 premiers chars) : {cleaned[:500]}")
+            sys.exit(1)
 
     if "selected_tests" not in data:
         print("  [!] Clé 'selected_tests' absente dans la réponse du LLM.")
         sys.exit(1)
 
-    # Trier par priorité croissante (1 = premier à exécuter)
+    # Trier par priorité croissante
     data["selected_tests"].sort(key=lambda t: t.get("priority", 999))
     return data
 
@@ -344,7 +355,7 @@ def display_plan(data: dict) -> None:
 
     print()
     print("  ╔══════════════════════════════════════════════════════════════╗")
-    print("  ║           PLAN DE TEST GÉNÉRÉ PAR L'IA (DeepSeek R1)        ║")
+    print("  ║           PLAN DE TEST GÉNÉRÉ PAR L'IA (Qwen 3.6)           ║")
     print("  ╚══════════════════════════════════════════════════════════════╝")
     if diff_sum:
         print(f"\n  Diff    : {diff_sum}")
@@ -370,7 +381,6 @@ def build_pytest_args(selected_tests: list) -> list:
 
     for entry in selected_tests:
         tid = entry["test_id"]
-        # Chercher le fichier correspondant
         matches = list(test_dir.rglob(f"{tid}.py"))
         if matches:
             args.append(str(matches[0].relative_to(PROJECT_ROOT)))
@@ -428,7 +438,7 @@ def save_selection_log(data: dict) -> None:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Sélection et priorisation intelligente des tests via DeepSeek R1 (gratuit)."
+        description="Sélection et priorisation intelligente des tests via LLM (gratuit)."
     )
     parser.add_argument(
         "--dry-run", action="store_true",
@@ -436,7 +446,7 @@ def main():
     )
     parser.add_argument(
         "--verbose", "-v", action="store_true",
-        help="Affiche le bloc <thinking> du LLM et les sorties pytest détaillées."
+        help="Affiche la réponse brute du LLM et les sorties pytest détaillées."
     )
     parser.add_argument(
         "--skip-prepare", action="store_true",
