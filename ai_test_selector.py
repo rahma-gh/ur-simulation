@@ -130,11 +130,29 @@ SYSTEM_PROMPT = textwrap.dedent("""\
       Source files broken down by function, with cross-file dependency links.
 
     ## YOUR REASONING PROCESS  (brief and direct)
-    Analyse the inputs and select tests in this order:
-      1. Tests that have FAILED in TESTS_HISTORY when the modified files changed (highest priority)
-      2. Tests that DEPEND ON the modified files (direct impact)
-      3. Tests logically affected by the change (indirect impact)
-    Skip all other tests.
+    Analyse the inputs and select tests using these rules IN ORDER:
+
+    RULE 1 — MANDATORY: Select tests that have FAILED in TESTS_HISTORY
+      when the same files modified in the current diff were changed.
+      These are the highest priority tests (priority 1, 2, 3...).
+
+    RULE 2 — CONDITIONAL: Select tests with NO history on the modified files
+      (first time this file changes) — we have no data so we must run them.
+      These get medium priority.
+
+    RULE 3 — SKIP: Do NOT select a test if ALL of the following are true:
+      - It has history entries for the modified files
+      - ALL its history entries for those files show PASSED
+      - The current change is of the same type as previous changes
+        (e.g., another value adjustment in the same variable)
+      These tests have proven stable for this type of change.
+
+    RULE 4 — EXCEPTION to RULE 3: Even if a test always passed before,
+      SELECT it if the current change is extreme or unusual
+      (e.g., value set to 0, negative value, or value 10x larger than before).
+
+    The goal is to run the MINIMUM number of tests that covers ALL likely failures.
+    Skipping stable tests is correct and expected.
 
     ## OUTPUT FORMAT  (strict — do not deviate)
     Output ONLY a valid JSON object. No markdown fences. No prose. No thinking block. Only raw JSON.
