@@ -35,12 +35,10 @@ import urllib.error
 import re
 from pathlib import Path
 
-# ── Configuration ────────────────────────────────────────────────────────────
 
 PROJECT_ROOT = Path(__file__).parent.resolve()
 AI_INPUTS    = PROJECT_ROOT / "ai_inputs"
 
-# Modèle recommandé : Qwen 3.6 Plus Preview (gratuit, raisonnement intégré)
 DEEPSEEK_MODEL = "openrouter/auto"
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 
@@ -49,8 +47,6 @@ MAX_DIFF_CHARS    = 4_000
 MAX_HISTORY_CHARS = 3_000
 MAX_MAP_CHARS     = 2_000
 
-
-# ── Lecture des fichiers d'entrée ─────────────────────────────────────────────
 
 def read_input(filename: str, max_chars: int) -> str:
     path = AI_INPUTS / filename
@@ -75,8 +71,6 @@ def load_all_inputs() -> dict:
         print(f"        ✓ {k:16s}  ({len(v):,} chars)")
     return data
 
-
-# ── Construction du prompt ────────────────────────────────────────────────────
 
 SYSTEM_PROMPT = textwrap.dedent("""\
     ## ROLE
@@ -224,8 +218,6 @@ def build_user_prompt(inputs: dict) -> str:
     """)
 
 
-# ── Appel au LLM (via OpenRouter) ────────────────────────────────────────────
-
 def call_llm(system: str, user: str, verbose: bool) -> str:
     api_key = os.environ.get("OPENROUTER_API_KEY", "").strip()
     if not api_key:
@@ -281,9 +273,6 @@ def call_llm(system: str, user: str, verbose: bool) -> str:
           f"completion: {usage.get('completion_tokens','?')}")
     return raw
 
-
-# ── Réparation d'un JSON tronqué ─────────────────────────────────────────────
-
 def repair_truncated_json(partial: str) -> str:
     """Tente de fermer un JSON tronqué (ajoute accolades et crochets manquants)."""
     # Enlever tout ce qui pourrait être après la dernière accolade complète
@@ -298,8 +287,6 @@ def repair_truncated_json(partial: str) -> str:
         repaired += ']' * open_brackets
     return repaired
 
-
-# ── Parsing de la réponse JSON ────────────────────────────────────────────────
 
 def parse_llm_response(raw: str) -> dict:
     print("  [3/4] Parsing de la réponse LLM ...")
@@ -341,8 +328,6 @@ def parse_llm_response(raw: str) -> dict:
     return data
 
 
-# ── Affichage du plan de test ─────────────────────────────────────────────────
-
 def display_plan(data: dict) -> None:
     selected  = data["selected_tests"]
     skipped   = data.get("skipped_count", "?")
@@ -350,9 +335,8 @@ def display_plan(data: dict) -> None:
     rationale = data.get("selection_rationale", "")
 
     print()
-    print("  ╔══════════════════════════════════════════════════════════════╗")
-    print("  ║           PLAN DE TEST GÉNÉRÉ PAR L'IA (Qwen 3.6)           ║")
-    print("  ╚══════════════════════════════════════════════════════════════╝")
+    print("            PLAN DE TEST GÉNÉRÉ PAR L'IA (Qwen 3.6)           ")
+    
     if diff_sum:
         print(f"\n  Diff    : {diff_sum}")
     if rationale:
@@ -367,7 +351,7 @@ def display_plan(data: dict) -> None:
     print()
 
 
-# ── Construction des arguments pytest ────────────────────────────────────────
+
 
 def build_pytest_args(selected_tests: list) -> list:
     """Convertit les test_id en chemins de fichiers pytest valides."""
@@ -388,8 +372,6 @@ def build_pytest_args(selected_tests: list) -> list:
 
     return args
 
-
-# ── Lancement des tests ───────────────────────────────────────────────────────
 
 def run_tests(pytest_args: list, dry_run: bool, verbose: bool) -> int:
     print("  [4/4] Lancement des tests sélectionnés ...")
@@ -415,8 +397,6 @@ def run_tests(pytest_args: list, dry_run: bool, verbose: bool) -> int:
     return result.returncode
 
 
-# ── Sauvegarde du résultat de sélection (pour audit CI) ──────────────────────
-
 def save_selection_log(data: dict) -> None:
     log_path = AI_INPUTS / "last_selection.json"
     log = {
@@ -429,8 +409,6 @@ def save_selection_log(data: dict) -> None:
     log_path.write_text(json.dumps(log, indent=2, ensure_ascii=False), encoding="utf-8")
     print(f"  ✓ Sélection sauvegardée : ai_inputs/last_selection.json")
 
-
-# ── Point d'entrée ────────────────────────────────────────────────────────────
 
 def main():
     parser = argparse.ArgumentParser(
