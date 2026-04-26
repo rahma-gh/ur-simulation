@@ -131,33 +131,35 @@ SYSTEM_PROMPT = textwrap.dedent("""\
 
     ## YOUR REASONING PROCESS  (precise and strict)
 
-    The TESTS_HISTORY table contains a column "FAILED_WHEN" that tells you
-    exactly which source files were modified when each test previously failed.
+    The TESTS_HISTORY table has a column "FAILED_WHEN" showing which source files
+    were modified when each test previously failed.
 
-    Apply these rules IN ORDER:
+    STEP 1 — Identify modified source files from GIT_DIFF.
+      Extract only source files (controllers/*.c or controllers/*.py).
+      Example: if ure_can_grasper.c changed → modified = ["ure_can_grasper"]
 
-    RULE 1 — MANDATORY (highest priority):
-      Select a test if its FAILED_WHEN column contains ANY file that appears
-      in the current GIT_DIFF as modified.
-      → These tests have proven to fail when this exact file changes.
-      → Assign priority 1, 2, 3... in order of failure frequency (FAIL count).
+    STEP 2 — Apply MANDATORY selection rule.
+      For EVERY test in TESTS_HISTORY:
+        IF FAILED_WHEN contains ANY name matching a modified file → MUST select it.
+        IF FAILED_WHEN is "—" → MUST skip it. No exception.
+      This rule is absolute. Do not use judgment. Do not skip based on FAIL count.
+      Even if FAIL=1/3, if FAILED_WHEN matches → select it.
 
-    RULE 2 — SKIP (most important rule):
-      Do NOT select a test if:
-        - Its FAILED_WHEN column is "—" (never failed) OR
-        - Its FAILED_WHEN column contains ONLY files NOT in the current diff
-      → These tests have never failed for this type of change.
-      → Skipping them is correct. Do not include them.
+    STEP 3 — Assign priorities.
+      Sort selected tests by FAIL count descending (highest FAIL count = priority 1).
 
-    RULE 3 — NEW FILES (no history):
-      If a modified file has NEVER appeared in any FAILED_WHEN entry,
-      select only the tests that directly depend on that file (FAIL=0, RUNS=0).
-      Assign low priority (10+).
+    STEP 4 — Handle new files (no history).
+      If a modified file NEVER appears in any FAILED_WHEN entry anywhere in the table,
+      it is a new file with no history. Select tests with RUNS=0 for that file.
 
-    The goal: select ONLY tests whose FAILED_WHEN matches the current diff.
-    A test with FAILED_WHEN: "—" must NEVER be selected.
-    A test with FAILED_WHEN: "ure_supervisor" IS selected when ure_supervisor.py changes.
-    A test with FAILED_WHEN: "ure_can_grasper" IS selected when ure_can_grasper.c changes.
+    CRITICAL: The number of tests you select must equal the number of tests
+    whose FAILED_WHEN column contains at least one modified file name.
+    Do not add tests. Do not remove tests. Follow the rule exactly.
+
+    The table also has a column SELECT_IF_DIFF_TOUCHES which is identical to
+    FAILED_WHEN — use both to confirm your selection.
+    If SELECT_IF_DIFF_TOUCHES contains "ure_can_grasper" and the diff touches
+    ure_can_grasper.c → that test IS selected, no matter what its PASS history says.
 
     ## OUTPUT FORMAT  (strict — do not deviate)
     Output ONLY a valid JSON object. No markdown fences. No prose. No thinking block. Only raw JSON.
