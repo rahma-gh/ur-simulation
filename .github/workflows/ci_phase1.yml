@@ -1,0 +1,185 @@
+name: CI Phase 1 — Construction de l'historique (Sans IA)
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+
+  tests-classiques:
+    name: "Phase 1 — Tous les tests + alimentation du store"
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: "Build image Docker"
+        run: docker build -t ur-simulation .
+
+      - name: "Lancer TOUS les tests dans Docker"
+        run: docker run --name ur-test-classic ur-simulation
+        continue-on-error: true
+
+      - name: "Récupérer le dossier reports/ depuis Docker"
+        if: always()
+        run: docker cp ur-test-classic:/app/reports/. reports/
+
+      # ── Diagnostic ────────────────────────────────────────────────────────
+      - name: "DIAGNOSTIC — Contenu du dossier reports/"
+        if: always()
+        run: |
+          echo "=== Fichiers dans reports/ ==="
+          find reports/ -type f | sort
+          echo ""
+          echo "=== Aperçu test_results.json ==="
+          cat reports/test_results.json 2>/dev/null | python3 -m json.tool || echo "(absent)"
+
+      # ── Alimentation du store ─────────────────────────────────────────────
+      - name: "Alimenter test_history_store.json avec les résultats"
+        if: always()
+        run: |
+          python3 - <<'EOF'
+          import json, re, os, subprocess
+
+          passed, failed, errors = [], [], []
+
+          # ── Lire les résultats depuis test_results.json (généré par conftest.py)
+          json_path = "reports/test_results.json"
+          if os.path.exists(json_path):
+              with open(json_path) as f:
+                  data = json.load(f)
+              passed = data.get("passed_tests", [])
+              failed = data.get("failed_tests", [])
+              print(f"test_results.json : {data['total']} total, "
+                    f"{data['passed']} passed, {data['failed']} failed")
+          else:
+              print("ATTENTION : test_results.json absent")
+
+          def git(cmd):
+              return subprocess.run(cmd, shell=True,
+                                    capture_output=True, text=True).stdout.strip()
+
+          commit_msg  = git("git log -1 --format=%s")
+
+          # ── Fichiers modifiés — garder seulement les sources controllers/
+          all_changed = git("git diff-tree --no-commit-id -r --name-only HEAD").splitlines()
+          if not all_changed:
+              all_changed = git("git diff --name-only HEAD~1 HEAD").splitlines()
+          all_changed = [f for f in all_changed if f.strip()]
+
+          source_files_changed = [
+              f for f in all_changed
+              if 'controllers/' in f and (f.endswith('.c') or f.endswith('.py'))
+          ]
+
+          # ── Extraire l'élément changé et sa valeur depuis le diff
+          diff_text = git("git show HEAD")
+
+          def extract_changed_element(diff_text):
+              patterns = [
+                  (r'\+\s*double\s+(\w+)\s*=\s*([\d.]+)',
+                   lambda m: (m.group(1), m.group(2))),
+                  (r'\+\s*#define\s+(\w+)\s+([\d.]+)',
+                   lambda m: (m.group(1), m.group(2))),
+                  (r'\+\s*([A-Z_]{3,})\s*=\s*([\d.]+)',
+                   lambda m: (m.group(1), m.group(2))),
+                  (r'\+\s*(target_positions)\s*\[\]',
+                   lambda m: (m.group(1), 'modified')),
+              ]
+              for pattern, extractor in patterns:
+                  m = re.search(pattern, diff_text)
+                  if m:
+                      return extractor(m)
+              return ('unknown', 'unknown')
+
+          changed_element, value_at_change = extract_changed_element(diff_text)
+
+          def normalize(name):
+              if "::" in name: name = name.split("::")[-1]
+              m = re.search(r'(test_\w+)', name)
+              return m.group(1) if m else name.strip()
+
+          # ── Charger le store existant
+          os.makedirs("ai_inputs", exist_ok=True)
+          store_path = "ai_inputs/test_history_store.json"
+          store = {}
+          if os.path.exists(store_path):
+              try:
+                  with open(store_path, encoding="utf-8-sig") as f:
+                      content = f.read().strip()
+                  store = json.loads(content) if content else {}
+              except Exception as e:
+                  print(f"Store illisible ({e}) — store vide")
+                  store = {}
+
+          # ── Ajouter les résultats avec la structure enrichie
+          new_entries = 0
+          for name in passed + failed + errors:
+              test_id = normalize(name)
+              result  = ("PASSED" if name in passed
+                         else "FAILED" if name in failed
+                         else "ERROR")
+
+              if test_id not in store:
+                  store[test_id] = {"test_id": test_id, "history": []}
+
+              already = any(
+                  h.get("commit_message") == commit_msg and h.get("result") == result
+                  for h in store[test_id]["history"]
+              )
+              if not already:
+                  store[test_id]["history"].append({
+                      "commit_message":       commit_msg,
+                      "source_files_changed": source_files_changed,
+                      "changed_element":      changed_element,
+                      "value_at_change":      value_at_change,
+                      "result":               result,
+                  })
+                  new_entries += 1
+
+          with open(store_path, "w", encoding="utf-8") as f:
+              json.dump(store, f, indent=2, ensure_ascii=False)
+
+          print(f"Store : {len(store)} tests uniques, +{new_entries} nouvelles entrées")
+          print(f"Commit : {commit_msg}")
+          print(f"Source files changed : {source_files_changed}")
+          print(f"Element changed : {changed_element} = {value_at_change}")
+          EOF
+
+      - name: "Commiter test_history_store.json"
+        if: always()
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add ai_inputs/test_history_store.json
+          git diff --staged --quiet \
+            && echo "Aucune nouvelle entrée." \
+            || (git commit -m "ci: update store phase1 [skip ci]" && git push)
+
+      # ── Diagnostics ───────────────────────────────────────────────────────
+      - name: "DIAGNOSTIC — simulation_results.json"
+        if: always()
+        run: cat reports/simulation_results.json || echo "(absent)"
+
+      - name: "DIAGNOSTIC — Webots stderr"
+        if: always()
+        run: tail -20 reports/webots_stderr.log || echo "(absent)"
+
+      - name: "DIAGNOSTIC — Webots stdout"
+        if: always()
+        run: tail -20 reports/webots_stdout.log || echo "(absent)"
+
+      - name: "Upload artefacts — phase 1"
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: resultats-phase1
+          path: reports/

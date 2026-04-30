@@ -1,28 +1,4 @@
 #!/usr/bin/env python3
-"""
-ai_test_selector.py — ur-simulation
-────────────────────────────────────────────────────────────────────────────────
-Framework intelligent de sélection et priorisation des tests via LLM (gratuit).
-
-Workflow :
-  1. Lit les 3 fichiers générés par prepare_inputs.py :
-       ai_inputs/git_diff.txt
-       ai_inputs/tests_history.txt
-       ai_inputs/codebase_map.txt
-  2. Construit un prompt structuré (prompt engineering) et l'envoie à Qwen 3.6
-     via OpenRouter (clé API gratuite sur https://openrouter.ai)
-  3. Parse la réponse JSON du LLM
-  4. Lance uniquement les tests sélectionnés, dans l'ordre de priorité fourni
-
-Usage :
-  python ai_test_selector.py [--dry-run] [--verbose] [--skip-prepare]
-
-Variables d'environnement :
-  OPENROUTER_API_KEY   → clé API OpenRouter (gratuite sur https://openrouter.ai)
-
-Modèle utilisé :
-  "openrouter/auto"
-"""
 
 import os
 import sys
@@ -39,13 +15,12 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).parent.resolve()
 AI_INPUTS    = PROJECT_ROOT / "ai_inputs"
 
-DEEPSEEK_MODEL = "openrouter/auto"
-OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
+HF_MODEL = "Qwen/Qwen2.5-Coder-32B-Instruct"
+HF_URL   = "https://api-inference.huggingface.co/v1/chat/completions"
 
-# Troncature des inputs (réduite pour laisser plus de place à la sortie JSON)
-MAX_DIFF_CHARS    = 4_000
-MAX_HISTORY_CHARS = 3_000
-MAX_MAP_CHARS     = 2_000
+
+MAX_DIFF_CHARS    = 8_000
+MAX_HISTORY_CHARS = 12_000
 
 
 def read_input(filename: str, max_chars: int) -> str:
@@ -63,9 +38,8 @@ def read_input(filename: str, max_chars: int) -> str:
 def load_all_inputs() -> dict:
     print("  [1/4] Lecture des fichiers ai_inputs/ ...")
     data = {
-        "git_diff":      read_input("git_diff.txt",      MAX_DIFF_CHARS),
-        "tests_history": read_input("tests_history.txt",  MAX_HISTORY_CHARS),
-        "codebase_map":  read_input("codebase_map.txt",   MAX_MAP_CHARS),
+        "git_diff":      read_input("git_diff.txt",     MAX_DIFF_CHARS),
+        "tests_history": read_input("tests_history.txt", MAX_HISTORY_CHARS),
     }
     for k, v in data.items():
         print(f"        ✓ {k:16s}  ({len(v):,} chars)")
@@ -73,179 +47,204 @@ def load_all_inputs() -> dict:
 
 
 SYSTEM_PROMPT = textwrap.dedent("""\
-    ## ROLE
-    You are a senior CI/CD test automation engineer with deep expertise in:
-    - Regression risk analysis from code diffs
-    - Test impact analysis based on source dependency graphs
-    - Test prioritization strategies for embedded robotics pipelines
-    - Python/pytest test suites and C controller code (Webots simulator)
- 
-    Your sole responsibility in this pipeline is to read three context files
-    provided by the user, reason carefully about what changed in the codebase,
-    and decide which tests must run and in which order.
-    You are the intelligence layer of an automated CI/CD framework.
-    Your output directly controls which pytest tests are executed on every git push.
- 
-    ## PROJECT CONTEXT
-    The project is "ur-simulation": a Webots-based robotics simulation of Universal
-    Robots arms (UR3e, UR5e, UR10e) that grasp and release cans on a conveyor belt.
-    The codebase has two source files that tests depend on:
-      - controllers/ure_can_grasper/ure_can_grasper.c   (C controller, state machine)
-      - controllers/ure_supervisor/ure_supervisor.py     (Python supervisor)
-    Tests read either the compiled C behaviour or a JSON report from the supervisor.
-    There are two test categories:
-      - functional      : verify that the simulation behaves correctly (grasping, states)
-      - non_functional  : verify performance, timing, boundary values, real-time
- 
-    ## INPUT FILES YOU WILL RECEIVE
-    The user message contains three sections:
- 
+    ## RÔLE
+    Tu es un moteur de sélection de tests pour un système cyber-physique industriel.
+    Le projet est "ur-simulation" : une simulation Webots de bras robotiques UR
+    qui saisissent des canettes sur un tapis roulant.
+
+    Ton seul rôle : analyser ce qui a changé dans le code source et décider
+    quels tests doivent être lancés sur ce push — le moins possible, mais tous
+    ceux qui sont réellement concernés par le changement.
+
+    ## FICHIERS SOURCE DU PROJET
+    Il y a exactement 2 fichiers source qui contrôlent le comportement :
+
+      controllers/ure_can_grasper/ure_can_grasper.c
+        Contient une machine à états C avec ces éléments indépendants :
+          - speed            : vitesse du bras (double speed = X.X)
+          - TIME_STEP        : intervalle simulation (#define TIME_STEP 32)
+          - structure        : états (WAITING/GRASPING/ROTATING/RELEASING/ROTATING_BACK)
+                               et positions joints {-1.88, -2.14, -2.38, -1.51}
+          - distance_threshold : seuil capteur distance (THRESHOLD = 500)
+          - wrist_threshold  : seuils poignet (-2.3, -0.1)
+          - gripper_position : fermeture gripper (0.85)
+
+      controllers/ure_supervisor/ure_supervisor.py
+        Contient ces constantes indépendantes :
+          - HAUTEUR_SAISIE    : hauteur détection saisie (0.80m)
+          - DEPLACEMENT_DEPOT : distance détection dépôt (0.30m)
+
+      Les tests lisent soit les constantes directement, soit le fichier
+      simulation_results.json produit par le supervisor après simulation.
+
+    ## CE QUE TU REÇOIS
+
     [GIT_DIFF]
-      What changed between the last two commits.
-      Contains: modified files, added/removed lines, impact analysis, commit history.
- 
+      - Quels fichiers source ont changé (controllers/*.c ou controllers/*.py)
+      - La constante exacte modifiée et sa nouvelle valeur
+      - Le diff complet (lignes + et -)
+
     [TESTS_HISTORY]
-      For every test: its file path, JSON keys it reads, source dependencies,
-      past PASSED/FAILED results per commit, last pass date, failure timeline.
- 
-    [CODEBASE_MAP]
-      Source files broken down by function, with cross-file dependency links.
- 
-    ## YOUR REASONING PROCESS  (precise and strict)
- 
-    The TESTS_HISTORY table has a column "FAILED_WHEN" showing which source files
-    were modified when each test previously failed.
- 
-    STEP 1 — Identify modified source files from GIT_DIFF.
-      Extract only source files (controllers/*.c or controllers/*.py).
-      Example: if ure_can_grasper.c changed → modified = ["ure_can_grasper"]
- 
-    STEP 2 — Apply MANDATORY selection rule.
-      For EVERY test in TESTS_HISTORY:
-        IF FAILED_WHEN contains ANY name matching a modified file → MUST select it.
-        IF FAILED_WHEN is "—" → MUST skip it. No exception.
-      This rule is absolute. Do not use judgment. Do not skip based on FAIL count.
-      Even if FAIL=1/3, if FAILED_WHEN matches → select it.
- 
-    STEP 3 — Assign priorities.
-      Sort selected tests by FAIL count descending (highest FAIL count = priority 1).
- 
-    STEP 4 — Handle new files (no history).
-      If a modified file NEVER appears in any FAILED_WHEN entry anywhere in the table,
-      it is a new file with no history. Select tests with RUNS=0 for that file.
- 
-    CRITICAL: The number of tests you select must equal the number of tests
-    whose FAILED_WHEN column contains at least one modified file name.
-    Do not add tests. Do not remove tests. Follow the rule exactly.
- 
-    The table also has a column SELECT_IF_DIFF_TOUCHES which is identical to
-    FAILED_WHEN — use both to confirm your selection.
-    If SELECT_IF_DIFF_TOUCHES contains "ure_can_grasper" and the diff touches
-    ure_can_grasper.c → that test IS selected, no matter what its PASS history says.
- 
-    ## OUTPUT FORMAT  (strict — do not deviate)
-    Output ONLY a valid JSON object. No markdown fences. No prose. No thinking block. Only raw JSON.
- 
-    Schema:
+      Tableau avec pour chaque test :
+      - TEST_ID      : identifiant exact
+      - CATÉGORIE    : functional | non_functional
+      - SOUS-CAT     : communication | safety | performance | stress | boundary | realtime
+      - FAIL / RUNS  : nombre d'échecs sur total de runs
+      - SENSITIVE_TO : constante précise que ce test vérifie
+                       Format → fichier::constante
+                       Exemple → ure_can_grasper::speed
+                       Valeur spéciale "ure_can_grasper::behavior | ure_supervisor::behavior"
+                       → ce test lit le JSON de résultats et est affecté par
+                         TOUT changement dans les 2 fichiers source
+                       Valeur "—" → test purement algorithmique, jamais affecté
+      - FAILED_WHEN  : fichier source modifié lors des échecs passés
+                       "—" = n'a jamais échoué
+
+    ## ÉTAPES DE SÉLECTION (suivre dans l'ordre strict)
+
+    ÉTAPE 1 — Identifier l'élément changé depuis GIT_DIFF
+      Lire "ÉLÉMENT CHANGÉ" dans le diff.
+      Identifier le fichier source ET la constante modifiée.
+      Exemple : "speed changé 1.0 → 0.0" → élément = ure_can_grasper::speed
+
+    ÉTAPE 2 — Sélectionner les tests (règles par ordre de priorité)
+
+      RÈGLE A — SENSITIVE_TO match (priorité absolue)
+        Si SENSITIVE_TO contient l'élément changé identifié à l'étape 1
+        → SÉLECTIONNER ce test, même si FAIL=0 et FAILED_WHEN=—
+        Exemples de match :
+          - élément = ure_can_grasper::speed
+            match si SENSITIVE_TO contient "ure_can_grasper::speed"
+          - élément = speed (dans ure_can_grasper.c)
+            match si SENSITIVE_TO contient "ure_can_grasper::behavior" (comportement global)
+
+      RÈGLE B — SENSITIVE_TO = behavior (filet comportemental)
+        Si SENSITIVE_TO = "ure_can_grasper::behavior | ure_supervisor::behavior"
+        ET le fichier source modifié est ure_can_grasper.c OU ure_supervisor.py
+        → SÉLECTIONNER (ces tests vérifient le comportement global, affecté par tout changement)
+
+      RÈGLE C — Filet de sécurité historique
+        Si FAILED_WHEN contient le fichier source modifié
+        ET le test n'est pas déjà sélectionné par A ou B
+        → SÉLECTIONNER (rattrape les dépendances non détectées statiquement)
+
+      RÈGLE D — Exclusion absolue
+        Si SENSITIVE_TO = "—" ET FAILED_WHEN = "—"
+        → IGNORER inconditionnellement
+        Ces tests sont purement algorithmiques (calculs mathématiques, stress tests
+        de valeurs constantes). Ils ne peuvent pas échouer à cause d'un changement
+        de code source.
+
+    ÉTAPE 3 — Prioriser les tests sélectionnés
+      Groupe 1 (passer en premier) : SOUS-CAT = safety
+      Groupe 2 : SOUS-CAT = communication | tests functional sans sous-catégorie
+      Groupe 3 : SOUS-CAT = performance | boundary | realtime
+      Groupe 4 (passer en dernier) : SOUS-CAT = stress
+
+      Dans chaque groupe, trier par ratio FAIL/RUNS décroissant
+      (le test qui a le plus échoué = priorité la plus haute dans son groupe).
+      Attribuer des entiers uniques à partir de 1.
+
+    ## VÉRIFICATION AVANT DE RÉPONDRE
+      [ ] Chaque test avec SENSITIVE_TO matchant l'élément changé est sélectionné
+      [ ] Chaque test avec SENSITIVE_TO = "—" ET FAILED_WHEN = "—" est ignoré
+      [ ] Aucun test_id inventé — tous viennent exactement de TESTS_HISTORY
+      [ ] Les priorités sont des entiers uniques à partir de 1
+      [ ] skipped_count = total tests dans TESTS_HISTORY - nombre sélectionnés
+
+    ## FORMAT DE SORTIE
+    Retourne UNIQUEMENT un objet JSON valide.
+    Pas de texte avant. Pas de texte après. Pas de balises markdown. JSON brut seulement.
+
     {
       "selected_tests": [
         {
-          "test_id":  "<exact test_id string from TESTS_HISTORY>",
-          "priority": <integer, 1 = run first>,
-          "category": "<functional | non_functional>",
-          "reason":   "<one precise sentence: what changed + why this test covers it>"
+          "test_id":     "<identifiant exact depuis TESTS_HISTORY>",
+          "priority":    <entier, 1 = passer en premier>,
+          "category":    "<functional | non_functional>",
+          "subcategory": "<communication | safety | performance | stress | boundary | realtime>",
+          "reason":      "<une phrase : quelle constante a changé + ce que ce test vérifie>"
         }
       ],
-      "skipped_count": <integer — number of tests NOT selected>,
-      "diff_summary":  "<one sentence: what files changed and what the change is>",
-      "selection_rationale": "<2-3 sentences explaining the overall selection strategy>"
+      "skipped_count":        <entier>,
+      "diff_summary":         "<une phrase : fichier modifié + nature du changement>",
+      "selection_rationale":  "<2 phrases : combien sélectionnés par règle A vs B vs C, et pourquoi>"
     }
- 
-    Validation rules your JSON MUST satisfy:
-      - "test_id" values must be copied exactly from TESTS_HISTORY — no invention
-      - "priority" values must be unique integers starting from 1
-      - "reason" must reference the specific changed code, not generic statements
-      - "skipped_count" must equal (total tests in TESTS_HISTORY) minus (selected count)
-      - Do NOT select a test if none of its declared dependencies were modified
-        AND it has no FAILED history on similar commits
-        AND the diff has no logical impact on what it validates
- 
-    ## FEW-SHOT EXAMPLE
-    Suppose the diff shows that `double speed = 1.5` changed to `double speed = 2.0`
-    in ure_can_grasper.c, and TESTS_HISTORY shows:
- 
-      test_vitesse_bras_non_nulle   DEPENDS ON: ure_can_grasper.c   ECHECS: 1 time at speed=0.0
-      test_duree_cycle_complet_ure  DEPENDS ON: (no source file)    ECHECS: 0
-      test_arm_rotates              DEPENDS ON: ure_supervisor.py   ECHECS: 0
- 
-    Correct selection:
-      priority 1 → test_vitesse_bras_non_nulle  (depends on ure_can_grasper.c + has fail history)
-      priority 2 → test_duree_cycle_complet_ure (speed change affects timing logic)
-      skipped    → test_arm_rotates             (depends only on supervisor, not modified)
- 
-    ## WHAT YOU MUST NEVER DO
-    - Never invent a test_id that does not exist in TESTS_HISTORY
-    - Never select ALL tests — be selective; skipping irrelevant tests is correct
-    - Never assign the same priority number to two different tests
-    - Never output anything other than the raw JSON object
-    - Never wrap the JSON in markdown code fences (no ```json)
-    - Never add explanatory text after the closing brace of the JSON
+
+    ## EXEMPLE
+    GIT_DIFF montre : speed changé de 1.0 à 0.0 dans ure_can_grasper.c
+
+    TESTS_HISTORY contient :
+      test_vitesse_bras_securisee   SENSITIVE_TO: ure_can_grasper::speed          FAILED_WHEN: —
+      test_arm_rotates              SENSITIVE_TO: ure_can_grasper::behavior | ... FAILED_WHEN: ure_can_grasper
+      test_boundary_joint_zero      SENSITIVE_TO: —                               FAILED_WHEN: —
+      test_timestep_conforme        SENSITIVE_TO: ure_can_grasper::TIME_STEP      FAILED_WHEN: —
+
+    Sélection correcte :
+      SÉLECTIONNER test_vitesse_bras_securisee → RÈGLE A (SENSITIVE_TO::speed match)
+      SÉLECTIONNER test_arm_rotates            → RÈGLE B (behavior + fichier source modifié)
+      IGNORER      test_boundary_joint_zero    → RÈGLE D (— et —)
+      IGNORER      test_timestep_conforme      → RÈGLE A non applicable (TIME_STEP ≠ speed)
+
+    ## CE QU'IL NE FAUT JAMAIS FAIRE
+    - Inventer un test_id qui n'existe pas dans TESTS_HISTORY
+    - Sélectionner TOUS les tests — être sélectif est correct et attendu
+    - Sélectionner un test dont SENSITIVE_TO ne correspond pas à l'élément changé
+      et dont FAILED_WHEN est "—"
+    - Assigner le même numéro de priorité à deux tests différents
+    - Ajouter du texte en dehors de l'objet JSON
 """)
+
 
 def build_user_prompt(inputs: dict) -> str:
     return textwrap.dedent(f"""\
-        Here are the three context files for the current git push.
-        Analyse them carefully and produce the test selection JSON as instructed.
+        Voici les fichiers de contexte pour le push actuel.
+        Analyse-les et produis le JSON de sélection de tests.
 
-        ═══════════════════════════════════════════════════════════════════════
+        ═══════════════════════════════════════════════════════════
         [GIT_DIFF]
-        ═══════════════════════════════════════════════════════════════════════
+        ═══════════════════════════════════════════════════════════
         {inputs['git_diff']}
 
-        ═══════════════════════════════════════════════════════════════════════
+        ═══════════════════════════════════════════════════════════
         [TESTS_HISTORY]
-        ═══════════════════════════════════════════════════════════════════════
+        ═══════════════════════════════════════════════════════════
         {inputs['tests_history']}
 
-        ═══════════════════════════════════════════════════════════════════════
-        [CODEBASE_MAP]
-        ═══════════════════════════════════════════════════════════════════════
-        {inputs['codebase_map']}
-
-        ═══════════════════════════════════════════════════════════════════════
-        Output ONLY the raw JSON object. Nothing else.
-        ═══════════════════════════════════════════════════════════════════════
+        ═══════════════════════════════════════════════════════════
+        Retourne UNIQUEMENT l'objet JSON brut. Rien d'autre.
+        ═══════════════════════════════════════════════════════════
     """)
 
 
+
 def call_llm(system: str, user: str, verbose: bool) -> str:
-    api_key = os.environ.get("OPENROUTER_API_KEY", "").strip()
+    api_key = os.environ.get("HF_TOKEN", "").strip()
     if not api_key:
-        print("\n  [!] Variable OPENROUTER_API_KEY non définie.")
-        print("      Obtenez une clé gratuite sur https://openrouter.ai")
-        print("      Puis : export OPENROUTER_API_KEY=sk-or-...")
+        print("\n  [!] Variable HF_TOKEN non définie.")
+        print("      Créez un token gratuit sur https://huggingface.co/settings/tokens")
+        print("      Puis : export HF_TOKEN=hf_...")
+        print("      Ou ajoutez HF_TOKEN dans les secrets GitHub Actions.")
         sys.exit(1)
 
-    print(f"  [2/4] Envoi au LLM : {DEEPSEEK_MODEL} ...")
+    print(f"  [2/4] Envoi au LLM : {HF_MODEL} ...")
 
     payload = json.dumps({
-        "model": DEEPSEEK_MODEL,
+        "model": HF_MODEL,
         "messages": [
             {"role": "system", "content": system},
             {"role": "user",   "content": user},
         ],
+        "max_tokens": 4096,
         "temperature": 0.0,
-        "max_tokens": 16384,   # augmenté pour éviter la troncature
     }).encode("utf-8")
 
     req = urllib.request.Request(
-        OPENROUTER_URL,
+        HF_URL,
         data=payload,
         headers={
             "Authorization": f"Bearer {api_key}",
             "Content-Type":  "application/json",
-            "HTTP-Referer":  "https://github.com/ur-simulation",
-            "X-Title":       "ur-simulation CI test selector",
         },
         method="POST",
     )
@@ -264,37 +263,35 @@ def call_llm(system: str, user: str, verbose: bool) -> str:
     raw = body["choices"][0]["message"]["content"].strip()
 
     if verbose:
-        print("\n  ── Réponse brute du LLM (thinking + JSON) ──")
+        print("\n  ── Réponse brute du LLM ──")
         print(raw[:3000])
-        print("  ────────────────────────────────────────────\n")
+        print("  ──────────────────────────\n")
 
     usage = body.get("usage", {})
     print(f"        ✓ tokens utilisés — prompt: {usage.get('prompt_tokens','?')}  "
           f"completion: {usage.get('completion_tokens','?')}")
     return raw
 
+
 def repair_truncated_json(partial: str) -> str:
-    """Tente de fermer un JSON tronqué (ajoute accolades et crochets manquants)."""
-    # Enlever tout ce qui pourrait être après la dernière accolade complète
-    # On va simplement équilibrer les accolades et crochets ouverts
-    open_braces = partial.count('{') - partial.count('}')
-    open_brackets = partial.count('[') - partial.count(']')
-    # Ajouter les caractères fermants
-    repaired = partial.rstrip(',')  # enlever une virgule finale éventuelle
-    if open_braces > 0:
-        repaired += '}' * open_braces
+    """Tente de fermer un JSON tronqué."""
+    repaired     = partial.rstrip(',')
+    open_braces  = repaired.count('{') - repaired.count('}')
+    open_brackets = repaired.count('[') - repaired.count(']')
     if open_brackets > 0:
         repaired += ']' * open_brackets
+    if open_braces > 0:
+        repaired += '}' * open_braces
     return repaired
 
 
 def parse_llm_response(raw: str) -> dict:
     print("  [3/4] Parsing de la réponse LLM ...")
 
-    # Supprimer le bloc <thinking> (DeepSeek R1) – au cas où
+    # Supprimer les blocs <thinking> (certains modèles)
     cleaned = re.sub(r"<thinking>[\s\S]*?</thinking>", "", raw).strip()
 
-    # Nettoyer les éventuels blocs markdown ```json ... ```
+    # Nettoyer les balises markdown ```json ... ```
     if "```" in cleaned:
         m = re.search(r"```(?:json)?\s*([\s\S]+?)```", cleaned)
         if m:
@@ -305,7 +302,6 @@ def parse_llm_response(raw: str) -> dict:
     if m:
         cleaned = m.group(0)
 
-    # Tentative de parsing normal
     try:
         data = json.loads(cleaned)
     except json.JSONDecodeError as e:
@@ -313,17 +309,16 @@ def parse_llm_response(raw: str) -> dict:
         repaired = repair_truncated_json(cleaned)
         try:
             data = json.loads(repaired)
-            print("      ✓ JSON réparé avec succès (troncature détectée).")
+            print("      ✓ JSON réparé avec succès.")
         except json.JSONDecodeError as e2:
-            print(f"\n  [!] Le LLM n'a pas retourné du JSON valide, même après réparation.")
-            print(f"      Réponse nettoyée (500 premiers chars) : {cleaned[:500]}")
+            print(f"\n  [!] JSON invalide même après réparation.")
+            print(f"      Réponse (500 premiers chars) : {cleaned[:500]}")
             sys.exit(1)
 
     if "selected_tests" not in data:
         print("  [!] Clé 'selected_tests' absente dans la réponse du LLM.")
         sys.exit(1)
 
-    # Trier par priorité croissante
     data["selected_tests"].sort(key=lambda t: t.get("priority", 999))
     return data
 
@@ -335,32 +330,31 @@ def display_plan(data: dict) -> None:
     rationale = data.get("selection_rationale", "")
 
     print()
-    print("            PLAN DE TEST GÉNÉRÉ PAR L'IA (Qwen 3.6)           ")
-    
+    print("  " + "=" * 70)
+    print(f"  PLAN DE TEST GÉNÉRÉ PAR L'IA — {HF_MODEL}")
+    print("  " + "=" * 70)
     if diff_sum:
         print(f"\n  Diff    : {diff_sum}")
     if rationale:
         print(f"  Analyse : {rationale}")
     print(f"\n  Tests sélectionnés : {len(selected)}   |   Ignorés : {skipped}\n")
-    print(f"  {'PRIO':<5}  {'CATÉGORIE':<16}  {'TEST_ID':<50}  RAISON")
-    print("  " + "─" * 120)
+    print(f"  {'PRIO':<5}  {'CATÉGORIE':<16}  {'SOUS-CAT':<14}  {'TEST_ID':<50}  RAISON")
+    print("  " + "─" * 130)
     for t in selected:
-        reason_short = t.get("reason", "")[:55]
+        reason_short = t.get("reason", "")[:50]
         cat          = t.get("category", "")
-        print(f"  {t['priority']:<5}  {cat:<16}  {t['test_id']:<50}  {reason_short}")
+        sub          = t.get("subcategory", "")
+        print(f"  {t['priority']:<5}  {cat:<16}  {sub:<14}  {t['test_id']:<50}  {reason_short}")
     print()
 
 
-
-
 def build_pytest_args(selected_tests: list) -> list:
-    """Convertit les test_id en chemins de fichiers pytest valides."""
-    test_dir = PROJECT_ROOT / "tests"
-    args = []
+    test_dir  = PROJECT_ROOT / "tests"
+    args      = []
     not_found = []
 
     for entry in selected_tests:
-        tid = entry["test_id"]
+        tid     = entry["test_id"]
         matches = list(test_dir.rglob(f"{tid}.py"))
         if matches:
             args.append(str(matches[0].relative_to(PROJECT_ROOT)))
@@ -380,7 +374,7 @@ def run_tests(pytest_args: list, dry_run: bool, verbose: bool) -> int:
     cmd = [sys.executable, "-m", "pytest"] + pytest_args + [
         "-v",
         "--tb=short",
-        f"--html=reports/ai_selected_report.html",
+        "--html=reports/ai_selected_report.html",
         "--self-contained-html",
     ]
     if verbose:
@@ -400,10 +394,10 @@ def run_tests(pytest_args: list, dry_run: bool, verbose: bool) -> int:
 def save_selection_log(data: dict) -> None:
     log_path = AI_INPUTS / "last_selection.json"
     log = {
-        "model":              DEEPSEEK_MODEL,
-        "selected":           data["selected_tests"],
-        "skipped":            data.get("skipped_count"),
-        "diff_summary":       data.get("diff_summary"),
+        "model":               HF_MODEL,
+        "selected":            data["selected_tests"],
+        "skipped":             data.get("skipped_count"),
+        "diff_summary":        data.get("diff_summary"),
         "selection_rationale": data.get("selection_rationale"),
     }
     log_path.write_text(json.dumps(log, indent=2, ensure_ascii=False), encoding="utf-8")
@@ -412,30 +406,24 @@ def save_selection_log(data: dict) -> None:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Sélection et priorisation intelligente des tests via LLM (gratuit)."
+        description="Sélection et priorisation intelligente des tests via LLM."
     )
-    parser.add_argument(
-        "--dry-run", action="store_true",
-        help="Affiche le plan de test sans lancer pytest."
-    )
-    parser.add_argument(
-        "--verbose", "-v", action="store_true",
-        help="Affiche la réponse brute du LLM et les sorties pytest détaillées."
-    )
-    parser.add_argument(
-        "--skip-prepare", action="store_true",
-        help="Ne pas relancer prepare_inputs.py avant la sélection."
-    )
+    parser.add_argument("--dry-run",      action="store_true",
+                        help="Affiche le plan sans lancer pytest.")
+    parser.add_argument("--verbose", "-v", action="store_true",
+                        help="Affiche la réponse brute du LLM.")
+    parser.add_argument("--skip-prepare", action="store_true",
+                        help="Ne pas relancer prepare_inputs.py.")
     args = parser.parse_args()
 
     print()
     print("=" * 70)
     print("  AI TEST SELECTOR — ur-simulation")
-    print(f"  Modèle : {DEEPSEEK_MODEL}")
+    print(f"  Modèle : {HF_MODEL}")
     print("=" * 70)
     print()
 
-    # 0. Régénérer les inputs si nécessaire
+    # 0. Régénérer les inputs
     if not args.skip_prepare:
         print("  [0/4] Régénération des inputs (prepare_inputs.py) ...")
         r = subprocess.run(
@@ -443,15 +431,15 @@ def main():
             cwd=PROJECT_ROOT,
         )
         if r.returncode != 0:
-            print("  [!] prepare_inputs.py a échoué — vérifiez votre dépôt git.")
+            print("  [!] prepare_inputs.py a échoué.")
             sys.exit(1)
         print()
 
-    # 1. Charger les 3 fichiers
+    # 1. Charger les inputs
     inputs = load_all_inputs()
     print()
 
-    # 2. Construire et envoyer le prompt au LLM
+    # 2. Envoyer au LLM
     raw_response = call_llm(SYSTEM_PROMPT, build_user_prompt(inputs), args.verbose)
     print()
 
@@ -462,7 +450,7 @@ def main():
     # 4. Afficher le plan
     display_plan(selection)
 
-    # 5. Sauvegarder le log de sélection
+    # 5. Sauvegarder
     save_selection_log(selection)
     print()
 
@@ -472,7 +460,7 @@ def main():
         print("  Aucun test à lancer (tous ignorés ou introuvables).")
         return 0
 
-    # 7. Lancer les tests
+    # 7. Lancer
     exit_code = run_tests(pytest_args, args.dry_run, args.verbose)
 
     print()

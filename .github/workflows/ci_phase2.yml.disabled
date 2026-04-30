@@ -1,17 +1,4 @@
-name: CI Phase 2 — Pipeline IA (DeepSeek)
-
-# ══════════════════════════════════════════════════════════════════════════════
-#  UN SEUL JOB — Pipeline IA uniquement
-#
-#  Flux :
-#  1. Lit test_history_store.json (rempli par la phase 1)
-#  2. Génère les 3 fichiers d entrée pour le LLM
-#  3. Envoie au LLM DeepSeek avec prompt structuré
-#  4. Lance uniquement les tests sélectionnés dans Docker/Webots
-#  5. Écrit les résultats dans le store (boucle d apprentissage)
-#
-#  À chaque push, le store s enrichit et la sélection devient plus précise.
-# ══════════════════════════════════════════════════════════════════════════════
+name: CI Phase 2 — Pipeline IA (Qwen via HuggingFace)
 
 on:
   push:
@@ -20,7 +7,7 @@ on:
 jobs:
 
   tests-ia:
-    name: "Pipeline IA — Sélection et Priorisation par DeepSeek"
+    name: "Pipeline IA — Sélection et Priorisation par Qwen"
     runs-on: ubuntu-22.04
 
     steps:
@@ -37,14 +24,12 @@ jobs:
       - name: Install dependencies
         run: pip install pytest pytest-html
 
-      # ── Étape 1 : Générer les 3 fichiers d entrée pour le LLM ────────────
-      # prepare_inputs.py lit le store (rempli par la phase 1 et les pushes IA précédents)
-      # et génère les 3 fichiers que le LLM va recevoir
+      # ── Étape 1 : Générer les 2 fichiers d'entrée pour le LLM ────────────
       - name: "Générer les fichiers ai_inputs/ (prepare_inputs.py)"
         run: python prepare_inputs.py
 
-      # ── Aperçu des 3 fichiers avant envoi au LLM ─────────────────────────
-      - name: "Aperçu des 3 fichiers envoyés au LLM"
+      # ── Aperçu des fichiers avant envoi au LLM ───────────────────────────
+      - name: "Aperçu des fichiers envoyés au LLM"
         run: |
           echo "════════════════════════════════════════════════════════════"
           echo "  FICHIER 1 — git_diff.txt"
@@ -57,21 +42,14 @@ jobs:
           cat ai_inputs/tests_history.txt
           echo ""
           echo "════════════════════════════════════════════════════════════"
-          echo "  FICHIER 3 — codebase_map.txt"
-          echo "════════════════════════════════════════════════════════════"
-          cat ai_inputs/codebase_map.txt
-          echo ""
-          echo "════════════════════════════════════════════════════════════"
           echo "  TAILLES DES FICHIERS"
           echo "════════════════════════════════════════════════════════════"
-          wc -c ai_inputs/git_diff.txt ai_inputs/tests_history.txt ai_inputs/codebase_map.txt
+          wc -c ai_inputs/git_diff.txt ai_inputs/tests_history.txt
 
       # ── Étape 2 : Sélection et priorisation par le LLM ───────────────────
-      # ai_test_selector.py envoie les 3 fichiers + prompt structuré à DeepSeek
-      # et récupère la liste ordonnée des tests à lancer
-      - name: "Sélection et priorisation par DeepSeek (SYSTEM + USER PROMPT)"
+      - name: "Sélection et priorisation par Qwen (HuggingFace)"
         env:
-          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: python ai_test_selector.py --skip-prepare --dry-run --verbose
 
       # ── Afficher la sélection du LLM ──────────────────────────────────────
@@ -160,16 +138,44 @@ jobs:
         run: docker cp ur-test-ia:/app/reports/. reports_ia/
 
       # ── Étape 5 : Enrichir le store avec les résultats IA ─────────────────
-      # C est ici que la boucle d apprentissage se ferme :
-      # les résultats des tests sélectionnés sont ajoutés au store
-      # qui sera relu au prochain push pour affiner la sélection
       - name: "Enrichir le store avec les résultats des tests IA"
         if: always()
         run: |
           python3 - <<'EOF'
           import json, re, os, subprocess
 
-          # Lire les résultats depuis test_results.json (généré par conftest.py)
+          def git(cmd):
+              return subprocess.run(cmd, shell=True, capture_output=True, text=True).stdout.strip()
+
+          commit_msg    = git("git log -1 --format=%s")
+          diff_text     = git("git show HEAD")
+
+          # Extraire fichiers source modifiés uniquement (controllers/)
+          all_changed   = git("git diff-tree --no-commit-id -r --name-only HEAD").splitlines()
+          if not all_changed:
+              all_changed = git("git diff --name-only HEAD~1 HEAD").splitlines()
+          source_files_changed = [
+              f for f in all_changed
+              if 'controllers/' in f and (f.endswith('.c') or f.endswith('.py'))
+          ]
+
+          # Extraire l'élément changé et sa valeur
+          def extract_changed_element(diff_text):
+              patterns = [
+                  (r'\+\s*double\s+(\w+)\s*=\s*([\d.]+)',  lambda m: (m.group(1), m.group(2))),
+                  (r'\+\s*#define\s+(\w+)\s+([\d.]+)',      lambda m: (m.group(1), m.group(2))),
+                  (r'\+\s*([A-Z_]{3,})\s*=\s*([\d.]+)',     lambda m: (m.group(1), m.group(2))),
+                  (r'\+\s*(target_positions)\s*\[\]',        lambda m: (m.group(1), 'modified')),
+              ]
+              for pattern, extractor in patterns:
+                  m = re.search(pattern, diff_text)
+                  if m:
+                      return extractor(m)
+              return ('unknown', 'unknown')
+
+          changed_element, value_at_change = extract_changed_element(diff_text)
+
+          # Lire les résultats depuis test_results.json
           passed, failed, errors = [], [], []
           json_path = "reports_ia/test_results.json"
           if os.path.exists(json_path):
@@ -181,17 +187,6 @@ jobs:
           else:
               print(f"ATTENTION : test_results.json absent")
               print(f"Contenu reports_ia/ : {os.listdir('reports_ia') if os.path.exists('reports_ia') else 'ABSENT'}")
-
-          def git(cmd):
-              return subprocess.run(cmd, shell=True, capture_output=True, text=True).stdout.strip()
-
-          commit_msg    = git("git log -1 --format=%s")
-          changed_files = git("git diff-tree --no-commit-id -r --name-only HEAD").splitlines()
-          if not changed_files:
-              changed_files = git("git diff --name-only HEAD~1 HEAD").splitlines()
-          if not changed_files:
-              changed_files = git("git log -1 --name-only --pretty=format: HEAD").splitlines()
-          changed_files = [f for f in changed_files if f.strip()]
 
           def normalize(name):
               if "::" in name: name = name.split("::")[-1]
@@ -215,7 +210,7 @@ jobs:
                   print(f"Store illisible ({e}) — store vide")
                   store = {}
 
-          # Ajouter les résultats dans la nouvelle structure par test_id
+          # Ajouter les résultats avec la nouvelle structure enrichie
           new_entries = 0
           for name in passed + failed + errors:
               test_id = normalize(name)
@@ -224,15 +219,21 @@ jobs:
               if test_id not in store:
                   store[test_id] = {"test_id": test_id, "history": []}
 
-              already = any(h.get("commit_message") == commit_msg and h.get("result") == result
-                            for h in store[test_id]["history"])
+              already = any(
+                  h.get("commit_message") == commit_msg and h.get("result") == result
+                  for h in store[test_id]["history"]
+              )
               if not already:
+                  # Nouvelle structure enrichie :
+                  # - source_files_changed : seulement les fichiers controllers/
+                  # - changed_element      : la constante modifiée
+                  # - value_at_change      : la nouvelle valeur
                   store[test_id]["history"].append({
-                      "commit_message": commit_msg,
-                      "changed_files":  changed_files,
-                      "result":         result,
-                      "source":         "ia",
-                      "llm_priority":   priority_map.get(test_id),
+                      "commit_message":      commit_msg,
+                      "source_files_changed": source_files_changed,
+                      "changed_element":     changed_element,
+                      "value_at_change":     value_at_change,
+                      "result":              result,
                   })
                   new_entries += 1
 
@@ -254,7 +255,7 @@ jobs:
             && echo "Aucune nouvelle entrée." \
             || (git commit -m "ci: update store ia [skip ci]" && git push)
 
-      # ── Étape 5 : Upload des artefacts téléchargeables ────────────────────
+      # ── Upload des artefacts ──────────────────────────────────────────────
       - name: "Upload — fichiers envoyés au LLM"
         uses: actions/upload-artifact@v4
         if: always()
@@ -263,7 +264,6 @@ jobs:
           path: |
             ai_inputs/git_diff.txt
             ai_inputs/tests_history.txt
-            ai_inputs/codebase_map.txt
             ai_inputs/last_selection.json
 
       - name: "Upload — rapports des tests IA"
