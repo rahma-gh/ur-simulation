@@ -19,6 +19,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -41,6 +50,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -65,6 +83,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -87,6 +114,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -111,6 +147,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -133,6 +178,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -157,6 +211,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -179,6 +242,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -203,6 +275,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -225,6 +306,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -249,6 +339,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -271,6 +370,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -295,6 +403,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -317,6 +434,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -341,6 +467,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -363,6 +498,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -387,6 +531,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -409,6 +562,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -433,6 +595,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -455,6 +626,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -479,6 +659,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -501,6 +690,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -525,6 +723,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -547,6 +754,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -571,6 +787,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -593,6 +818,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -617,6 +851,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -639,6 +882,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -663,6 +915,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "FAILED"
       }
     ]
   },
@@ -686,6 +947,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "FAILED"
       }
     ]
   },
@@ -708,6 +978,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -732,6 +1011,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "FAILED"
       }
     ]
   },
@@ -754,6 +1042,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -778,6 +1075,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "FAILED"
       }
     ]
   },
@@ -800,6 +1106,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -824,6 +1139,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "FAILED"
       }
     ]
   },
@@ -846,6 +1170,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -870,6 +1203,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -892,6 +1234,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -916,6 +1267,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -938,6 +1298,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -962,6 +1331,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -984,6 +1362,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -1008,6 +1395,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -1030,6 +1426,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -1054,6 +1459,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -1076,6 +1490,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -1100,6 +1523,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -1122,6 +1554,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -1146,6 +1587,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -1168,6 +1618,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -1192,6 +1651,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -1214,6 +1682,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -1238,6 +1715,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -1260,6 +1746,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -1284,6 +1779,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -1306,6 +1810,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -1330,6 +1843,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -1352,6 +1874,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -1376,6 +1907,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -1398,6 +1938,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -1422,6 +1971,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -1444,6 +2002,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -1468,6 +2035,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -1490,6 +2066,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -1514,6 +2099,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -1536,6 +2130,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -1560,6 +2163,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -1582,6 +2194,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -1606,6 +2227,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -1628,6 +2258,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -1652,6 +2291,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -1674,6 +2322,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -1698,6 +2355,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -1720,6 +2386,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -1744,6 +2419,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -1766,6 +2450,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -1790,6 +2483,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -1812,6 +2514,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -1836,6 +2547,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -1858,6 +2578,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -1882,6 +2611,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -1904,6 +2642,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -1928,6 +2675,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -1950,6 +2706,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -1974,6 +2739,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -1996,6 +2770,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -2020,6 +2803,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "FAILED"
       }
     ]
   },
@@ -2042,6 +2834,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -2066,6 +2867,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -2089,6 +2899,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "FAILED"
       }
     ]
   },
@@ -2111,6 +2930,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -2135,6 +2963,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "FAILED"
       }
     ]
   },
@@ -2157,6 +2994,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -2181,6 +3027,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "FAILED"
       }
     ]
   },
@@ -2204,6 +3059,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "FAILED"
       }
     ]
   },
@@ -2227,6 +3091,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "FAILED"
       }
     ]
   },
@@ -2249,6 +3122,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -2273,6 +3155,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -2295,6 +3186,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -2319,6 +3219,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "PASSED"
       }
     ]
   },
@@ -2341,6 +3250,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -2365,6 +3283,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "FAILED"
       }
     ]
   },
@@ -2387,6 +3314,15 @@
         ],
         "changed_element": "speed",
         "value_at_change": "1.0",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
         "result": "PASSED"
       }
     ]
@@ -2411,6 +3347,15 @@
         "changed_element": "speed",
         "value_at_change": "1.0",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update DEPLACEMENT_DEPOT value to 99.0",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "DEPLACEMENT_DEPOT",
+        "value_at_change": "99.0",
+        "result": "FAILED"
       }
     ]
   }
