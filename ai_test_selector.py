@@ -9,6 +9,7 @@ import textwrap
 import urllib.request
 import urllib.error
 import re
+import time
 from pathlib import Path
 
 
@@ -229,14 +230,17 @@ def call_llm(system: str, user: str, verbose: bool) -> str:
 
     print(f"  [2/4] Envoi au LLM : {HF_MODEL} ...")
 
+    # Payload au format NATIF Hugging Face Inference API
     payload = json.dumps({
-        "model": HF_MODEL,
-        "messages": [
+        "inputs": [
             {"role": "system", "content": system},
             {"role": "user",   "content": user},
         ],
-        "max_tokens": 4096,
-        "temperature": 0.0,
+        "parameters": {
+            "max_new_tokens": 4096,
+            "temperature": 0.0,
+            "return_full_text": False  # Évite la répétition du prompt
+        }
     }).encode("utf-8")
 
     req = urllib.request.Request(
@@ -250,28 +254,42 @@ def call_llm(system: str, user: str, verbose: bool) -> str:
     )
 
     try:
-        with urllib.request.urlopen(req, timeout=180) as resp:
+        # Timeout augmenté à 5 min pour le "cold start" des modèles 7B
+        with urllib.request.urlopen(req, timeout=300) as resp:
             body = json.loads(resp.read().decode("utf-8"))
+
+        # Gestion du chargement du modèle (erreur courante sur le tier gratuit)
+        if isinstance(body, dict) and "error" in body:
+            if "loading" in body.get("error", "").lower():
+                wait = body.get("estimated_time", 30)
+                print(f"  [!] Modèle en chargement. Pause de {wait:.0f}s...")
+                time.sleep(wait + 5)
+                return call_llm(system, user, verbose)  # Récursion sécurisée
+            print(f"   Erreur HF API : {body.get('error', 'Inconnue')}")
+            sys.exit(1)
+
+        # Format de réponse natif HF : [{"generated_text": "..."}]
+        if isinstance(body, list) and len(body) > 0:
+            raw = body[0].get("generated_text", "").strip()
+        else:
+            raise ValueError("Structure de réponse API inattendue")
+
     except urllib.error.HTTPError as e:
         err_body = e.read().decode("utf-8", errors="replace")
-        print(f"\n  [!] Erreur HTTP {e.code} : {err_body[:500]}")
+        print(f"\n   Erreur HTTP {e.code} : {err_body[:500]}")
         sys.exit(1)
     except urllib.error.URLError as e:
         print(f"\n  [!] Erreur réseau : {e.reason}")
         sys.exit(1)
-
-    raw = body["choices"][0]["message"]["content"].strip()
 
     if verbose:
         print("\n  ── Réponse brute du LLM ──")
         print(raw[:3000])
         print("  ──────────────────────────\n")
 
-    usage = body.get("usage", {})
-    print(f"        ✓ tokens utilisés — prompt: {usage.get('prompt_tokens','?')}  "
-          f"completion: {usage.get('completion_tokens','?')}")
+    # L'API gratuite HF ne renvoie pas les compteurs de tokens
+    print(f"         Génération terminée.")
     return raw
-
 
 def repair_truncated_json(partial: str) -> str:
     """Tente de fermer un JSON tronqué."""
