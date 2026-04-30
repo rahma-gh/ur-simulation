@@ -46,6 +46,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -95,6 +104,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -146,6 +164,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -195,6 +222,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -246,6 +282,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -295,6 +340,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -346,6 +400,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -395,6 +458,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -446,6 +518,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -495,6 +576,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -546,6 +636,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -595,6 +694,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -646,6 +754,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -695,6 +812,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -746,6 +872,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -795,6 +930,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -846,6 +990,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -895,6 +1048,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -946,6 +1108,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -995,6 +1166,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -1046,6 +1226,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -1095,6 +1284,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -1146,6 +1344,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -1195,6 +1402,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -1246,6 +1462,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -1295,6 +1520,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -1346,6 +1580,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -1395,6 +1638,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -1446,6 +1698,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -1495,6 +1756,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -1546,6 +1816,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -1595,6 +1874,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -1646,6 +1934,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -1695,6 +1992,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -1746,6 +2052,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -1795,6 +2110,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -1846,6 +2170,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -1895,6 +2228,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -1946,6 +2288,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -1995,6 +2346,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -2046,6 +2406,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -2095,6 +2464,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -2146,6 +2524,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "FAILED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -2195,6 +2582,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -2246,6 +2642,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -2295,6 +2700,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -2346,6 +2760,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -2395,6 +2818,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -2446,6 +2878,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -2495,6 +2936,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -2546,6 +2996,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -2595,6 +3054,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -2646,6 +3114,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -2695,6 +3172,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -2746,6 +3232,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -2795,6 +3290,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -2846,6 +3350,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -2895,6 +3408,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -2946,6 +3468,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -2995,6 +3526,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -3046,6 +3586,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -3095,6 +3644,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -3146,6 +3704,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -3195,6 +3762,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -3246,6 +3822,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -3295,6 +3880,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -3346,6 +3940,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -3395,6 +3998,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -3446,6 +4058,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -3495,6 +4116,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -3546,6 +4176,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -3595,6 +4234,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -3646,6 +4294,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -3695,6 +4352,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -3746,6 +4412,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -3795,6 +4470,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -3846,6 +4530,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -3895,6 +4588,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -3946,6 +4648,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -3995,6 +4706,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -4046,6 +4766,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -4095,6 +4824,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -4146,6 +4884,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -4195,6 +4942,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -4246,6 +5002,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -4295,6 +5060,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -4346,6 +5120,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -4395,6 +5178,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -4446,6 +5238,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -4495,6 +5296,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -4546,6 +5356,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -4595,6 +5414,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -4646,6 +5474,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -4695,6 +5532,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -4746,6 +5592,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -4795,6 +5650,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -4846,6 +5710,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -4895,6 +5768,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -4946,6 +5828,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -4995,6 +5886,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -5046,6 +5946,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -5095,6 +6004,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
@@ -5146,6 +6064,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -5196,6 +6123,15 @@
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
+        "result": "PASSED"
       }
     ]
   },
@@ -5245,6 +6181,15 @@
         ],
         "changed_element": "HAUTEUR_SAISIE",
         "value_at_change": "0.01",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to 0.80 meters(initial value)",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.80",
         "result": "PASSED"
       }
     ]
