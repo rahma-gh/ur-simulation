@@ -16,7 +16,7 @@ PROJECT_ROOT = Path(__file__).parent.resolve()
 AI_INPUTS    = PROJECT_ROOT / "ai_inputs"
 
 HF_MODEL = "Qwen/Qwen2.5-Coder-32B-Instruct"
-HF_URL   = "https://api-inference.huggingface.co/v1/chat/completions"
+HF_URL   = f"https://api-inference.huggingface.co/models/{HF_MODEL}/v1/chat/completions"
 
 
 MAX_DIFF_CHARS    = 8_000
