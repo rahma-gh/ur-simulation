@@ -37,6 +37,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -77,6 +86,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -119,6 +137,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -159,6 +186,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -201,6 +237,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -241,6 +286,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -283,6 +337,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -323,6 +386,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -365,6 +437,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -405,6 +486,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -447,6 +537,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -487,6 +586,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -529,6 +637,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -569,6 +686,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -611,6 +737,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -651,6 +786,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -693,6 +837,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -733,6 +886,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -775,6 +937,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -815,6 +986,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -857,6 +1037,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -897,6 +1086,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -939,6 +1137,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -979,6 +1186,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -1021,6 +1237,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -1061,6 +1286,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -1103,6 +1337,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -1143,6 +1386,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -1185,6 +1437,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -1225,6 +1486,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -1267,6 +1537,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -1307,6 +1586,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -1349,6 +1637,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -1389,6 +1686,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -1431,6 +1737,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -1471,6 +1786,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -1513,6 +1837,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -1553,6 +1886,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -1595,6 +1937,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -1635,6 +1986,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -1677,6 +2037,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -1717,6 +2086,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -1759,6 +2137,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "FAILED"
       }
     ]
   },
@@ -1799,6 +2186,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -1841,6 +2237,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -1881,6 +2286,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -1923,6 +2337,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -1963,6 +2386,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -2005,6 +2437,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -2045,6 +2486,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -2087,6 +2537,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -2127,6 +2586,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -2169,6 +2637,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -2209,6 +2686,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -2251,6 +2737,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -2291,6 +2786,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -2333,6 +2837,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -2373,6 +2886,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -2415,6 +2937,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -2455,6 +2986,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -2497,6 +3037,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -2537,6 +3086,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -2579,6 +3137,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -2619,6 +3186,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -2661,6 +3237,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -2701,6 +3286,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -2743,6 +3337,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -2783,6 +3386,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -2825,6 +3437,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -2865,6 +3486,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -2907,6 +3537,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -2947,6 +3586,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -2989,6 +3637,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -3029,6 +3686,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -3071,6 +3737,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -3111,6 +3786,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -3153,6 +3837,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -3193,6 +3886,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -3235,6 +3937,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -3275,6 +3986,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -3317,6 +4037,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -3357,6 +4086,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -3399,6 +4137,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -3439,6 +4186,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -3481,6 +4237,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -3521,6 +4286,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -3563,6 +4337,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -3603,6 +4386,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -3645,6 +4437,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -3685,6 +4486,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -3727,6 +4537,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -3767,6 +4586,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -3809,6 +4637,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -3849,6 +4686,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -3891,6 +4737,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -3931,6 +4786,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -3973,6 +4837,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -4013,6 +4886,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -4055,6 +4937,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -4095,6 +4986,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -4137,6 +5037,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -4177,6 +5086,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
@@ -4219,6 +5137,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -4260,6 +5187,15 @@
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
         "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
+        "result": "PASSED"
       }
     ]
   },
@@ -4300,6 +5236,15 @@
         ],
         "changed_element": "DEPLACEMENT_DEPOT",
         "value_at_change": "0.30",
+        "result": "PASSED"
+      },
+      {
+        "commit_message": "Update HAUTEUR_SAISIE to a new value",
+        "source_files_changed": [
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "HAUTEUR_SAISIE",
+        "value_at_change": "0.01",
         "result": "PASSED"
       }
     ]
