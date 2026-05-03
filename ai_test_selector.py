@@ -16,8 +16,9 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).parent.resolve()
 AI_INPUTS    = PROJECT_ROOT / "ai_inputs"
 
-HF_MODEL = "Qwen/Qwen2.5-Coder-32B-Instruct"
-HF_URL   =  "https://api-inference.huggingface.co/v1/chat/completions"
+
+HF_MODEL = "mistralai/Mistral-7B-Instruct-v0.3"
+HF_URL   = "https://api-inference.huggingface.co/models/" + HF_MODEL
 
 
 MAX_DIFF_CHARS    = 8_000
@@ -229,14 +230,18 @@ def call_llm(system: str, user: str, verbose: bool) -> str:
 
     print(f"  [2/4] Envoi au LLM : {HF_MODEL} ...")
 
+    # L'API gratuite HF attend un prompt texte unique (system + user concaténés)
+    full_prompt = (
+        f"<s>[INST] <<SYS>>\n{system}\n<</SYS>>\n\n{user} [/INST]"
+    )
+
     payload = json.dumps({
-        "model": HF_MODEL,
-        "messages": [
-            {"role": "system", "content": system},
-            {"role": "user",   "content": user},
-        ],
-        "max_tokens": 4096,
-        "temperature": 0.0,
+        "inputs": full_prompt,
+        "parameters": {
+            "max_new_tokens": 2048,
+            "temperature":    0.01,   # quasi-déterministe (0.0 non accepté par HF)
+            "return_full_text": False,
+        },
     }).encode("utf-8")
 
     req = urllib.request.Request(
@@ -245,12 +250,13 @@ def call_llm(system: str, user: str, verbose: bool) -> str:
         headers={
             "Authorization": f"Bearer {api_key}",
             "Content-Type":  "application/json",
+            "x-wait-for-model": "true",   # attend si le modèle est en veille
         },
         method="POST",
     )
 
     try:
-        with urllib.request.urlopen(req, timeout=180) as resp:
+        with urllib.request.urlopen(req, timeout=300) as resp:
             body = json.loads(resp.read().decode("utf-8"))
     except urllib.error.HTTPError as e:
         err_body = e.read().decode("utf-8", errors="replace")
@@ -260,16 +266,21 @@ def call_llm(system: str, user: str, verbose: bool) -> str:
         print(f"\n  [!] Erreur réseau : {e.reason}")
         sys.exit(1)
 
-    raw = body["choices"][0]["message"]["content"].strip()
+    # L'API HF gratuite retourne une liste : [{"generated_text": "..."}]
+    if isinstance(body, list) and body:
+        raw = body[0].get("generated_text", "").strip()
+    elif isinstance(body, dict) and "generated_text" in body:
+        raw = body["generated_text"].strip()
+    else:
+        print(f"\n  [!] Format de réponse inattendu : {str(body)[:300]}")
+        sys.exit(1)
 
     if verbose:
         print("\n  ── Réponse brute du LLM ──")
         print(raw[:3000])
         print("  ──────────────────────────\n")
 
-    usage = body.get("usage", {})
-    print(f"        ✓ tokens utilisés — prompt: {usage.get('prompt_tokens','?')}  "
-          f"completion: {usage.get('completion_tokens','?')}")
+    print(f"        ✓ Réponse reçue ({len(raw)} chars)")
     return raw
 
 def repair_truncated_json(partial: str) -> str:
@@ -330,7 +341,7 @@ def display_plan(data: dict) -> None:
 
     print()
     print("  " + "=" * 70)
-    print(f"  PLAN DE TEST GÉNÉRÉ PAR L'IA — {HF_MODEL}")
+    print(f"  PLAN DE TEST GÉNÉRÉ PAR L'IA — {HF_MODEL} (HuggingFace gratuit)")
     print("  " + "=" * 70)
     if diff_sum:
         print(f"\n  Diff    : {diff_sum}")
@@ -418,7 +429,7 @@ def main():
     print()
     print("=" * 70)
     print("  AI TEST SELECTOR — ur-simulation")
-    print(f"  Modèle : {HF_MODEL}")
+    print(f"  Modèle : {HF_MODEL} (HuggingFace gratuit)")
     print("=" * 70)
     print()
 

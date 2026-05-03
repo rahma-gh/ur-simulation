@@ -1,4 +1,4 @@
-name: CI Phase 2 — Pipeline IA (Qwen via HuggingFace)
+name: CI Phase 2 — Pipeline IA (Mistral via HuggingFace)
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 jobs:
 
   tests-ia:
-    name: "Pipeline IA — Sélection et Priorisation par Qwen"
+    name: "Pipeline IA — Sélection et Priorisation par Mistral"
     runs-on: ubuntu-22.04
 
     steps:
@@ -47,7 +47,7 @@ jobs:
           wc -c ai_inputs/git_diff.txt ai_inputs/tests_history.txt
 
       # ── Étape 2 : Sélection et priorisation par le LLM ───────────────────
-      - name: "Sélection et priorisation par Qwen (HuggingFace)"
+      - name: "Sélection et priorisation par Mistral-7B (HuggingFace gratuit)"
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: python ai_test_selector.py --skip-prepare --dry-run --verbose
