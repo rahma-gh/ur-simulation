@@ -18,7 +18,8 @@ AI_INPUTS    = PROJECT_ROOT / "ai_inputs"
 
 
 HF_MODEL = "mistralai/Mistral-7B-Instruct-v0.3"
-HF_URL = "https://api-inference.huggingface.co/models/" + HF_MODEL + "/v1/chat/completions"
+HF_URL   = "https://api-inference.huggingface.co/models/" + HF_MODEL + "/v1/chat/completions"
+
 
 
 MAX_DIFF_CHARS    = 8_000
@@ -230,18 +231,14 @@ def call_llm(system: str, user: str, verbose: bool) -> str:
 
     print(f"  [2/4] Envoi au LLM : {HF_MODEL} ...")
 
-    # L'API gratuite HF attend un prompt texte unique (system + user concaténés)
-    full_prompt = (
-        f"<s>[INST] <<SYS>>\n{system}\n<</SYS>>\n\n{user} [/INST]"
-    )
-
     payload = json.dumps({
-        "inputs": full_prompt,
-        "parameters": {
-            "max_new_tokens": 2048,
-            "temperature":    0.01,   # quasi-déterministe (0.0 non accepté par HF)
-            "return_full_text": False,
-        },
+        "model": HF_MODEL,
+        "messages": [
+            {"role": "system", "content": system},
+            {"role": "user",   "content": user},
+        ],
+        "max_tokens": 2048,
+        "temperature": 0.01,
     }).encode("utf-8")
 
     req = urllib.request.Request(
@@ -266,21 +263,16 @@ def call_llm(system: str, user: str, verbose: bool) -> str:
         print(f"\n  [!] Erreur réseau : {e.reason}")
         sys.exit(1)
 
-    # L'API HF gratuite retourne une liste : [{"generated_text": "..."}]
-    if isinstance(body, list) and body:
-        raw = body[0].get("generated_text", "").strip()
-    elif isinstance(body, dict) and "generated_text" in body:
-        raw = body["generated_text"].strip()
-    else:
-        print(f"\n  [!] Format de réponse inattendu : {str(body)[:300]}")
-        sys.exit(1)
+    raw = body["choices"][0]["message"]["content"].strip()
 
     if verbose:
         print("\n  ── Réponse brute du LLM ──")
         print(raw[:3000])
         print("  ──────────────────────────\n")
 
-    print(f"        ✓ Réponse reçue ({len(raw)} chars)")
+    usage = body.get("usage", {})
+    print(f"        ✓ tokens utilisés — prompt: {usage.get('prompt_tokens','?')}  "
+          f"completion: {usage.get('completion_tokens','?')}")
     return raw
 
 def repair_truncated_json(partial: str) -> str:
