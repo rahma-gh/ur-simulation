@@ -7,7 +7,7 @@ on:
 jobs:
 
   tests-ia:
-    name: "Pipeline IA — Sélection et Priorisation par Gemini 1.5 Flash"
+    name: "Pipeline IA — Sélection et Priorisation par Gemini 2.0 Flash Lite"
     runs-on: ubuntu-22.04
 
     steps:
@@ -47,7 +47,7 @@ jobs:
           wc -c ai_inputs/git_diff.txt ai_inputs/tests_history.txt
 
       # ── Étape 2 : Sélection et priorisation par le LLM ───────────────────
-      - name: "Sélection et priorisation par Gemini 1.5 Flash (Google AI Studio gratuit)"
+      - name: "Sélection et priorisation par Gemini 2.0 Flash Lite (Google AI Studio gratuit)"
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python ai_test_selector.py --skip-prepare --dry-run --verbose
