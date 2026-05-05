@@ -1,4 +1,4 @@
-name: CI Phase 2 — Pipeline IA (Mistral via HuggingFace)
+name: CI Phase 2 — Pipeline IA (Groq — LLaMA 3.1)
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 jobs:
 
   tests-ia:
-    name: "Pipeline IA — Sélection et Priorisation par Mistral"
+    name: "Pipeline IA — Sélection et Priorisation par LLaMA 3.1"
     runs-on: ubuntu-22.04
 
     steps:
@@ -47,9 +47,9 @@ jobs:
           wc -c ai_inputs/git_diff.txt ai_inputs/tests_history.txt
 
       # ── Étape 2 : Sélection et priorisation par le LLM ───────────────────
-      - name: "Sélection et priorisation par Mistral-7B (HuggingFace gratuit)"
+      - name: "Sélection et priorisation par LLaMA 3.1 8B (Groq gratuit)"
         env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: python ai_test_selector.py --skip-prepare --dry-run --verbose
 
       # ── Afficher la sélection du LLM ──────────────────────────────────────

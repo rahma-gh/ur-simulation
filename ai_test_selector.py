@@ -16,14 +16,11 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).parent.resolve()
 AI_INPUTS    = PROJECT_ROOT / "ai_inputs"
 
-# Modèle gratuit HuggingFace (petit modèle, tier gratuit)
-# Pour migrer vers Groq plus tard : changer HF_MODEL et HF_URL (voir commentaires)
-HF_MODEL = "mistralai/Mistral-7B-Instruct-v0.3"
-HF_URL   = "https://api-inference.huggingface.co/models/" + HF_MODEL + "/v1/chat/completions"
-
-# ── Migration future vers Groq (décommenter ces 2 lignes + changer HF_TOKEN→GROQ_API_KEY) ──
-# HF_MODEL = "llama-3.3-70b-versatile"
-# HF_URL   = "https://api.groq.com/openai/v1/chat/completions"
+# ── LLM : Groq (gratuit, open-source, fiable) ──
+# Modèles disponibles : llama-3.3-70b-versatile | llama-3.1-8b-instant | mixtral-8x7b-32768
+# Clé gratuite : https://console.groq.com/keys
+HF_MODEL = "llama-3.1-8b-instant"
+HF_URL   = "https://api.groq.com/openai/v1/chat/completions"
 
 
 MAX_DIFF_CHARS    = 8_000
@@ -226,11 +223,11 @@ def build_user_prompt(inputs: dict) -> str:
 
 
 def call_llm(system: str, user: str, verbose: bool) -> str:
-    api_key = os.environ.get("HF_TOKEN", "").strip()
+    api_key = os.environ.get("GROQ_API_KEY", "").strip()
     if not api_key:
-        print("\n  [!] Variable HF_TOKEN non définie.")
-        print("      Créez un token gratuit sur https://huggingface.co/settings/tokens")
-        print("      Puis : export HF_TOKEN=hf_...")
+        print("\n  [!] Variable GROQ_API_KEY non définie.")
+        print("      Créez une clé gratuite sur https://console.groq.com/keys")
+        print("      Puis : export GROQ_API_KEY=gsk_...")
         sys.exit(1)
 
     print(f"  [2/4] Envoi au LLM : {HF_MODEL} ...")
@@ -337,7 +334,7 @@ def display_plan(data: dict) -> None:
 
     print()
     print("  " + "=" * 70)
-    print(f"  PLAN DE TEST GÉNÉRÉ PAR L'IA — {HF_MODEL} (HuggingFace gratuit)")
+    print(f"  PLAN DE TEST GÉNÉRÉ PAR L'IA — {HF_MODEL} (Groq — gratuit)")
     print("  " + "=" * 70)
     if diff_sum:
         print(f"\n  Diff    : {diff_sum}")
@@ -425,7 +422,7 @@ def main():
     print()
     print("=" * 70)
     print("  AI TEST SELECTOR — ur-simulation")
-    print(f"  Modèle : {HF_MODEL} (HuggingFace gratuit)")
+    print(f"  Modèle : {HF_MODEL} (Groq — gratuit)")
     print("=" * 70)
     print()
 
