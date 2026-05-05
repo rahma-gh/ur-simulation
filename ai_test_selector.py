@@ -19,7 +19,7 @@ AI_INPUTS    = PROJECT_ROOT / "ai_inputs"
 # ── LLM : Google AI Studio — API native (gratuit, 1M tokens contexte) ──
 # Clé gratuite : https://aistudio.google.com/apikey
 # Modèles gratuits : gemini-1.5-flash | gemini-1.5-flash-8b | gemini-1.0-pro
-HF_MODEL = "gemini-flash-latest"
+HF_MODEL = "gemini-2.5-flash"
 HF_URL   = "https://generativelanguage.googleapis.com/v1beta/models/" + HF_MODEL + ":generateContent"
 
 
