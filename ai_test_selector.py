@@ -247,7 +247,7 @@ def call_llm(system: str, user: str, verbose: bool) -> str:
             {"role": "user", "parts": [{"text": user}]}
         ],
         "generationConfig": {
-            "maxOutputTokens": 2048,
+            "maxOutputTokens": 8192,
             "temperature":     0.01,
         }
     }).encode("utf-8")
