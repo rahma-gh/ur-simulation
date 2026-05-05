@@ -16,11 +16,10 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).parent.resolve()
 AI_INPUTS    = PROJECT_ROOT / "ai_inputs"
 
-# ── LLM : Groq (gratuit, open-source, fiable) ──
-# Modèles disponibles : llama-3.3-70b-versatile | llama-3.1-8b-instant | mixtral-8x7b-32768
-# Clé gratuite : https://console.groq.com/keys
-HF_MODEL = "llama-3.1-8b-instant"
-HF_URL   = "https://api.groq.com/openai/v1/chat/completions"
+# ── LLM : Google AI Studio (gratuit, 1M tokens contexte) ──
+# Clé gratuite : https://aistudio.google.com/apikey
+HF_MODEL = "gemini-2.0-flash"
+HF_URL   = "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions"
 
 
 MAX_DIFF_CHARS    = 8_000
@@ -201,6 +200,9 @@ SYSTEM_PROMPT = textwrap.dedent("""\
 
 
 def build_user_prompt(inputs: dict) -> str:
+    # Google AI Studio : 1 000 000 tokens de contexte — aucune troncature nécessaire
+    history = inputs['tests_history']
+
     return textwrap.dedent(f"""\
         Voici les fichiers de contexte pour le push actuel.
         Analyse-les et produis le JSON de sélection de tests.
@@ -213,7 +215,7 @@ def build_user_prompt(inputs: dict) -> str:
         ═══════════════════════════════════════════════════════════
         [TESTS_HISTORY]
         ═══════════════════════════════════════════════════════════
-        {inputs['tests_history']}
+        {history}
 
         ═══════════════════════════════════════════════════════════
         Retourne UNIQUEMENT l'objet JSON brut. Rien d'autre.
@@ -223,11 +225,11 @@ def build_user_prompt(inputs: dict) -> str:
 
 
 def call_llm(system: str, user: str, verbose: bool) -> str:
-    api_key = os.environ.get("GROQ_API_KEY", "").strip()
+    api_key = os.environ.get("GEMINI_API_KEY", "").strip()
     if not api_key:
-        print("\n  [!] Variable GROQ_API_KEY non définie.")
-        print("      Créez une clé gratuite sur https://console.groq.com/keys")
-        print("      Puis : export GROQ_API_KEY=gsk_...")
+        print("\n  [!] Variable GEMINI_API_KEY non définie.")
+        print("      Créez une clé gratuite sur https://aistudio.google.com/apikey")
+        print("      Puis : export GEMINI_API_KEY=AIza...")
         sys.exit(1)
 
     print(f"  [2/4] Envoi au LLM : {HF_MODEL} ...")
@@ -334,7 +336,7 @@ def display_plan(data: dict) -> None:
 
     print()
     print("  " + "=" * 70)
-    print(f"  PLAN DE TEST GÉNÉRÉ PAR L'IA — {HF_MODEL} (Groq — gratuit)")
+    print(f"  PLAN DE TEST GÉNÉRÉ PAR L'IA — {HF_MODEL} (Google AI Studio — gratuit)")
     print("  " + "=" * 70)
     if diff_sum:
         print(f"\n  Diff    : {diff_sum}")
@@ -422,7 +424,7 @@ def main():
     print()
     print("=" * 70)
     print("  AI TEST SELECTOR — ur-simulation")
-    print(f"  Modèle : {HF_MODEL} (Groq — gratuit)")
+    print(f"  Modèle : {HF_MODEL} (Google AI Studio — gratuit)")
     print("=" * 70)
     print()
 
