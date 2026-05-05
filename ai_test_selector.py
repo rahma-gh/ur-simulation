@@ -248,7 +248,7 @@ def call_llm(system: str, user: str, verbose: bool) -> str:
         headers={
             "Authorization": f"Bearer {api_key}",
             "Content-Type":  "application/json",
-            "x-wait-for-model": "true",   # attend si le modèle est en veille
+            "User-Agent":    "ur-simulation-ci/1.0",
         },
         method="POST",
     )
