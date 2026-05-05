@@ -18,7 +18,7 @@ AI_INPUTS    = PROJECT_ROOT / "ai_inputs"
 
 
 HF_MODEL = "mistralai/Mistral-7B-Instruct-v0.3"
-HF_URL   = "https://api-inference.huggingface.co/models/" + HF_MODEL
+HF_URL = "https://api-inference.huggingface.co/models/" + HF_MODEL + "/v1/chat/completions"
 
 
 MAX_DIFF_CHARS    = 8_000
