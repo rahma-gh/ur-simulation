@@ -16,9 +16,11 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).parent.resolve()
 AI_INPUTS    = PROJECT_ROOT / "ai_inputs"
 
-
-HF_MODEL = "gemini-1.5-flash-latest"
-HF_URL   = "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions"
+# ── LLM : Google AI Studio — API native (gratuit, 1M tokens contexte) ──
+# Clé gratuite : https://aistudio.google.com/apikey
+# Modèles gratuits : gemini-1.5-flash | gemini-1.5-flash-8b | gemini-1.0-pro
+HF_MODEL = "gemini-1.5-flash"
+HF_URL   = "https://generativelanguage.googleapis.com/v1beta/models/" + HF_MODEL + ":generateContent"
 
 
 MAX_DIFF_CHARS    = 8_000
@@ -233,23 +235,29 @@ def call_llm(system: str, user: str, verbose: bool) -> str:
 
     print(f"  [2/4] Envoi au LLM : {HF_MODEL} ...")
 
+    # API native Google AI Studio (generateContent)
+    # La clé passe en query param, pas en header Authorization
+    url = HF_URL + f"?key={api_key}"
+
     payload = json.dumps({
-        "model": HF_MODEL,
-        "messages": [
-            {"role": "system", "content": system},
-            {"role": "user",   "content": user},
+        "system_instruction": {
+            "parts": [{"text": system}]
+        },
+        "contents": [
+            {"role": "user", "parts": [{"text": user}]}
         ],
-        "max_tokens": 2048,
-        "temperature": 0.01,
+        "generationConfig": {
+            "maxOutputTokens": 2048,
+            "temperature":     0.01,
+        }
     }).encode("utf-8")
 
     req = urllib.request.Request(
-        HF_URL,
+        url,
         data=payload,
         headers={
-            "Authorization": f"Bearer {api_key}",
-            "Content-Type":  "application/json",
-            "User-Agent":    "ur-simulation-ci/1.0",
+            "Content-Type": "application/json",
+            "User-Agent":   "ur-simulation-ci/1.0",
         },
         method="POST",
     )
@@ -265,16 +273,17 @@ def call_llm(system: str, user: str, verbose: bool) -> str:
         print(f"\n  [!] Erreur réseau : {e.reason}")
         sys.exit(1)
 
-    raw = body["choices"][0]["message"]["content"].strip()
+    # Format réponse API native Google
+    raw = body["candidates"][0]["content"]["parts"][0]["text"].strip()
 
     if verbose:
         print("\n  ── Réponse brute du LLM ──")
         print(raw[:3000])
         print("  ──────────────────────────\n")
 
-    usage = body.get("usage", {})
-    print(f"        ✓ tokens utilisés — prompt: {usage.get('prompt_tokens','?')}  "
-          f"completion: {usage.get('completion_tokens','?')}")
+    usage = body.get("usageMetadata", {})
+    print(f"        ✓ tokens utilisés — prompt: {usage.get('promptTokenCount','?')}  "
+          f"completion: {usage.get('candidatesTokenCount','?')}")
     return raw
 
 def repair_truncated_json(partial: str) -> str:
