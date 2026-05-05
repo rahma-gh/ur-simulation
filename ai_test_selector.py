@@ -16,10 +16,14 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).parent.resolve()
 AI_INPUTS    = PROJECT_ROOT / "ai_inputs"
 
-
+# Modèle gratuit HuggingFace (petit modèle, tier gratuit)
+# Pour migrer vers Groq plus tard : changer HF_MODEL et HF_URL (voir commentaires)
 HF_MODEL = "mistralai/Mistral-7B-Instruct-v0.3"
 HF_URL   = "https://api-inference.huggingface.co/models/" + HF_MODEL + "/v1/chat/completions"
 
+# ── Migration future vers Groq (décommenter ces 2 lignes + changer HF_TOKEN→GROQ_API_KEY) ──
+# HF_MODEL = "llama-3.3-70b-versatile"
+# HF_URL   = "https://api.groq.com/openai/v1/chat/completions"
 
 
 MAX_DIFF_CHARS    = 8_000
