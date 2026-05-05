@@ -18,7 +18,7 @@ AI_INPUTS    = PROJECT_ROOT / "ai_inputs"
 
 # ── LLM : Google AI Studio (gratuit, 1M tokens contexte) ──
 # Clé gratuite : https://aistudio.google.com/apikey
-HF_MODEL = "gemini-2.0-flash"
+HF_MODEL = "gemini-1.5-flash"
 HF_URL   = "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions"
 
 
