@@ -262,16 +262,24 @@ def call_llm(system: str, user: str, verbose: bool) -> str:
         method="POST",
     )
 
-    try:
-        with urllib.request.urlopen(req, timeout=300) as resp:
-            body = json.loads(resp.read().decode("utf-8"))
-    except urllib.error.HTTPError as e:
-        err_body = e.read().decode("utf-8", errors="replace")
-        print(f"\n  [!] Erreur HTTP {e.code} : {err_body[:500]}")
-        sys.exit(1)
-    except urllib.error.URLError as e:
-        print(f"\n  [!] Erreur réseau : {e.reason}")
-        sys.exit(1)
+    MAX_RETRIES = 5
+    for attempt in range(1, MAX_RETRIES + 1):
+        try:
+            with urllib.request.urlopen(req, timeout=300) as resp:
+                body = json.loads(resp.read().decode("utf-8"))
+            break  # succès — on sort de la boucle
+        except urllib.error.HTTPError as e:
+            err_body = e.read().decode("utf-8", errors="replace")
+            if e.code == 503 and attempt < MAX_RETRIES:
+                wait = attempt * 10
+                print(f"  [!] Serveur surchargé (503) — retry {attempt}/{MAX_RETRIES-1} dans {wait}s...")
+                time.sleep(wait)
+                continue
+            print(f"\n  [!] Erreur HTTP {e.code} : {err_body[:500]}")
+            sys.exit(1)
+        except urllib.error.URLError as e:
+            print(f"\n  [!] Erreur réseau : {e.reason}")
+            sys.exit(1)
 
     # Format réponse API native Google
     raw = body["candidates"][0]["content"]["parts"][0]["text"].strip()
