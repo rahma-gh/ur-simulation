@@ -16,11 +16,11 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).parent.resolve()
 AI_INPUTS    = PROJECT_ROOT / "ai_inputs"
 
-# ── LLM : Google AI Studio — API native (gratuit, 1M tokens contexte) ──
-# Clé gratuite : https://aistudio.google.com/apikey
-# Modèles gratuits : gemini-1.5-flash | gemini-1.5-flash-8b | gemini-1.0-pro
-HF_MODEL = "gemini-2.5-flash"
-HF_URL   = "https://generativelanguage.googleapis.com/v1beta/models/" + HF_MODEL + ":generateContent"
+# ── LLM : Groq (gratuit, open-source, 6000 TPM) ──
+# Clé gratuite : https://console.groq.com/keys
+# Modèles : llama-3.3-70b-versatile | llama-3.1-8b-instant | mixtral-8x7b-32768
+HF_MODEL = "llama-3.3-70b-versatile"
+HF_URL   = "https://api.groq.com/openai/v1/chat/completions"
 
 
 MAX_DIFF_CHARS    = 8_000
@@ -226,38 +226,32 @@ def build_user_prompt(inputs: dict) -> str:
 
 
 def call_llm(system: str, user: str, verbose: bool) -> str:
-    api_key = os.environ.get("GEMINI_API_KEY", "").strip()
+    api_key = os.environ.get("GROQ_API_KEY", "").strip()
     if not api_key:
-        print("\n  [!] Variable GEMINI_API_KEY non définie.")
-        print("      Créez une clé gratuite sur https://aistudio.google.com/apikey")
-        print("      Puis : export GEMINI_API_KEY=AIza...")
+        print("\n  [!] Variable GROQ_API_KEY non définie.")
+        print("      Créez une clé gratuite sur https://console.groq.com/keys")
+        print("      Puis : export GROQ_API_KEY=gsk_...")
         sys.exit(1)
 
     print(f"  [2/4] Envoi au LLM : {HF_MODEL} ...")
 
-    # API native Google AI Studio (generateContent)
-    # La clé passe en query param, pas en header Authorization
-    url = HF_URL + f"?key={api_key}"
-
     payload = json.dumps({
-        "system_instruction": {
-            "parts": [{"text": system}]
-        },
-        "contents": [
-            {"role": "user", "parts": [{"text": user}]}
+        "model": HF_MODEL,
+        "messages": [
+            {"role": "system", "content": system},
+            {"role": "user",   "content": user},
         ],
-        "generationConfig": {
-            "maxOutputTokens": 8192,
-            "temperature":     0.01,
-        }
+        "max_tokens":  8192,
+        "temperature": 0.01,
     }).encode("utf-8")
 
     req = urllib.request.Request(
-        url,
+        HF_URL,
         data=payload,
         headers={
-            "Content-Type": "application/json",
-            "User-Agent":   "ur-simulation-ci/1.0",
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type":  "application/json",
+            "User-Agent":    "ur-simulation-ci/1.0",
         },
         method="POST",
     )
@@ -282,16 +276,16 @@ def call_llm(system: str, user: str, verbose: bool) -> str:
             sys.exit(1)
 
     # Format réponse API native Google
-    raw = body["candidates"][0]["content"]["parts"][0]["text"].strip()
+    raw = body["choices"][0]["message"]["content"].strip()
 
     if verbose:
         print("\n  ── Réponse brute du LLM ──")
         print(raw[:3000])
         print("  ──────────────────────────\n")
 
-    usage = body.get("usageMetadata", {})
-    print(f"        ✓ tokens utilisés — prompt: {usage.get('promptTokenCount','?')}  "
-          f"completion: {usage.get('candidatesTokenCount','?')}")
+    usage = body.get("usage", {})
+    print(f"        ✓ tokens utilisés — prompt: {usage.get('prompt_tokens','?')}  "
+          f"completion: {usage.get('completion_tokens','?')}")
     return raw
 
 def repair_truncated_json(partial: str) -> str:
@@ -352,7 +346,7 @@ def display_plan(data: dict) -> None:
 
     print()
     print("  " + "=" * 70)
-    print(f"  PLAN DE TEST GÉNÉRÉ PAR L'IA — {HF_MODEL} (Google AI Studio — gratuit)")
+    print(f"  PLAN DE TEST GÉNÉRÉ PAR L'IA — {HF_MODEL} (Groq — gratuit)")
     print("  " + "=" * 70)
     if diff_sum:
         print(f"\n  Diff    : {diff_sum}")
@@ -440,7 +434,7 @@ def main():
     print()
     print("=" * 70)
     print("  AI TEST SELECTOR — ur-simulation")
-    print(f"  Modèle : {HF_MODEL} (Google AI Studio — gratuit)")
+    print(f"  Modèle : {HF_MODEL} (Groq — gratuit)")
     print("=" * 70)
     print()
 

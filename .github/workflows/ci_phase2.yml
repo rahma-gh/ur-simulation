@@ -1,4 +1,4 @@
-name: CI Phase 2 — Pipeline IA (Google AI Studio — Gemini)
+name: CI Phase 2 — Pipeline IA (Groq — LLaMA 3.3)
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 jobs:
 
   tests-ia:
-    name: "Pipeline IA — Sélection et Priorisation par Gemini 2.0 Flash Lite"
+    name: "Pipeline IA — Sélection et Priorisation par LLaMA 3.3 70B"
     runs-on: ubuntu-22.04
 
     steps:
@@ -47,9 +47,9 @@ jobs:
           wc -c ai_inputs/git_diff.txt ai_inputs/tests_history.txt
 
       # ── Étape 2 : Sélection et priorisation par le LLM ───────────────────
-      - name: "Sélection et priorisation par Gemini 2.0 Flash Lite (Google AI Studio gratuit)"
+      - name: "Sélection et priorisation par LLaMA 3.3 70B (Groq gratuit))"
         env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: python ai_test_selector.py --skip-prepare --dry-run --verbose
 
       # ── Afficher la sélection du LLM ──────────────────────────────────────
