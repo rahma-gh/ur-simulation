@@ -349,7 +349,27 @@ def parse_llm_response(raw: str) -> dict:
             print("  [!] Clé 'selected_tests' absente dans la réponse du LLM.")
             sys.exit(1)
 
+    # Normaliser chaque test : gérer "name" vs "test_id" et "priority" manquant
+    normalized = []
+    for i, t in enumerate(data["selected_tests"]):
+        # Accepter "name" comme alias de "test_id"
+        if "test_id" not in t and "name" in t:
+            t["test_id"] = t["name"]
+        # Ajouter priority si manquant
+        if "priority" not in t:
+            t["priority"] = i + 1
+        # Ajouter category/subcategory si manquant
+        if "category" not in t:
+            t["category"] = "functional"
+        if "subcategory" not in t:
+            t["subcategory"] = "—"
+        if "reason" not in t:
+            t["reason"] = "sélectionné par le LLM"
+        normalized.append(t)
+    data["selected_tests"] = normalized
     data["selected_tests"].sort(key=lambda t: t.get("priority", 999))
+    if "skipped_count" not in data:
+        data["skipped_count"] = "?"
     return data
 
 
