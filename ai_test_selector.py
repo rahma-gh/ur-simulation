@@ -219,7 +219,9 @@ def build_user_prompt(inputs: dict) -> str:
         {history}
 
         ═══════════════════════════════════════════════════════════
-        Retourne UNIQUEMENT l'objet JSON brut. Rien d'autre.
+        IMPORTANT : Retourne UNIQUEMENT un objet JSON valide.
+        La clé racine DOIT être "selected_tests" (pas "tests", pas autre chose).
+        Pas de texte avant. Pas de texte après. Pas de balises markdown.
         ═══════════════════════════════════════════════════════════
     """)
 
@@ -269,7 +271,9 @@ def call_llm(system: str, user: str, verbose: bool) -> str:
                 print(f"  [!] Serveur surchargé (503) — retry {attempt}/{MAX_RETRIES-1} dans {wait}s...")
                 time.sleep(wait)
                 continue
-            print(f"\n  [!] Erreur HTTP {e.code} : {err_body[:500]}")
+            print(f"\n  [!] Erreur HTTP {e.code}")
+            print(f"      Headers : {dict(e.headers)}")
+            print(f"      Body    : {err_body[:1000]}")
             sys.exit(1)
         except urllib.error.URLError as e:
             print(f"\n  [!] Erreur réseau : {e.reason}")
@@ -330,9 +334,20 @@ def parse_llm_response(raw: str) -> dict:
             print(f"      Réponse (500 premiers chars) : {cleaned[:500]}")
             sys.exit(1)
 
+    # Fallback : accepter "tests" comme alias de "selected_tests" (certains modèles)
     if "selected_tests" not in data:
-        print("  [!] Clé 'selected_tests' absente dans la réponse du LLM.")
-        sys.exit(1)
+        if "tests" in data:
+            print("  [!] Clé 'selected_tests' absente — utilisation de 'tests' comme fallback.")
+            # Convertir le format simplifié en format attendu
+            data["selected_tests"] = [
+                {"test_id": t, "priority": i+1, "category": "functional",
+                 "subcategory": "—", "reason": "sélectionné par le LLM"}
+                for i, t in enumerate(data["tests"])
+            ]
+            data["skipped_count"] = data.get("skipped_count", 0)
+        else:
+            print("  [!] Clé 'selected_tests' absente dans la réponse du LLM.")
+            sys.exit(1)
 
     data["selected_tests"].sort(key=lambda t: t.get("priority", 999))
     return data
