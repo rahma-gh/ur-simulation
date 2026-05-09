@@ -16,7 +16,9 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).parent.resolve()
 AI_INPUTS    = PROJECT_ROOT / "ai_inputs"
 
-
+# ── LLM : Groq (gratuit, open-source, 6000 TPM) ──
+# Clé gratuite : https://console.groq.com/keys
+# Modèles : llama-3.3-70b-versatile | llama-3.1-8b-instant | mixtral-8x7b-32768
 HF_MODEL = "qwen3:4b"
 HF_URL   = os.environ.get("OLLAMA_NGROK_URL", "http://localhost:11434").rstrip("/") + "/api/chat"
 
