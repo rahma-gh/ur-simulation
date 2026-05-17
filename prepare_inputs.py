@@ -103,7 +103,26 @@ def detect_sensitivity(src):
         sensitive.append('ure_can_grasper::behavior | ure_supervisor::behavior')
 
     return sensitive if sensitive else ['—']
+ELEMENT_TO_SENSITIVE = {
+    "speed":             "ure_can_grasper::speed",
+    "TIME_STEP":         "ure_can_grasper::TIME_STEP",
+    "HAUTEUR_SAISIE":    "ure_supervisor::HAUTEUR_SAISIE",
+    "DEPLACEMENT_DEPOT": "ure_supervisor::DEPLACEMENT_DEPOT",
+}
 
+def enrich_sensitive_from_store(test_id, static_sensitive, history):
+    """
+    Si un test a FAILED quand changed_element=X → il est sensible à X.
+    Capture les tests indirectement affectés (ex: test_all_cans_grasped
+    échoue quand speed=0.0 car le bras ne bouge plus).
+    """
+    enriched = set(static_sensitive) - {"—"}
+    for h in history:
+        if h.get("result") == "FAILED":
+            elem = h.get("changed_element", "")
+            if elem in ELEMENT_TO_SENSITIVE:
+                enriched.add(ELEMENT_TO_SENSITIVE[elem])
+    return sorted(enriched) if enriched else ["—"]
 
 # ── Parser les tests ──────────────────────────────────────────
 def parse_tests():
@@ -127,7 +146,10 @@ def parse_tests():
             #   reliability         (extrait de stress)
             #   stress, boundary    (inchangés)
             subcategory = parts[2] if len(parts) >= 4 else ''
-            sensitive   = detect_sensitivity(src)
+            # APRÈS — enrichi avec le store
+            sensitive_static = detect_sensitivity(src)
+            history = history_by_test.get(test_id, [])
+            sensitive = enrich_sensitive_from_store(test_id, sensitive_static, history)
 
             tests.append({
                 'test_id':      fname.replace('.py', ''),
