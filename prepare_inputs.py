@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-
 import os, re, json, subprocess
 from collections import defaultdict
 from datetime import datetime
@@ -12,6 +11,38 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 NOW = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
+# ── Controller source paths ───────────────────────────────────
+CONTROLLER_C  = os.path.join(PROJECT_ROOT, 'controllers', 'ure_can_grasper', 'ure_can_grasper.c')
+CONTROLLER_PY = os.path.join(PROJECT_ROOT, 'controllers', 'ure_supervisor', 'ure_supervisor.py')
+
+# ── Input size limits ─────────────────────────────────────────
+# IMPORTANT — why these limits exist and when to change them:
+#
+#   These limits protect against silently overflowing the LLM's context window.
+#   If the raw input exceeds the model's token budget, the model silently drops
+#   the tail of the prompt — which is far worse than our explicit truncation here,
+#   because then we don't even know what was lost.
+#
+#   Can you remove them entirely?
+#   → NOT recommended. Even large-context models (32k tokens) can be overwhelmed
+#     by an unbounded test history or a massive merge-commit diff. Always keep a
+#     safety ceiling; just raise it when you upgrade the model.
+#
+#   Current values are tuned for qwen2.5-coder:14b (≈32k token context):
+#     MAX_DIFF_CHARS    = 20 000   (raised from 8 000 — covers realistic diffs)
+#     MAX_HISTORY_CHARS = 40 000   (raised from 12 000 — no test entry is dropped)
+#
+#   If you switch back to qwen3:4b (≈4k tokens), lower these back to 8 000 / 12 000.
+#   If you switch to a 32B+ model, you can raise them further or remove the ceiling
+#   for history (but keep one for diff to avoid sending huge merge commits).
+#
+#   For very large inputs, a better strategy than raising limits is to summarize
+#   the history (e.g. keep only the last 5 runs per test) before sending to the LLM.
+
+MAX_DIFF_CHARS    = 20_000   # raised from 8 000
+MAX_HISTORY_CHARS = 40_000   # raised from 12 000
+
+
 def run(cmd):
     r = subprocess.run(cmd, shell=True, capture_output=True, text=True, cwd=PROJECT_ROOT)
     return r.stdout.strip()
@@ -20,27 +51,16 @@ print(f"\n{'='*60}\n  prepare_inputs.py — {NOW}\n{'='*60}\n")
 
 # ══════════════════════════════════════════════════════════════
 # SENSITIVITY DETECTION
-# Pour chaque fichier test, détecte à quelle constante précise
-# du code source il est sensible — basé sur les mots-clés dans
-# le code source du test.
 # ══════════════════════════════════════════════════════════════
 def detect_sensitivity(src):
     """
-    Lit le code source d'un test et retourne la liste des éléments
-    du code source que ce test vérifie.
-
-    Logique : on cherche des mots-clés ou valeurs numériques qui
-    correspondent aux constantes définies dans les fichiers source.
-
-    Retourne une liste comme :
-      ['ure_can_grasper::speed', 'ure_can_grasper::TIME_STEP']
-    ou ['—'] si le test est purement algorithmique.
+    Reads a test's source code and returns the list of source-code
+    elements (constants / behaviors) this test is sensitive to.
+    Returns ['—'] if the test is purely algorithmic.
     """
     sensitive = []
 
     # ── ure_can_grasper.c ───────────────────────────────────────
-
-    # speed : la vitesse du bras (double speed = X.X)
     if re.search(
         r'\bDEFAULT_SPEED\b'
         r'|\bspeed\b.*(?:rad|bras|vitesse|securis|limit|=\s*1\.0|=\s*0\.0|=\s*2\.0)'
@@ -49,11 +69,9 @@ def detect_sensitivity(src):
     ):
         sensitive.append('ure_can_grasper::speed')
 
-    # TIME_STEP : l'intervalle de simulation (#define TIME_STEP 32)
     if re.search(r'\bTIME_STEP\b|\bTIMESTEP\b', src):
         sensitive.append('ure_can_grasper::TIME_STEP')
 
-    # structure : états de la machine ou positions joints ou référence au .c
     if re.search(
         r'-1\.88|-2\.14|-2\.38|-1\.51'
         r'|\btarget_positions\b'
@@ -64,7 +82,6 @@ def detect_sensitivity(src):
     ):
         sensitive.append('ure_can_grasper::structure')
 
-    # distance_threshold : seuil du capteur de distance (500)
     if re.search(
         r'\bTHRESHOLD\b.*\b500\b'
         r'|\b500\b.*\bTHRESHOLD\b'
@@ -74,21 +91,16 @@ def detect_sensitivity(src):
     ):
         sensitive.append('ure_can_grasper::distance_threshold')
 
-    # wrist_threshold : seuils de position du poignet (-2.3, -0.1)
     if re.search(r'-2\.3\b|-0\.1\b|\bWRIST_THRESH\b', src):
         sensitive.append('ure_can_grasper::wrist_threshold')
 
-    # gripper_position : position de fermeture du gripper (0.85)
     if re.search(r'\b0\.85\b|\bGRIPPER_GRASP_POSITION\b', src):
         sensitive.append('ure_can_grasper::gripper_position')
 
     # ── ure_supervisor.py ───────────────────────────────────────
-
-    # HAUTEUR_SAISIE : hauteur de détection de saisie (0.80m)
     if re.search(r'\bHAUTEUR_SAISIE\b|\bHAUTEUR_MIN\b', src):
         sensitive.append('ure_supervisor::HAUTEUR_SAISIE')
 
-    # DEPLACEMENT_DEPOT : distance de détection du dépôt (0.30m)
     if re.search(
         r'\bDEPLACEMENT_DEPOT\b'
         r'|\bDEPLACEMENT_MIN\b'
@@ -97,34 +109,13 @@ def detect_sensitivity(src):
     ):
         sensitive.append('ure_supervisor::DEPLACEMENT_DEPOT')
 
-    # behavior : lit simulation_results.json sans constante hardcodée
-    # Ces tests vérifient le comportement global — affectés par tout changement source.
     if 'simulation_results.json' in src and not sensitive:
         sensitive.append('ure_can_grasper::behavior | ure_supervisor::behavior')
 
     return sensitive if sensitive else ['—']
-ELEMENT_TO_SENSITIVE = {
-    "speed":             "ure_can_grasper::speed",
-    "TIME_STEP":         "ure_can_grasper::TIME_STEP",
-    "HAUTEUR_SAISIE":    "ure_supervisor::HAUTEUR_SAISIE",
-    "DEPLACEMENT_DEPOT": "ure_supervisor::DEPLACEMENT_DEPOT",
-}
 
-def enrich_sensitive_from_store(test_id, static_sensitive, history):
-    """
-    Si un test a FAILED quand changed_element=X → il est sensible à X.
-    Capture les tests indirectement affectés (ex: test_all_cans_grasped
-    échoue quand speed=0.0 car le bras ne bouge plus).
-    """
-    enriched = set(static_sensitive) - {"—"}
-    for h in history:
-        if h.get("result") == "FAILED":
-            elem = h.get("changed_element", "")
-            if elem in ELEMENT_TO_SENSITIVE:
-                enriched.add(ELEMENT_TO_SENSITIVE[elem])
-    return sorted(enriched) if enriched else ["—"]
 
-# ── Parser les tests ──────────────────────────────────────────
+# ── Parse tests ───────────────────────────────────────────────
 def parse_tests():
     tests = []
     for root, dirs, files in os.walk(os.path.join(PROJECT_ROOT, 'tests')):
@@ -138,18 +129,8 @@ def parse_tests():
 
             parts       = rel.split('/')
             category    = parts[1] if len(parts) >= 2 else 'root'
-            # Sous-catégorie : nom du dossier dans non_functional/
-            # Nouvelle nomenclature ISO 25010 + IEC 61508 :
-            #   interoperability    (était : communication)
-            #   functional_safety   (était : safety)
-            #   performance_efficiency (était : performance + realtime)
-            #   reliability         (extrait de stress)
-            #   stress, boundary    (inchangés)
             subcategory = parts[2] if len(parts) >= 4 else ''
-            # APRÈS — enrichi avec le store
-            sensitive_static = detect_sensitivity(src)
-            history = history_by_test.get(test_id, [])
-            sensitive = enrich_sensitive_from_store(test_id, sensitive_static, history)
+            sensitive   = detect_sensitivity(src)
 
             tests.append({
                 'test_id':      fname.replace('.py', ''),
@@ -161,19 +142,15 @@ def parse_tests():
     return tests
 
 
-print("  [1/4] Parsing des tests...")
+print("  [1/5] Parsing tests...")
 tests_data = parse_tests()
 n_func    = sum(1 for t in tests_data if t['category'] == 'functional')
 n_nonfunc = sum(1 for t in tests_data if t['category'] == 'non_functional')
 print(f"        {len(tests_data)} tests  |  functional: {n_func}  |  non_functional: {n_nonfunc}")
 
 
-# ── Lire l'historique git ─────────────────────────────────────
+# ── Read git history ──────────────────────────────────────────
 def extract_changed_element(diff_text):
-    """
-    Extrait la constante modifiée et sa nouvelle valeur depuis un diff.
-    Retourne (element, value) comme ('speed', '0.0').
-    """
     patterns = [
         (r'\+\s*double\s+(\w+)\s*=\s*([\d.]+)',  lambda m: (m.group(1), m.group(2))),
         (r'\+\s*#define\s+(\w+)\s+([\d.]+)',      lambda m: (m.group(1), m.group(2))),
@@ -207,7 +184,7 @@ def get_commits(n=10):
     return commits
 
 
-print("  [2/4] Lecture du git log...")
+print("  [2/5] Reading git log...")
 commits = get_commits(10)
 HEAD = commits[0] if commits else {
     'hash': 'unknown', 'date': NOW, 'msg': 'unknown',
@@ -217,10 +194,11 @@ PREV = commits[1] if len(commits) > 1 else HEAD
 print(f"        {len(commits)} commits | HEAD={HEAD['hash'][:8]} "
       f"element={HEAD.get('changed_element')} value={HEAD.get('value_at_change')}")
 
-print("  [3/4] Génération git_diff + tests_history...")
+print("  [3/5] Generating git_diff.txt (with full controller sources)...")
 
 # ══════════════════════════════════════════════════════════════
-# git_diff.txt
+# git_diff.txt — includes full controller source code so the AI
+# can understand the exact semantic impact of every change.
 # ══════════════════════════════════════════════════════════════
 full_diff     = run(f"git diff {PREV['hash']} {HEAD['hash']}")
 changed_files = [
@@ -232,6 +210,27 @@ source_files_changed = [
     if 'controllers/' in f and (f.endswith('.c') or f.endswith('.py'))
 ]
 
+# Truncate diff explicitly (never silently)
+diff_was_truncated = False
+if len(full_diff) > MAX_DIFF_CHARS:
+    print(f"  [WARNING] git diff truncated: {len(full_diff):,} → {MAX_DIFF_CHARS:,} chars")
+    print(f"            Raise MAX_DIFF_CHARS if this diff contains important changes.")
+    full_diff = (
+        full_diff[:MAX_DIFF_CHARS]
+        + f"\n\n... [TRUNCATED at {MAX_DIFF_CHARS} chars — raise MAX_DIFF_CHARS if needed]"
+    )
+    diff_was_truncated = True
+
+# Read controller sources in full (no limit — they are small and critical)
+def read_source(path):
+    if os.path.exists(path):
+        with open(path, encoding='utf-8') as f:
+            return f.read()
+    return f"(file not found: {path})"
+
+controller_c_src  = read_source(CONTROLLER_C)
+controller_py_src = read_source(CONTROLLER_PY)
+
 lines = []
 lines += [
     "=" * 80,
@@ -241,34 +240,60 @@ lines += [
     "=" * 80, ""
 ]
 
-lines += ["─" * 80, "FICHIERS SOURCE MODIFIÉS (controllers/ uniquement)", "─" * 80]
+lines += ["─" * 80, "SOURCE FILES CHANGED (controllers/ only)", "─" * 80]
 if source_files_changed:
     for f in source_files_changed:
         lines.append(f"  {f}")
 else:
-    lines.append("  (aucun fichier source controllers/ modifié)")
+    lines.append("  (no controllers/ source file changed)")
 
-lines += ["", "─" * 80, "ÉLÉMENT CHANGÉ", "─" * 80]
-lines.append(f"  Constante     : {HEAD.get('changed_element', 'unknown')}")
-lines.append(f"  Nouvelle valeur : {HEAD.get('value_at_change', 'unknown')}")
+lines += ["", "─" * 80, "CHANGED ELEMENT", "─" * 80]
+lines.append(f"  Constant  : {HEAD.get('changed_element', 'unknown')}")
+lines.append(f"  New value : {HEAD.get('value_at_change', 'unknown')}")
 
-lines += ["", "─" * 80, "DIFF COMPLET", "─" * 80]
+lines += ["", "─" * 80, "FULL DIFF", "─" * 80]
+if diff_was_truncated:
+    lines.append("  WARNING: diff was truncated — see MAX_DIFF_CHARS in prepare_inputs.py")
 lines.append(full_diff)
 
+# ── Inject full controller source code ────────────────────────
+lines += [
+    "",
+    "=" * 80,
+    "CONTROLLER SOURCE — controllers/ure_can_grasper/ure_can_grasper.c (FULL)",
+    "Included so the AI understands the exact semantic impact of any change.",
+    "Key elements: speed, TIME_STEP, target_positions[], distance threshold (500),",
+    "              wrist thresholds (-2.3 / -0.1), gripper position (0.85),",
+    "              state machine: WAITING→GRASPING→ROTATING→RELEASING→ROTATING_BACK",
+    "=" * 80,
+    controller_c_src,
+    "",
+    "=" * 80,
+    "CONTROLLER SOURCE — controllers/ure_supervisor/ure_supervisor.py (FULL)",
+    "Included so the AI understands the exact semantic impact of any change.",
+    "Key elements: HAUTEUR_SAISIE (0.80m), DEPLACEMENT_DEPOT (0.30m),",
+    "              produces simulation_results.json read by integration/functional tests.",
+    "=" * 80,
+    controller_py_src,
+]
+
+out_diff = '\n'.join(lines)
 with open(os.path.join(OUTPUT_DIR, 'git_diff.txt'), 'w', encoding='utf-8') as f:
-    f.write('\n'.join(lines))
-print(f"        ✓ ai_inputs/git_diff.txt")
+    f.write(out_diff)
+print(f"        ✓ ai_inputs/git_diff.txt  ({len(out_diff):,} chars, includes controller sources)")
+
 
 # ══════════════════════════════════════════════════════════════
-# Lecture du store (en lecture seule)
+# Load history store (read-only)
 # ══════════════════════════════════════════════════════════════
+print("  [4/5] Loading history store...")
 history_store = {}
 if os.path.exists(HISTORY_STORE):
     with open(HISTORY_STORE) as f:
         history_store = json.load(f)
-    print(f"        store chargé : {len(history_store)} entrées")
+    print(f"        store loaded: {len(history_store)} entries")
 else:
-    print("        store absent — premier push, aucun historique disponible")
+    print("        store absent — first push, no history available")
 
 history_by_test = defaultdict(list)
 for test_id, entry in history_store.items():
@@ -278,9 +303,13 @@ for test_id, entry in history_store.items():
     else:
         history_by_test[entry.get('test_id', test_id)].append(entry)
 
+
 # ══════════════════════════════════════════════════════════════
 # tests_history.txt
+# NEVER silently truncate test entries — warn loudly instead.
 # ══════════════════════════════════════════════════════════════
+print("  [5/5] Generating tests_history.txt...")
+
 lines = []
 lines += [
     "=" * 100,
@@ -290,16 +319,16 @@ lines += [
     f"element={HEAD.get('changed_element')}  value={HEAD.get('value_at_change')}  "
     f"\"{HEAD['msg']}\"",
     "",
-    "COLONNES :",
-    "  TEST_ID      : identifiant exact du test",
-    "  CATÉGORIE    : functional | non_functional",
-    "  SOUS-CAT     : communication | safety | performance | stress | boundary | realtime",
-    "  FAIL / RUNS  : nombre d'échecs sur nombre total de runs",
-    "  SENSITIVE_TO : constante précise du code source que ce test vérifie",
-    "                 Format → fichier::constante",
-    "                 '—' = test purement algorithmique, jamais affecté par le code",
-    "  FAILED_WHEN  : fichier source modifié lors des échecs passés de ce test",
-    "                 '—' = n'a jamais échoué",
+    "COLUMNS:",
+    "  TEST_ID      : exact test identifier",
+    "  CATEGORY     : functional | non_functional",
+    "  SUBCATEGORY  : communication | safety | performance | stress | boundary | realtime",
+    "  FAIL / RUNS  : number of failures over total runs",
+    "  SENSITIVE_TO : exact source-code constant this test verifies",
+    "                 Format → file::constant",
+    "                 '—' = purely algorithmic test, never affected by source code",
+    "  FAILED_WHEN  : source file modified when this test failed in the past",
+    "                 '—' = has never failed",
     "=" * 100, ""
 ]
 
@@ -309,7 +338,7 @@ col_sub  = 14
 col_sens = 55
 
 header = (
-    f"  {'TEST_ID':<{col_id}}  {'CATÉGORIE':<{col_cat}}  {'SOUS-CAT':<{col_sub}}  "
+    f"  {'TEST_ID':<{col_id}}  {'CATEGORY':<{col_cat}}  {'SUBCATEGORY':<{col_sub}}  "
     f"{'FAIL':>4}  {'RUNS':>4}  {'SENSITIVE_TO':<{col_sens}}  FAILED_WHEN"
 )
 lines.append(header)
@@ -320,8 +349,6 @@ for t in tests_data:
     runs  = len(h)
     fails = sum(1 for r in h if r['result'] == 'FAILED')
 
-    # FAILED_WHEN : fichiers source présents lors des échecs
-    # Support nouvelle structure (source_files_changed) et ancienne (changed_files)
     failed_when = []
     for r in h:
         if r['result'] == 'FAILED':
@@ -346,12 +373,20 @@ for t in tests_data:
     )
 
 lines.append("")
+history_text = '\n'.join(lines)
+
+# Warn if large — but write everything (never drop test entries silently)
+if len(history_text) > MAX_HISTORY_CHARS:
+    print(f"  [WARNING] tests_history.txt is large: {len(history_text):,} chars")
+    print(f"            MAX_HISTORY_CHARS={MAX_HISTORY_CHARS:,}. Full file is written.")
+    print(f"            Consider upgrading to qwen2.5-coder:14b (32k context) or")
+    print(f"            raising MAX_HISTORY_CHARS if the LLM rejects the input.")
 
 with open(os.path.join(OUTPUT_DIR, 'tests_history.txt'), 'w', encoding='utf-8') as f:
-    f.write('\n'.join(lines))
-print(f"        ✓ ai_inputs/tests_history.txt")
+    f.write(history_text)
+print(f"        ✓ ai_inputs/tests_history.txt  ({len(history_text):,} chars, {len(tests_data)} tests)")
 
-print(f"\n  Terminé. store={len(history_store)} entrées\n")
-print("  Fichiers générés :")
-print("    - ai_inputs/git_diff.txt")
-print("    - ai_inputs/tests_history.txt")
+print(f"\n  Done. store={len(history_store)} entries\n")
+print("  Generated files:")
+print("    - ai_inputs/git_diff.txt  (diff + full controller sources)")
+print("    - ai_inputs/tests_history.txt  (all tests, no silent truncation)")

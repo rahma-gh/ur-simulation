@@ -16,31 +16,33 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).parent.resolve()
 AI_INPUTS    = PROJECT_ROOT / "ai_inputs"
 
-# ── LLM : Groq (gratuit, open-source, 6000 TPM) ──
-# Clé gratuite : https://console.groq.com/keys
-# Modèles : llama-3.3-70b-versatile | llama-3.1-8b-instant | mixtral-8x7b-32768
-HF_MODEL = "qwen3:4b"
+HF_MODEL = os.environ.get("AI_MODEL", "qwen2.5-coder:14b")
 HF_URL   = os.environ.get("OLLAMA_NGROK_URL", "http://localhost:11434").rstrip("/") + "/api/chat"
 
+# ── LLM retry settings ───────────────────────────────────────
+MAX_RETRIES     = 3   # number of times to retry on bad JSON or HTTP 503
+RETRY_WAIT_SEC  = 5   # seconds between retries on bad JSON response
 
-MAX_DIFF_CHARS    = 8_000
-MAX_HISTORY_CHARS = 12_000
+# ── Input size limits (see prepare_inputs.py for rationale) ──
+MAX_DIFF_CHARS    = 20_000
+MAX_HISTORY_CHARS = 40_000
 
 
 def read_input(filename: str, max_chars: int) -> str:
     path = AI_INPUTS / filename
     if not path.exists():
-        print(f"  [!] Fichier manquant : {path}")
-        print(f"      → Lancez d'abord : python prepare_inputs.py")
+        print(f"  [!] Missing file: {path}")
+        print(f"      → Run first: python prepare_inputs.py")
         sys.exit(1)
     content = path.read_text(encoding="utf-8")
     if len(content) > max_chars:
-        content = content[:max_chars] + f"\n\n... [tronqué à {max_chars} caractères]"
+        print(f"  [WARNING] {filename} truncated: {len(content):,} → {max_chars:,} chars")
+        content = content[:max_chars] + f"\n\n... [TRUNCATED at {max_chars} chars]"
     return content
 
 
 def load_all_inputs() -> dict:
-    print("  [1/4] Lecture des fichiers ai_inputs/ ...")
+    print("  [1/4] Reading ai_inputs/ files...")
     data = {
         "git_diff":      read_input("git_diff.txt",     MAX_DIFF_CHARS),
         "tests_history": read_input("tests_history.txt", MAX_HISTORY_CHARS),
@@ -50,163 +52,165 @@ def load_all_inputs() -> dict:
     return data
 
 
+# ══════════════════════════════════════════════════════════════
+# SYSTEM PROMPT — written in English for best model compliance
+# ══════════════════════════════════════════════════════════════
 SYSTEM_PROMPT = textwrap.dedent("""\
-    ## RÔLE
-    Tu es un moteur de sélection de tests pour un système cyber-physique industriel.
-    Le projet est "ur-simulation" : une simulation Webots de bras robotiques UR
-    qui saisissent des canettes sur un tapis roulant.
+    ## ROLE
+    You are a test selection engine for an industrial cyber-physical system.
+    The project is "ur-simulation": a Webots simulation of UR robotic arms
+    that grasp cans from a conveyor belt.
 
-    Ton seul rôle : analyser ce qui a changé dans le code source et décider
-    quels tests doivent être lancés sur ce push — le moins possible, mais tous
-    ceux qui sont réellement concernés par le changement.
+    Your sole role: analyze what changed in the source code and decide
+    which tests must be run on this push — as few as possible, but every
+    test genuinely affected by the change.
 
-    ## FICHIERS SOURCE DU PROJET
-    Il y a exactement 2 fichiers source qui contrôlent le comportement :
+    ## SOURCE FILES
+    There are exactly 2 source files that control behavior:
 
       controllers/ure_can_grasper/ure_can_grasper.c
-        Contient une machine à états C avec ces éléments indépendants :
-          - speed            : vitesse du bras (double speed = X.X)
-          - TIME_STEP        : intervalle simulation (#define TIME_STEP 32)
-          - structure        : états (WAITING/GRASPING/ROTATING/RELEASING/ROTATING_BACK)
-                               et positions joints {-1.88, -2.14, -2.38, -1.51}
-          - distance_threshold : seuil capteur distance (THRESHOLD = 500)
-          - wrist_threshold  : seuils poignet (-2.3, -0.1)
-          - gripper_position : fermeture gripper (0.85)
+        C state machine with these independent elements:
+          - speed            : arm speed (double speed = X.X)
+          - TIME_STEP        : simulation interval (#define TIME_STEP 32)
+          - structure        : states (WAITING/GRASPING/ROTATING/RELEASING/ROTATING_BACK)
+                               and joint positions {-1.88, -2.14, -2.38, -1.51}
+          - distance_threshold : distance sensor threshold (< 500)
+          - wrist_threshold  : wrist position thresholds (-2.3, -0.1)
+          - gripper_position : gripper close position (0.85)
 
       controllers/ure_supervisor/ure_supervisor.py
-        Contient ces constantes indépendantes :
-          - HAUTEUR_SAISIE    : hauteur détection saisie (0.80m)
-          - DEPLACEMENT_DEPOT : distance détection dépôt (0.30m)
+        Contains these independent constants:
+          - HAUTEUR_SAISIE    : grasp detection height (0.80 m)
+          - DEPLACEMENT_DEPOT : deposit detection distance (0.30 m)
 
-      Les tests lisent soit les constantes directement, soit le fichier
-      simulation_results.json produit par le supervisor après simulation.
+      Tests read either the constants directly or the simulation_results.json
+      file produced by the supervisor after simulation.
 
-    ## CE QUE TU REÇOIS
+    ## WHAT YOU RECEIVE
 
     [GIT_DIFF]
-      - Quels fichiers source ont changé (controllers/*.c ou controllers/*.py)
-      - La constante exacte modifiée et sa nouvelle valeur
-      - Le diff complet (lignes + et -)
+      - Which source files changed (controllers/*.c or controllers/*.py)
+      - The exact constant modified and its new value
+      - The complete diff (+ and - lines)
+      - Full source code of both controllers (for semantic context)
 
     [TESTS_HISTORY]
-      Tableau avec pour chaque test :
-      - TEST_ID      : identifiant exact
-      - CATÉGORIE    : functional | non_functional
-      - SOUS-CAT     : communication | safety | performance | stress | boundary | realtime
-      - FAIL / RUNS  : nombre d'échecs sur total de runs
-      - SENSITIVE_TO : constante précise que ce test vérifie
-                       Format → fichier::constante
-                       Exemple → ure_can_grasper::speed
-                       Valeur spéciale "ure_can_grasper::behavior | ure_supervisor::behavior"
-                       → ce test lit le JSON de résultats et est affecté par
-                         TOUT changement dans les 2 fichiers source
-                       Valeur "—" → test purement algorithmique, jamais affecté
-      - FAILED_WHEN  : fichier source modifié lors des échecs passés
-                       "—" = n'a jamais échoué
+      A table with for each test:
+      - TEST_ID      : exact identifier
+      - CATEGORY     : functional | non_functional
+      - SUBCATEGORY  : communication | safety | performance | stress | boundary | realtime
+      - FAIL / RUNS  : number of failures over total runs
+      - SENSITIVE_TO : exact constant this test checks
+                       Format → file::constant
+                       Example → ure_can_grasper::speed
+                       Special value "ure_can_grasper::behavior | ure_supervisor::behavior"
+                       → this test reads the JSON results and is affected by
+                         ANY change in either source file
+                       Value "—" → purely algorithmic test, never affected
+      - FAILED_WHEN  : source file modified when this test failed in the past
+                       "—" = has never failed
 
-    ## ÉTAPES DE SÉLECTION (suivre dans l'ordre strict)
+    ## SELECTION STEPS (follow in strict order)
 
-    ÉTAPE 1 — Identifier l'élément changé depuis GIT_DIFF
-      Lire "ÉLÉMENT CHANGÉ" dans le diff.
-      Identifier le fichier source ET la constante modifiée.
-      Exemple : "speed changé 1.0 → 0.0" → élément = ure_can_grasper::speed
+    STEP 1 — Identify the changed element from GIT_DIFF
+      Read "CHANGED ELEMENT" in the diff.
+      Identify the source file AND the modified constant.
+      Example: "speed changed 1.0 → 0.0" → element = ure_can_grasper::speed
 
-    ÉTAPE 2 — Sélectionner les tests (règles par ordre de priorité)
+    STEP 2 — Select tests (rules in priority order)
 
-      RÈGLE A — SENSITIVE_TO match (priorité absolue)
-        Si SENSITIVE_TO contient l'élément changé identifié à l'étape 1
-        → SÉLECTIONNER ce test, même si FAIL=0 et FAILED_WHEN=—
-        Exemples de match :
-          - élément = ure_can_grasper::speed
-            match si SENSITIVE_TO contient "ure_can_grasper::speed"
-          - élément = speed (dans ure_can_grasper.c)
-            match si SENSITIVE_TO contient "ure_can_grasper::behavior" (comportement global)
+      RULE A — SENSITIVE_TO match (absolute priority)
+        If SENSITIVE_TO contains the element identified in step 1
+        → SELECT this test, even if FAIL=0 and FAILED_WHEN=—
+        Match examples:
+          - element = ure_can_grasper::speed
+            match if SENSITIVE_TO contains "ure_can_grasper::speed"
+          - element = speed (in ure_can_grasper.c)
+            match if SENSITIVE_TO contains "ure_can_grasper::behavior" (global behavior)
 
-      RÈGLE B — SENSITIVE_TO = behavior (filet comportemental)
-        Si SENSITIVE_TO = "ure_can_grasper::behavior | ure_supervisor::behavior"
-        ET le fichier source modifié est ure_can_grasper.c OU ure_supervisor.py
-        → SÉLECTIONNER (ces tests vérifient le comportement global, affecté par tout changement)
+      RULE B — SENSITIVE_TO = behavior (behavioral safety net)
+        If SENSITIVE_TO = "ure_can_grasper::behavior | ure_supervisor::behavior"
+        AND the modified source file is ure_can_grasper.c OR ure_supervisor.py
+        → SELECT (these tests verify global behavior, affected by any change)
 
-      RÈGLE C — Filet de sécurité historique
-        Si FAILED_WHEN contient le fichier source modifié
-        ET le test n'est pas déjà sélectionné par A ou B
-        → SÉLECTIONNER (rattrape les dépendances non détectées statiquement)
+      RULE C — Historical safety net
+        If FAILED_WHEN contains the modified source file
+        AND the test is not already selected by A or B
+        → SELECT (catches dependencies not detected statically)
 
-      RÈGLE D — Exclusion absolue
-        Si SENSITIVE_TO = "—" ET FAILED_WHEN = "—"
-        → IGNORER inconditionnellement
-        Ces tests sont purement algorithmiques (calculs mathématiques, stress tests
-        de valeurs constantes). Ils ne peuvent pas échouer à cause d'un changement
-        de code source.
+      RULE D — Absolute exclusion
+        If SENSITIVE_TO = "—" AND FAILED_WHEN = "—"
+        → IGNORE unconditionally
+        These tests are purely algorithmic (math, stress tests on fixed values).
+        They cannot fail due to a source code change.
 
-    ÉTAPE 3 — Prioriser les tests sélectionnés
-      Groupe 1 (passer en premier) : SOUS-CAT = safety
-      Groupe 2 : SOUS-CAT = communication | tests functional sans sous-catégorie
-      Groupe 3 : SOUS-CAT = performance | boundary | realtime
-      Groupe 4 (passer en dernier) : SOUS-CAT = stress
+    STEP 3 — Prioritize selected tests
+      Group 1 (run first) : SUBCATEGORY = safety
+      Group 2             : SUBCATEGORY = communication | functional tests without subcategory
+      Group 3             : SUBCATEGORY = performance | boundary | realtime
+      Group 4 (run last)  : SUBCATEGORY = stress
 
-      Dans chaque groupe, trier par ratio FAIL/RUNS décroissant
-      (le test qui a le plus échoué = priorité la plus haute dans son groupe).
-      Attribuer des entiers uniques à partir de 1.
+      Within each group, sort by FAIL/RUNS ratio descending
+      (highest failure rate = highest priority within group).
+      Assign unique integers starting from 1.
 
-    ## VÉRIFICATION AVANT DE RÉPONDRE
-      [ ] Chaque test avec SENSITIVE_TO matchant l'élément changé est sélectionné
-      [ ] Chaque test avec SENSITIVE_TO = "—" ET FAILED_WHEN = "—" est ignoré
-      [ ] Aucun test_id inventé — tous viennent exactement de TESTS_HISTORY
-      [ ] Les priorités sont des entiers uniques à partir de 1
-      [ ] skipped_count = total tests dans TESTS_HISTORY - nombre sélectionnés
+    ## VERIFICATION BEFORE RESPONDING
+      [ ] Every test with a SENSITIVE_TO matching the changed element is selected
+      [ ] Every test with SENSITIVE_TO = "—" AND FAILED_WHEN = "—" is ignored
+      [ ] No invented test_id — all come exactly from TESTS_HISTORY
+      [ ] Priorities are unique integers starting from 1
+      [ ] skipped_count = total tests in TESTS_HISTORY - number selected
 
-    ## FORMAT DE SORTIE
-    Retourne UNIQUEMENT un objet JSON valide.
-    Pas de texte avant. Pas de texte après. Pas de balises markdown. JSON brut seulement.
+    ## OUTPUT FORMAT
+    Return ONLY a valid JSON object.
+    No text before. No text after. No markdown fences. Raw JSON only.
 
     {
       "selected_tests": [
         {
-          "test_id":     "<identifiant exact depuis TESTS_HISTORY>",
-          "priority":    <entier, 1 = passer en premier>,
+          "test_id":     "<exact identifier from TESTS_HISTORY>",
+          "priority":    <integer, 1 = run first>,
           "category":    "<functional | non_functional>",
           "subcategory": "<communication | safety | performance | stress | boundary | realtime>",
-          "reason":      "<une phrase : quelle constante a changé + ce que ce test vérifie>"
+          "reason":      "<one sentence: which constant changed + what this test verifies>",
+          "rule":        "<RULE A | RULE B | RULE C>"
         }
       ],
-      "skipped_count":        <entier>,
-      "diff_summary":         "<une phrase : fichier modifié + nature du changement>",
-      "selection_rationale":  "<2 phrases : combien sélectionnés par règle A vs B vs C, et pourquoi>"
+      "skipped_count":        <integer>,
+      "diff_summary":         "<one sentence: file changed + nature of change>",
+      "selection_rationale":  "<2 sentences: how many selected per rule A vs B vs C, and why>"
     }
 
-    ## EXEMPLE
-    GIT_DIFF montre : speed changé de 1.0 à 0.0 dans ure_can_grasper.c
+    ## EXAMPLE
+    GIT_DIFF shows: speed changed from 1.0 to 0.0 in ure_can_grasper.c
 
-    TESTS_HISTORY contient :
+    TESTS_HISTORY contains:
       test_vitesse_bras_securisee   SENSITIVE_TO: ure_can_grasper::speed          FAILED_WHEN: —
       test_arm_rotates              SENSITIVE_TO: ure_can_grasper::behavior | ... FAILED_WHEN: ure_can_grasper
       test_boundary_joint_zero      SENSITIVE_TO: —                               FAILED_WHEN: —
       test_timestep_conforme        SENSITIVE_TO: ure_can_grasper::TIME_STEP      FAILED_WHEN: —
 
-    Sélection correcte :
-      SÉLECTIONNER test_vitesse_bras_securisee → RÈGLE A (SENSITIVE_TO::speed match)
-      SÉLECTIONNER test_arm_rotates            → RÈGLE B (behavior + fichier source modifié)
-      IGNORER      test_boundary_joint_zero    → RÈGLE D (— et —)
-      IGNORER      test_timestep_conforme      → RÈGLE A non applicable (TIME_STEP ≠ speed)
+    Correct selection:
+      SELECT test_vitesse_bras_securisee → RULE A (SENSITIVE_TO::speed matches)
+      SELECT test_arm_rotates            → RULE B (behavior + modified source file)
+      IGNORE test_boundary_joint_zero    → RULE D (— and —)
+      IGNORE test_timestep_conforme      → RULE A does not apply (TIME_STEP ≠ speed)
 
-    ## CE QU'IL NE FAUT JAMAIS FAIRE
-    - Inventer un test_id qui n'existe pas dans TESTS_HISTORY
-    - Sélectionner TOUS les tests — être sélectif est correct et attendu
-    - Sélectionner un test dont SENSITIVE_TO ne correspond pas à l'élément changé
-      et dont FAILED_WHEN est "—"
-    - Assigner le même numéro de priorité à deux tests différents
-    - Ajouter du texte en dehors de l'objet JSON
+    ## WHAT YOU MUST NEVER DO
+    - Invent a test_id that does not exist in TESTS_HISTORY
+    - Select ALL tests — being selective is correct and expected
+    - Select a test whose SENSITIVE_TO does not match the changed element
+      and whose FAILED_WHEN is "—"
+    - Assign the same priority number to two different tests
+    - Add any text outside the JSON object
+    - Return invalid JSON or JSON missing the "selected_tests" key
 """)
 
 
 def build_user_prompt(inputs: dict) -> str:
-    # Google AI Studio : 1 000 000 tokens de contexte — aucune troncature nécessaire
-    history = inputs['tests_history']
-
     return textwrap.dedent(f"""\
-        Voici les fichiers de contexte pour le push actuel.
-        Analyse-les et produis le JSON de sélection de tests.
+        Here are the context files for the current push.
+        Analyze them and produce the test selection JSON.
 
         ═══════════════════════════════════════════════════════════
         [GIT_DIFF]
@@ -216,26 +220,25 @@ def build_user_prompt(inputs: dict) -> str:
         ═══════════════════════════════════════════════════════════
         [TESTS_HISTORY]
         ═══════════════════════════════════════════════════════════
-        {history}
+        {inputs['tests_history']}
 
         ═══════════════════════════════════════════════════════════
-        IMPORTANT : Retourne UNIQUEMENT un objet JSON valide.
-        La clé racine DOIT être "selected_tests" (pas "tests", pas autre chose).
-        Pas de texte avant. Pas de texte après. Pas de balises markdown.
+        CRITICAL: Return ONLY a valid JSON object.
+        The root key MUST be "selected_tests".
+        No text before. No text after. No markdown fences.
+        Every selected test MUST include a "rule" field (RULE A, RULE B, or RULE C).
         ═══════════════════════════════════════════════════════════
     """)
 
 
-
-def call_llm(system: str, user: str, verbose: bool) -> str:
+def call_llm_once(system: str, user: str) -> str:
+    """Single LLM call. Returns raw response string."""
     ngrok_url = os.environ.get("OLLAMA_NGROK_URL", "").strip()
     if not ngrok_url:
-        print("\n  [!] Variable OLLAMA_NGROK_URL non définie.")
-        print("      Lance ngrok sur ton PC : ngrok http 11434")
-        print("      Puis ajoute l'URL dans GitHub Secrets : OLLAMA_NGROK_URL=https://abc123.ngrok-free.app")
+        print("\n  [!] OLLAMA_NGROK_URL not set.")
+        print("      Run ngrok on your PC: ngrok http 11434")
+        print("      Then add the URL to GitHub Secrets: OLLAMA_NGROK_URL=https://abc123.ngrok-free.app")
         sys.exit(1)
-
-    print(f"  [2/4] Envoi au LLM : {HF_MODEL} ...")
 
     payload = json.dumps({
         "model": HF_MODEL,
@@ -244,7 +247,7 @@ def call_llm(system: str, user: str, verbose: bool) -> str:
             {"role": "user",   "content": user},
         ],
         "stream": False,
-        "options": {"temperature": 0.01},
+        "options": {"temperature": 0.0},   # deterministic output for reproducibility
     }).encode("utf-8")
 
     req = urllib.request.Request(
@@ -252,154 +255,260 @@ def call_llm(system: str, user: str, verbose: bool) -> str:
         data=payload,
         headers={
             "Content-Type":               "application/json",
-            "User-Agent":                 "ur-simulation-ci/1.0",
+            "User-Agent":                 "ur-simulation-ci/2.0",
             "ngrok-skip-browser-warning": "true",
         },
         method="POST",
     )
 
-    MAX_RETRIES = 5
-    for attempt in range(1, MAX_RETRIES + 1):
+    HTTP_RETRIES = 5
+    for attempt in range(1, HTTP_RETRIES + 1):
         try:
             with urllib.request.urlopen(req, timeout=300) as resp:
                 body = json.loads(resp.read().decode("utf-8"))
-            break  # succès — on sort de la boucle
+            break
         except urllib.error.HTTPError as e:
             err_body = e.read().decode("utf-8", errors="replace")
-            if e.code == 503 and attempt < MAX_RETRIES:
+            if e.code == 503 and attempt < HTTP_RETRIES:
                 wait = attempt * 10
-                print(f"  [!] Serveur surchargé (503) — retry {attempt}/{MAX_RETRIES-1} dans {wait}s...")
+                print(f"  [!] Server overloaded (503) — retry {attempt}/{HTTP_RETRIES-1} in {wait}s...")
                 time.sleep(wait)
                 continue
-            print(f"\n  [!] Erreur HTTP {e.code}")
-            print(f"      Headers : {dict(e.headers)}")
-            print(f"      Body    : {err_body[:1000]}")
+            print(f"\n  [!] HTTP error {e.code}")
+            print(f"      Body: {err_body[:1000]}")
             sys.exit(1)
         except urllib.error.URLError as e:
-            print(f"\n  [!] Erreur réseau : {e.reason}")
+            print(f"\n  [!] Network error: {e.reason}")
             sys.exit(1)
 
-    # Format réponse Ollama
     raw = body["message"]["content"].strip()
-
-    if verbose:
-        print("\n  ── Réponse brute du LLM ──")
-        print(raw[:3000])
-        print("  ──────────────────────────\n")
-
-    print(f"        ✓ modèle utilisé  — {body.get('model', HF_MODEL)}")
-    print(f"        ✓ tokens utilisés — prompt: {body.get('prompt_eval_count','?')}  "
+    print(f"        ✓ model used     — {body.get('model', HF_MODEL)}")
+    print(f"        ✓ tokens used    — prompt: {body.get('prompt_eval_count','?')}  "
           f"completion: {body.get('eval_count','?')}")
     return raw
 
-def repair_truncated_json(partial: str) -> str:
-    """Tente de fermer un JSON tronqué."""
-    repaired     = partial.rstrip(',')
-    open_braces  = repaired.count('{') - repaired.count('}')
-    open_brackets = repaired.count('[') - repaired.count(']')
-    if open_brackets > 0:
-        repaired += ']' * open_brackets
-    if open_braces > 0:
-        repaired += '}' * open_braces
-    return repaired
+
+def call_llm(system: str, user: str, verbose: bool) -> str:
+    """
+    Calls the LLM up to MAX_RETRIES times, retrying on bad JSON.
+    This ensures the pipeline never silently accepts a weak/incomplete AI response.
+    """
+    print(f"  [2/4] Sending to LLM: {HF_MODEL} ...")
+
+    for attempt in range(1, MAX_RETRIES + 1):
+        raw = call_llm_once(system, user)
+
+        if verbose:
+            print(f"\n  ── Raw LLM response (attempt {attempt}) ──")
+            print(raw[:3000])
+            print("  ─────────────────────────────────────────\n")
+
+        # Quick pre-check: does the response look like JSON?
+        cleaned = _clean_raw(raw)
+        if cleaned.startswith("{"):
+            return raw  # looks valid, let parse_llm_response handle the rest
+
+        if attempt < MAX_RETRIES:
+            print(f"  [!] Response does not look like JSON (attempt {attempt}/{MAX_RETRIES}) — retrying in {RETRY_WAIT_SEC}s...")
+            print(f"      First 200 chars: {raw[:200]}")
+            time.sleep(RETRY_WAIT_SEC)
+        else:
+            print(f"\n  [!] LLM did not return valid JSON after {MAX_RETRIES} attempts.")
+            print(f"      Last response (500 chars): {raw[:500]}")
+            sys.exit(1)
+
+    return raw   # unreachable but keeps linters happy
 
 
-def parse_llm_response(raw: str) -> dict:
-    print("  [3/4] Parsing de la réponse LLM ...")
-
-    # Supprimer les blocs <thinking> (certains modèles)
+def _clean_raw(raw: str) -> str:
+    """Strip <thinking> blocks and markdown fences from raw LLM output."""
     cleaned = re.sub(r"<thinking>[\s\S]*?</thinking>", "", raw).strip()
-
-    # Nettoyer les balises markdown ```json ... ```
     if "```" in cleaned:
         m = re.search(r"```(?:json)?\s*([\s\S]+?)```", cleaned)
         if m:
             cleaned = m.group(1).strip()
-
-    # Extraire le premier objet JSON
     m = re.search(r"\{[\s\S]+\}", cleaned)
     if m:
         cleaned = m.group(0)
+    return cleaned
 
-    try:
-        data = json.loads(cleaned)
-    except json.JSONDecodeError as e:
-        print(f"  [!] JSON invalide, tentative de réparation... ({e})")
-        repaired = repair_truncated_json(cleaned)
-        try:
-            data = json.loads(repaired)
-            print("      ✓ JSON réparé avec succès.")
-        except json.JSONDecodeError as e2:
-            print(f"\n  [!] JSON invalide même après réparation.")
-            print(f"      Réponse (500 premiers chars) : {cleaned[:500]}")
-            sys.exit(1)
 
-    # Fallback : accepter "tests" comme alias de "selected_tests" (certains modèles)
+# ══════════════════════════════════════════════════════════════
+# STRICT JSON VALIDATION
+# The old code silently accepted weak/fallback formats and
+# repaired truncated JSON. This version:
+#   1. Rejects invalid JSON and retries the LLM call
+#   2. Validates the schema strictly
+#   3. Never silently accepts missing fields
+# ══════════════════════════════════════════════════════════════
+REQUIRED_ROOT_KEYS    = {"selected_tests", "skipped_count", "diff_summary", "selection_rationale"}
+REQUIRED_TEST_KEYS    = {"test_id", "priority", "category", "subcategory", "reason", "rule"}
+VALID_RULES           = {"RULE A", "RULE B", "RULE C"}
+VALID_CATEGORIES      = {"functional", "non_functional"}
+VALID_SUBCATEGORIES   = {"communication", "safety", "performance", "stress", "boundary", "realtime", "—", ""}
+
+
+def validate_schema(data: dict) -> list[str]:
+    """
+    Returns a list of validation errors.
+    Empty list = schema is valid.
+    """
+    errors = []
+
+    missing_root = REQUIRED_ROOT_KEYS - set(data.keys())
+    if missing_root:
+        errors.append(f"Missing root keys: {missing_root}")
+
     if "selected_tests" not in data:
-        if "tests" in data:
-            print("  [!] Clé 'selected_tests' absente — utilisation de 'tests' comme fallback.")
-            # Convertir le format simplifié en format attendu
-            data["selected_tests"] = [
-                {"test_id": t, "priority": i+1, "category": "functional",
-                 "subcategory": "—", "reason": "sélectionné par le LLM"}
-                for i, t in enumerate(data["tests"])
-            ]
-            data["skipped_count"] = data.get("skipped_count", 0)
-        else:
-            print("  [!] Clé 'selected_tests' absente dans la réponse du LLM.")
-            sys.exit(1)
+        return errors  # can't validate further
 
-    # Normaliser chaque test : gérer tous les formats possibles de Qwen3
-    normalized = []
+    if not isinstance(data["selected_tests"], list):
+        errors.append("'selected_tests' must be a list")
+        return errors
+
+    priorities_seen = set()
     for i, t in enumerate(data["selected_tests"]):
-        # Cas 1 : t est une string simple (ex: "test_vitesse_bras")
-        if isinstance(t, str):
-            t = {"test_id": t, "priority": i + 1, "category": "functional",
-                 "subcategory": "—", "reason": "sélectionné par le LLM"}
-        # Cas 2 : t est un dict
-        elif isinstance(t, dict):
-            if "test_id" not in t and "name" in t:
-                t["test_id"] = t["name"]
-            if "test_id" not in t:
-                t["test_id"] = str(t)
-            if "priority" not in t:
-                t["priority"] = i + 1
-            if "category" not in t:
-                t["category"] = "functional"
-            if "subcategory" not in t:
-                t["subcategory"] = "—"
-            if "reason" not in t:
-                t["reason"] = "sélectionné par le LLM"
-        normalized.append(t)
-    data["selected_tests"] = normalized
-    data["selected_tests"].sort(key=lambda t: t.get("priority", 999))
-    if "skipped_count" not in data:
-        data["skipped_count"] = "?"
-    return data
+        prefix = f"selected_tests[{i}]"
+        if not isinstance(t, dict):
+            errors.append(f"{prefix}: must be a dict, got {type(t).__name__}")
+            continue
+
+        missing = REQUIRED_TEST_KEYS - set(t.keys())
+        if missing:
+            errors.append(f"{prefix}: missing keys {missing}")
+
+        if "priority" in t:
+            p = t["priority"]
+            if not isinstance(p, int):
+                errors.append(f"{prefix}: 'priority' must be int, got {type(p).__name__}")
+            elif p in priorities_seen:
+                errors.append(f"{prefix}: duplicate priority {p}")
+            else:
+                priorities_seen.add(p)
+
+        if "rule" in t and t["rule"] not in VALID_RULES:
+            errors.append(f"{prefix}: invalid rule '{t['rule']}', expected one of {VALID_RULES}")
+
+        if "category" in t and t["category"] not in VALID_CATEGORIES:
+            errors.append(f"{prefix}: invalid category '{t['category']}'")
+
+        if "subcategory" in t and t["subcategory"] not in VALID_SUBCATEGORIES:
+            # subcategory is a soft warning, not a hard error
+            pass  # accept any value — the model may use variant names
+
+    if not isinstance(data.get("skipped_count", 0), int):
+        errors.append("'skipped_count' must be an integer")
+
+    return errors
 
 
+def parse_llm_response(raw: str, system: str, user: str, verbose: bool) -> dict:
+    """
+    Parses and strictly validates the LLM response.
+    Retries the LLM call if validation fails (up to MAX_RETRIES).
+    """
+    print("  [3/4] Parsing and validating LLM response...")
+
+    for attempt in range(1, MAX_RETRIES + 1):
+        cleaned = _clean_raw(raw)
+
+        # 1. Parse JSON
+        try:
+            data = json.loads(cleaned)
+        except json.JSONDecodeError as e:
+            print(f"  [!] Invalid JSON (attempt {attempt}/{MAX_RETRIES}): {e}")
+            print(f"      First 300 chars: {cleaned[:300]}")
+            if attempt < MAX_RETRIES:
+                print(f"      Retrying LLM call in {RETRY_WAIT_SEC}s...")
+                time.sleep(RETRY_WAIT_SEC)
+                raw = call_llm_once(system, user)
+                if verbose:
+                    print(f"\n  ── Retry {attempt} raw response ──")
+                    print(raw[:2000])
+                    print("  ─────────────────────────────────\n")
+                continue
+            else:
+                print(f"\n  [!] LLM returned invalid JSON after {MAX_RETRIES} attempts. Aborting.")
+                sys.exit(1)
+
+        # 2. Validate schema
+        errors = validate_schema(data)
+        if errors:
+            print(f"  [!] Schema validation failed (attempt {attempt}/{MAX_RETRIES}):")
+            for err in errors:
+                print(f"      - {err}")
+            if attempt < MAX_RETRIES:
+                print(f"      Retrying LLM call in {RETRY_WAIT_SEC}s...")
+                time.sleep(RETRY_WAIT_SEC)
+                raw = call_llm_once(system, user)
+                if verbose:
+                    print(f"\n  ── Retry {attempt} raw response ──")
+                    print(raw[:2000])
+                    print("  ─────────────────────────────────\n")
+                continue
+            else:
+                print(f"\n  [!] LLM response failed schema validation after {MAX_RETRIES} attempts.")
+                print(f"      Validation errors: {errors}")
+                sys.exit(1)
+
+        # 3. All good — normalize and return
+        data["selected_tests"].sort(key=lambda t: t.get("priority", 999))
+        print(f"        ✓ JSON valid and schema OK ({len(data['selected_tests'])} tests selected)")
+        return data
+
+    # Should not reach here
+    sys.exit(1)
+
+
+# ══════════════════════════════════════════════════════════════
+# DETERMINISTIC SELECTION REPORT
+# Shows exactly why each test was selected, which rule applied,
+# and what changed — making results explainable and debuggable.
+# ══════════════════════════════════════════════════════════════
 def display_plan(data: dict) -> None:
     selected  = data["selected_tests"]
     skipped   = data.get("skipped_count", "?")
     diff_sum  = data.get("diff_summary", "")
     rationale = data.get("selection_rationale", "")
 
-    print()
-    print("  " + "=" * 70)
-    print(f"  PLAN DE TEST GÉNÉRÉ PAR L'IA — {HF_MODEL} (Ollama local via ngrok)")
-    print("  " + "=" * 70)
-    if diff_sum:
-        print(f"\n  Diff    : {diff_sum}")
-    if rationale:
-        print(f"  Analyse : {rationale}")
-    print(f"\n  Tests sélectionnés : {len(selected)}   |   Ignorés : {skipped}\n")
-    print(f"  {'PRIO':<5}  {'CATÉGORIE':<16}  {'SOUS-CAT':<14}  {'TEST_ID':<50}  RAISON")
-    print("  " + "─" * 130)
+    # Count per rule
+    rule_counts = {}
     for t in selected:
-        reason_short = t.get("reason", "")[:50]
-        cat          = t.get("category", "")
-        sub          = t.get("subcategory", "")
-        print(f"  {t['priority']:<5}  {cat:<16}  {sub:<14}  {t['test_id']:<50}  {reason_short}")
+        rule = t.get("rule", "?")
+        rule_counts[rule] = rule_counts.get(rule, 0) + 1
+
+    print()
+    print("  " + "=" * 80)
+    print(f"  AI TEST SELECTION REPORT — {HF_MODEL}")
+    print("  " + "=" * 80)
+    if diff_sum:
+        print(f"\n  Change    : {diff_sum}")
+    if rationale:
+        print(f"  Analysis  : {rationale}")
+
+    print(f"\n  Selected  : {len(selected)} tests   |   Skipped: {skipped}")
+    if rule_counts:
+        rule_summary = "  |  ".join(f"{rule}: {count}" for rule, count in sorted(rule_counts.items()))
+        print(f"  By rule   : {rule_summary}")
+
+    print()
+    print(f"  {'PRIO':<5}  {'RULE':<8}  {'CATEGORY':<16}  {'SUBCATEGORY':<14}  {'TEST_ID'}")
+    print(f"  {'':5}  {'':8}  {'':16}  {'':14}  {'REASON'}")
+    print("  " + "─" * 100)
+
+    for t in selected:
+        test_id  = t['test_id']
+        priority = t['priority']
+        rule     = t.get('rule', '?')
+        cat      = t.get('category', '')
+        sub      = t.get('subcategory', '')
+        reason   = t.get('reason', '')
+
+        print(f"  {priority:<5}  {rule:<8}  {cat:<16}  {sub:<14}  {test_id}")
+        print(f"  {'':5}  {'':8}  {'':16}  {'':14}  → {reason}")
+        print()
+
+    print("  " + "─" * 100)
     print()
 
 
@@ -417,13 +526,13 @@ def build_pytest_args(selected_tests: list) -> list:
             not_found.append(tid)
 
     if not_found:
-        print(f"  [!] Tests introuvables sur disque (ignorés) : {not_found}")
+        print(f"  [!] Tests not found on disk (skipped): {not_found}")
 
     return args
 
 
 def run_tests(pytest_args: list, dry_run: bool, verbose: bool) -> int:
-    print("  [4/4] Lancement des tests sélectionnés ...")
+    print("  [4/4] Running selected tests...")
     print()
 
     cmd = [sys.executable, "-m", "pytest"] + pytest_args + [
@@ -435,11 +544,11 @@ def run_tests(pytest_args: list, dry_run: bool, verbose: bool) -> int:
     if verbose:
         cmd.append("-s")
 
-    print("  Commande :", " ".join(cmd))
+    print("  Command:", " ".join(cmd))
     print()
 
     if dry_run:
-        print("  [dry-run] Aucun test lancé (--dry-run actif).")
+        print("  [dry-run] No tests launched (--dry-run active).")
         return 0
 
     result = subprocess.run(cmd, cwd=PROJECT_ROOT)
@@ -456,73 +565,77 @@ def save_selection_log(data: dict) -> None:
         "selection_rationale": data.get("selection_rationale"),
     }
     log_path.write_text(json.dumps(log, indent=2, ensure_ascii=False), encoding="utf-8")
-    print(f"  ✓ Sélection sauvegardée : ai_inputs/last_selection.json")
+    print(f"  ✓ Selection saved: ai_inputs/last_selection.json")
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Sélection et priorisation intelligente des tests via LLM."
+        description="Intelligent test selection and prioritization via LLM."
     )
     parser.add_argument("--dry-run",      action="store_true",
-                        help="Affiche le plan sans lancer pytest.")
+                        help="Display the plan without launching pytest.")
     parser.add_argument("--verbose", "-v", action="store_true",
-                        help="Affiche la réponse brute du LLM.")
+                        help="Show raw LLM response.")
     parser.add_argument("--skip-prepare", action="store_true",
-                        help="Ne pas relancer prepare_inputs.py.")
+                        help="Skip prepare_inputs.py.")
     args = parser.parse_args()
 
     print()
     print("=" * 70)
     print("  AI TEST SELECTOR — ur-simulation")
-    print(f"  Modèle : {HF_MODEL} (Ollama local via ngrok)")
+    print(f"  Model : {HF_MODEL} (Ollama local via ngrok)")
     print("=" * 70)
     print()
 
-    # 0. Régénérer les inputs
+    # 0. Regenerate inputs
     if not args.skip_prepare:
-        print("  [0/4] Régénération des inputs (prepare_inputs.py) ...")
+        print("  [0/4] Regenerating inputs (prepare_inputs.py)...")
         r = subprocess.run(
             [sys.executable, str(PROJECT_ROOT / "prepare_inputs.py")],
             cwd=PROJECT_ROOT,
         )
         if r.returncode != 0:
-            print("  [!] prepare_inputs.py a échoué.")
+            print("  [!] prepare_inputs.py failed.")
             sys.exit(1)
         print()
 
-    # 1. Charger les inputs
+    # 1. Load inputs
     inputs = load_all_inputs()
     print()
 
-    # 2. Envoyer au LLM
-    raw_response = call_llm(SYSTEM_PROMPT, build_user_prompt(inputs), args.verbose)
+    # 2. Build prompts
+    system = SYSTEM_PROMPT
+    user   = build_user_prompt(inputs)
+
+    # 3. Call LLM (with retry on bad JSON)
+    raw_response = call_llm(system, user, args.verbose)
     print()
 
-    # 3. Parser la réponse
-    selection = parse_llm_response(raw_response)
+    # 4. Parse + validate (strict, with retry)
+    selection = parse_llm_response(raw_response, system, user, args.verbose)
     print()
 
-    # 4. Afficher le plan
+    # 5. Display deterministic selection report
     display_plan(selection)
 
-    # 5. Sauvegarder
+    # 6. Save
     save_selection_log(selection)
     print()
 
-    # 6. Construire les args pytest
+    # 7. Build pytest args
     pytest_args = build_pytest_args(selection["selected_tests"])
     if not pytest_args:
-        print("  Aucun test à lancer (tous ignorés ou introuvables).")
+        print("  No tests to run (all skipped or not found on disk).")
         return 0
 
-    # 7. Lancer
+    # 8. Run
     exit_code = run_tests(pytest_args, args.dry_run, args.verbose)
 
     print()
     if exit_code == 0:
-        print("   Tous les tests sélectionnés ont passé.")
+        print("  ✓ All selected tests passed.")
     else:
-        print(f"   Certains tests ont échoué (exit code {exit_code}).")
+        print(f"  ✗ Some tests failed (exit code {exit_code}).")
     print()
 
     return exit_code
