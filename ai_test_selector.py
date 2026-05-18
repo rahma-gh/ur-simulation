@@ -16,7 +16,7 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).parent.resolve()
 AI_INPUTS    = PROJECT_ROOT / "ai_inputs"
 
-HF_MODEL = os.environ.get("AI_MODEL", "qwen2.5-coder:14b")
+HF_MODEL = "qwen3:4b"
 HF_URL   = os.environ.get("OLLAMA_NGROK_URL", "http://localhost:11434").rstrip("/") + "/api/chat"
 
 # ── LLM retry settings ───────────────────────────────────────
