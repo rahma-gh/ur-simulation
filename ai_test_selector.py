@@ -128,9 +128,8 @@ def call_llm(user_prompt):
 
     # ── Fix ngrok 403 ────────────────────────────────────────────────────────
     headers = {
-    "Content-Type": "application/json",
-    "ngrok-skip-browser-warning": "true",
-    "User-Agent": "python-requests/ollama-client",
+     "Content-Type": "application/json",
+     "User-Agent": "python-requests/ollama-client",
 }
 
     print(f"Calling LLM at {url} (model: {MODEL}) ...")
