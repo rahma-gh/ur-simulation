@@ -136,6 +136,8 @@ def call_llm(user_prompt):
     print(f"Calling LLM at {url} (model: {MODEL}) ...")
     try:
         response = requests.post(url, json=payload, headers=headers, timeout=TIMEOUT)
+        print(f"Status: {response.status_code}")
+        print(f"Response: {response.text[:1000]}")
         response.raise_for_status()
     except requests.exceptions.Timeout:
         print("ERROR: LLM request timed out.")
