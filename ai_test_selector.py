@@ -8,6 +8,7 @@ the prioritized list of tests to execute.
 import os
 import sys
 import json
+import re
 import requests
 
 # ── Paths ────────────────────────────────────────────────────────────────────
@@ -88,6 +89,25 @@ def load_input(filename):
         return f.read()
 
 
+def extract_changed_element(git_diff_text):
+    """Extract the changed element name from git_diff.txt."""
+    for line in git_diff_text.splitlines():
+        m = re.match(r"CHANGED ELEMENT\s*:\s*(\S+)", line)
+        if m:
+            return m.group(1)
+    return None
+
+
+def filter_deps(deps, changed_element):
+    """Return only the impacts relevant to the changed element."""
+    if not changed_element:
+        return deps
+    for file_deps in deps.values():
+        if changed_element in file_deps:
+            return {changed_element: file_deps[changed_element]}
+    return deps
+
+
 def build_user_prompt():
     git_diff     = load_input("git_diff.txt")
     test_history = load_input("test_history.txt")
@@ -98,11 +118,18 @@ def build_user_prompt():
     with open(DEPS_PATH) as f:
         deps = json.load(f)
 
+    # Only send the relevant part of dependencies to reduce payload size
+    changed_element = extract_changed_element(git_diff)
+    filtered_deps   = filter_deps(deps, changed_element)
+
+    print(f"  Changed element : {changed_element}")
+    print(f"  Deps sent       : {list(filtered_deps.keys())}")
+
     return f"""=== INPUT 1: GIT DIFF (what changed) ===
 {git_diff}
 
 === INPUT 2: DEPENDENCY MAP (what the change impacts) ===
-{json.dumps(deps, indent=2)}
+{json.dumps(filtered_deps, indent=2)}
 
 === INPUT 3: TEST HISTORY (all tests + sensitivity + past failures) ===
 {test_history}
@@ -141,6 +168,8 @@ def call_llm(user_prompt):
         sys.exit(1)
     except requests.exceptions.RequestException as e:
         print(f"ERROR: Groq request failed: {e}")
+        if hasattr(e, 'response') and e.response is not None:
+            print(f"Response: {e.response.text[:500]}")
         sys.exit(1)
 
     data = response.json()
@@ -149,7 +178,6 @@ def call_llm(user_prompt):
 
 def parse_and_validate(raw):
     """Extract and validate JSON from LLM response."""
-    import re
     raw = raw.strip()
     # Strip <think>...</think> blocks (Qwen3 includes reasoning by default)
     raw = re.sub(r"<think>.*?</think>", "", raw, flags=re.DOTALL).strip()
