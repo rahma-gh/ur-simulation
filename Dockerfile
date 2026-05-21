@@ -17,7 +17,7 @@ RUN wget -qO- https://cyberbotics.com/Cyberbotics.asc | apt-key add - && \
     apt-get update && apt-get install -y webots && \
     rm -rf /var/lib/apt/lists/*
 
-RUN pip3 install pytest pytest-html numpy
+RUN pip3 install pytest pytest-html pytest-json-report numpy
 
 COPY . /app
 WORKDIR /app
