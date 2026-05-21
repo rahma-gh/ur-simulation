@@ -1,187 +1,82 @@
 {
   "ure_can_grasper.c": {
     "speed": {
-      "type": "constante",
       "role": "vitesse angulaire des moteurs du bras UR, passée en argv[1]",
       "impacts": [
-        {
-          "cible": "wb_motor_set_velocity()",
-          "consequence": "vitesse de rotation du bras change — si 0.0 le bras est immobile"
-        },
-        {
-          "cible": "transition ROTATING→RELEASING (position_sensor < -2.3)",
-          "consequence": "si bras immobile, le seuil wrist -2.3 n'est jamais atteint → RELEASING jamais déclenché"
-        },
-        {
-          "cible": "transition ROTATING_BACK→WAITING (position_sensor > -0.1)",
-          "consequence": "si bras immobile, le retour en position initiale n'est jamais complété"
-        },
-        {
-          "cible": "HAUTEUR_SAISIE check (ure_supervisor.py)",
-          "consequence": "si bras trop lent ou immobile, la canette n'atteint pas HAUTEUR_SAISIE → grasped=False dans JSON"
-        },
-        {
-          "cible": "DEPLACEMENT_DEPOT check (ure_supervisor.py)",
-          "consequence": "si bras immobile, la canette n'est jamais déposée → deposited=False dans JSON"
-        },
-        {
-          "cible": "champs JSON affectés",
-          "consequence": "grasped, deposited, grasp_events, release_events, all_cans_grasped, sequence_complete, wrist_reached_target, max_can_heights, duration"
-        },
-        {
-          "cible": "tests lisant le code source .c",
-          "consequence": "tout test cherchant 'speed = 1.0' dans le code échouera si speed est changé à 0.0"
-        }
+        "wb_motor_set_velocity() — si 0.0 le bras est immobile",
+        "transition ROTATING→RELEASING : seuil wrist -2.3 jamais atteint si bras immobile",
+        "transition ROTATING_BACK→WAITING : retour position initiale jamais complété si bras immobile",
+        "grasped dans simulation_results.json peut devenir False",
+        "deposited dans simulation_results.json peut devenir False",
+        "grasp_events, release_events, all_cans_grasped, sequence_complete, wrist_reached_target, max_can_heights, duration dans le JSON",
+        "tests lisant le code source .c : tout test cherchant 'speed = 1.0' échouera"
       ]
     },
     "TIME_STEP": {
-      "type": "constante",
       "role": "pas de simulation en millisecondes (#define 32)",
       "impacts": [
-        {
-          "cible": "wb_robot_step(TIME_STEP)",
-          "consequence": "cadence de la boucle de contrôle change"
-        },
-        {
-          "cible": "wb_distance_sensor_enable() et wb_position_sensor_enable()",
-          "consequence": "fréquence de lecture des capteurs change"
-        },
-        {
-          "cible": "durée réelle des phases (GRASPING, ROTATING, etc.)",
-          "consequence": "le nombre de steps pour chaque phase change → durées mesurées en secondes changent"
-        },
-        {
-          "cible": "champs JSON affectés",
-          "consequence": "duration, phase_durations"
-        },
-        {
-          "cible": "tests lisant le code source .c",
-          "consequence": "tout test cherchant TIME_STEP ou sa valeur 32 dans le code est affecté"
-        }
+        "wb_robot_step() — cadence de la boucle de contrôle change",
+        "wb_distance_sensor_enable() et wb_position_sensor_enable() — fréquence de lecture des capteurs change",
+        "durée réelle des phases GRASPING, ROTATING, RELEASING change",
+        "duration, phase_durations dans le JSON",
+        "tests lisant le code source .c : tout test cherchant TIME_STEP ou la valeur 32 échouera"
       ]
     },
     "target_positions": {
-      "type": "constante",
       "role": "positions angulaires cibles des 4 joints du bras en GRASPING [-1.88, -2.14, -2.38, -1.51]",
       "impacts": [
-        {
-          "cible": "wb_motor_set_position() en état GRASPING",
-          "consequence": "lieu de dépose de la canette change"
-        },
-        {
-          "cible": "position_sensor wrist_1_joint",
-          "consequence": "si target_positions changent, la valeur du wrist sensor en rotation change → seuil -2.3 peut ne plus être atteint"
-        },
-        {
-          "cible": "champs JSON affectés",
-          "consequence": "wrist_reached_target, release_events, deposited, sequence_complete"
-        },
-        {
-          "cible": "tests lisant le code source .c",
-          "consequence": "tout test cherchant les valeurs -1.88, -2.14, -2.38, -1.51 dans le code est affecté"
-        }
+        "wb_motor_set_position() en état GRASPING — lieu de dépose du bras change",
+        "wrist_1_joint_sensor — seuil -2.3 peut ne plus être atteint",
+        "wrist_reached_target, release_events, deposited, sequence_complete dans le JSON",
+        "tests lisant le code source .c : tout test cherchant -1.88, -2.14, -2.38, -1.51 échouera"
       ]
     },
     "distance_threshold": {
-      "type": "constante",
       "role": "seuil de détection canette par le capteur distance (< 500)",
       "impacts": [
-        {
-          "cible": "transition WAITING→GRASPING",
-          "consequence": "si seuil trop bas, la canette n'est jamais détectée → GRASPING jamais déclenché"
-        },
-        {
-          "cible": "champs JSON affectés",
-          "consequence": "distance_sensor_triggered, grasped, grasp_events, all_cans_grasped, sequence_complete"
-        },
-        {
-          "cible": "tests lisant le code source .c",
-          "consequence": "tout test cherchant la valeur 500 dans le code est affecté"
-        }
+        "transition WAITING→GRASPING — si seuil trop bas, canette jamais détectée",
+        "distance_sensor_triggered, grasped, grasp_events, all_cans_grasped, sequence_complete dans le JSON",
+        "tests lisant le code source .c : tout test cherchant la valeur 500 échouera"
       ]
     },
     "gripper_position": {
-      "type": "constante",
       "role": "position de fermeture des doigts du gripper (0.85 rad)",
       "impacts": [
-        {
-          "cible": "wb_motor_set_position() des hand_motors en GRASPING",
-          "consequence": "force de saisie change — si trop faible la canette peut tomber"
-        },
-        {
-          "cible": "champs JSON affectés",
-          "consequence": "grasped, grasp_events, all_cans_grasped"
-        },
-        {
-          "cible": "tests lisant le code source .c",
-          "consequence": "tout test cherchant la valeur 0.85 dans le code est affecté"
-        }
+        "wb_motor_set_position() des hand_motors en GRASPING — force de saisie change",
+        "grasped, grasp_events, all_cans_grasped dans le JSON",
+        "tests lisant le code source .c : tout test cherchant la valeur 0.85 échouera"
       ]
     },
     "wrist_threshold": {
-      "type": "constante",
       "role": "seuils de position du capteur wrist_1_joint (-2.3 pour RELEASING, -0.1 pour WAITING)",
       "impacts": [
-        {
-          "cible": "transition ROTATING→RELEASING (< -2.3)",
-          "consequence": "déclenchement de la phase releasing change"
-        },
-        {
-          "cible": "transition ROTATING_BACK→WAITING (> -0.1)",
-          "consequence": "retour en position d'attente change"
-        },
-        {
-          "cible": "champs JSON affectés",
-          "consequence": "wrist_reached_target, release_events, deposited, sequence_complete, all_cans_grasped"
-        },
-        {
-          "cible": "tests lisant le code source .c",
-          "consequence": "tout test cherchant les valeurs -2.3 ou -0.1 dans le code est affecté"
-        }
+        "transition ROTATING→RELEASING — déclenchement de la phase releasing change",
+        "transition ROTATING_BACK→WAITING — retour en position d'attente change",
+        "wrist_reached_target, release_events, deposited, sequence_complete, all_cans_grasped dans le JSON",
+        "tests lisant le code source .c : tout test cherchant -2.3 ou -0.1 échouera"
       ]
     }
   },
   "ure_supervisor.py": {
     "HAUTEUR_SAISIE": {
-      "type": "constante",
       "role": "seuil de hauteur pour valider qu'une canette est saisie (0.80 m)",
       "impacts": [
-        {
-          "cible": "condition grasped[i] = True",
-          "consequence": "si seuil trop élevé, aucune canette ne sera jamais considérée comme saisie"
-        },
-        {
-          "cible": "champs JSON affectés",
-          "consequence": "grasped, grasp_events, all_cans_grasped, sequence_complete, max_can_heights"
-        }
+        "condition grasped[i] = True — si seuil trop élevé, aucune canette jamais considérée saisie",
+        "grasped, grasp_events, all_cans_grasped, sequence_complete, max_can_heights dans le JSON"
       ]
     },
     "DEPLACEMENT_DEPOT": {
-      "type": "constante",
       "role": "déplacement horizontal minimal pour valider qu'une canette est déposée (0.30 m)",
       "impacts": [
-        {
-          "cible": "condition deposited[i] = True",
-          "consequence": "si seuil trop élevé (ex: 99.0), aucune canette ne sera jamais considérée comme déposée"
-        },
-        {
-          "cible": "champs JSON affectés",
-          "consequence": "deposited, release_events, sequence_complete, all_cans_grasped"
-        }
+        "condition deposited[i] = True — si seuil trop élevé (ex: 99.0), aucune canette jamais déposée",
+        "deposited, release_events, sequence_complete, all_cans_grasped dans le JSON"
       ]
     },
     "STEPS_STABLE": {
-      "type": "constante",
       "role": "nombre de steps stables avant de valider une position (30 steps)",
       "impacts": [
-        {
-          "cible": "délai de validation des positions",
-          "consequence": "si trop grand, la validation est retardée → durée de simulation augmente"
-        },
-        {
-          "cible": "champs JSON affectés",
-          "consequence": "duration, phase_durations"
-        }
+        "délai de validation des positions — si trop grand, durée de simulation augmente",
+        "duration, phase_durations dans le JSON"
       ]
     }
   }
