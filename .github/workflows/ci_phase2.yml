@@ -1,4 +1,4 @@
-name: CI Phase 2 — AI Pipeline (Groq + Qwen3-32b)
+name: CI Phase 2 — AI Pipeline (Groq + Llama3.3-70b)
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 jobs:
 
   ai-test-pipeline:
-    name: "AI Pipeline — Selection & Prioritization by Qwen3-32b (Groq)"
+    name: "AI Pipeline — Selection & Prioritization by Llama3.3-70b (Groq)"
     runs-on: ubuntu-22.04
 
     steps:
@@ -106,10 +106,13 @@ jobs:
       # ── STEP 7 : Run simulation + selected tests ───────────────────────────
       - name: "Run Webots simulation then selected tests"
         run: |
+          # Read selected paths and pass them into Docker via env variable
           SELECTED_PATHS=$(cat ai_inputs/selected_test_paths.txt)
           echo "Tests to run: $SELECTED_PATHS"
 
-          docker run --name ur-test-ai ur-simulation bash -c "
+          docker run --name ur-test-ai \
+            -e SELECTED_PATHS="$SELECTED_PATHS" \
+            ur-simulation bash -c "
             export DISPLAY=:99
             Xvfb :99 -screen 0 1280x1024x24 -ac +extension GLX +render -noreset &
             sleep 3
@@ -137,6 +140,7 @@ jobs:
             kill \$WEBOTS_PID 2>/dev/null || true
             sleep 2
 
+            echo \"Running selected tests: \$SELECTED_PATHS\"
             pytest \$SELECTED_PATHS -v \
               --html=/app/reports/report_ai.html \
               --self-contained-html \
@@ -152,7 +156,7 @@ jobs:
           mkdir -p reports_ai
           docker cp ur-test-ai:/app/reports/. reports_ai/
 
-      # ── STEP 11 : Upload artifacts ────────────────────────────────────────
+      # ── STEP 9 : Upload artifacts ──────────────────────────────────────────
       - name: "Upload — LLM inputs"
         uses: actions/upload-artifact@v4
         if: always()
