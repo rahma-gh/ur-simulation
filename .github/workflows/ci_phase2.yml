@@ -1,4 +1,4 @@
-name: CI Phase 2 — AI Pipeline (Ollama + Qwen2.5-Coder)
+name: CI Phase 2 — AI Pipeline (Groq + Qwen3-32b)
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 jobs:
 
   ai-test-pipeline:
-    name: "AI Pipeline — Selection & Prioritization by Qwen2.5-Coder:7b"
+    name: "AI Pipeline — Selection & Prioritization by Qwen3-32b (Groq)"
     runs-on: ubuntu-22.04
 
     steps:
@@ -16,7 +16,7 @@ jobs:
       - name: "Checkout code (full history for git diff)"
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0        # required for git diff HEAD~1
+          fetch-depth: 0
 
       # ── STEP 2 : Python setup ─────────────────────────────────────────────
       - name: "Setup Python 3.10"
@@ -46,10 +46,10 @@ jobs:
           echo "  File sizes:"
           wc -l ai_inputs/git_diff.txt ai_inputs/test_history.txt ai_inputs/dependencies.json
 
-      # ── STEP 4 : Call LLM via ngrok ───────────────────────────────────────
-      - name: "Call LLM — Selection & Prioritization (Ollama via cloudflare)"
+      # ── STEP 4 : Call Groq LLM ────────────────────────────────────────────
+      - name: "Call LLM — Selection & Prioritization (Groq API)"
         env:
-          NGROK_URL: ${{ secrets.NGROK_URL }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: python ai_test_selector.py
 
       - name: "Display LLM selection result"
@@ -137,7 +137,7 @@ jobs:
             kill \$WEBOTS_PID 2>/dev/null || true
             sleep 2
 
-            pytest $SELECTED_PATHS -v \
+            pytest \$SELECTED_PATHS -v \
               --html=/app/reports/report_ai.html \
               --self-contained-html \
               --json-report \
@@ -151,82 +151,6 @@ jobs:
         run: |
           mkdir -p reports_ai
           docker cp ur-test-ai:/app/reports/. reports_ai/
-
-      # ── STEP 9 : Enrich store with new results ────────────────────────────
-      # DISABLED DURING TESTING — uncomment when ready
-      # - name: "Enrich test_history_store.json with new results"
-      #   if: always()
-      #   run: |
-      #     python3 - <<'PYEOF'
-      #     import json, re, os, subprocess
-      #     def git(cmd):
-      #         return subprocess.run(cmd, shell=True, capture_output=True, text=True).stdout.strip()
-      #     commit_msg    = git("git log -1 --format=%s")
-      #     diff_text     = git("git show HEAD")
-      #     def extract_changed(diff):
-      #         patterns = [
-      #             r'\+\s*double\s+(\w+)\s*=\s*([\d.\-]+)',
-      #             r'\+\s*#define\s+(\w+)\s+([\d.\-]+)',
-      #             r'\+\s*([A-Z_]{3,})\s*=\s*([\d.\-]+)',
-      #         ]
-      #         for pat in patterns:
-      #             m = re.search(pat, diff)
-      #             if m:
-      #                 return m.group(1), m.group(2)
-      #         return "unknown", "unknown"
-      #     changed_element, value_at_change = extract_changed(diff_text)
-      #     results_path = "reports_ai/test_results.json"
-      #     passed, failed = [], []
-      #     if os.path.exists(results_path):
-      #         with open(results_path) as f:
-      #             data = json.load(f)
-      #         for t in data.get("tests", []):
-      #             name = t.get("nodeid", "").split("::")[-1]
-      #             if t.get("outcome") == "passed":
-      #                 passed.append(name)
-      #             else:
-      #                 failed.append(name)
-      #     store_path = "ai_inputs/test_history_store.json"
-      #     store = {}
-      #     if os.path.exists(store_path):
-      #         with open(store_path, encoding="utf-8-sig") as f:
-      #             content = f.read().strip()
-      #             store = json.loads(content) if content else {}
-      #     new_entries = 0
-      #     for name in passed + failed:
-      #         test_id = name.strip()
-      #         result  = "PASSED" if name in passed else "FAILED"
-      #         if test_id not in store:
-      #             store[test_id] = {"test_id": test_id, "history": []}
-      #         already = any(
-      #             h.get("commit_message") == commit_msg and h.get("result") == result
-      #             for h in store[test_id]["history"]
-      #         )
-      #         if not already:
-      #             store[test_id]["history"].append({
-      #                 "commit_message":  commit_msg,
-      #                 "changed_element": changed_element,
-      #                 "value_at_change": value_at_change,
-      #                 "result":          result,
-      #             })
-      #             new_entries += 1
-      #     with open(store_path, "w", encoding="utf-8") as f:
-      #         json.dump(store, f, indent=2, ensure_ascii=False)
-      #     print(f"Store updated: {len(store)} unique tests, +{new_entries} new entries")
-      #     PYEOF
-
-      # ── STEP 10 : Commit updated store ────────────────────────────────────
-      # DISABLED DURING TESTING — uncomment when ready
-      # - name: "Commit updated test_history_store.json"
-      #   if: always()
-      #   run: |
-      #     git config user.name  "github-actions[bot]"
-      #     git config user.email "github-actions[bot]@users.noreply.github.com"
-      #     git pull --rebase || true
-      #     git add ai_inputs/test_history_store.json
-      #     git diff --staged --quiet \
-      #       && echo "No new store entries to commit." \
-      #       || (git commit -m "ci: update test history store [skip ci]" && git push)
 
       # ── STEP 11 : Upload artifacts ────────────────────────────────────────
       - name: "Upload — LLM inputs"

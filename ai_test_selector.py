@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-
+"""
+ai_test_selector.py
+Sends the 3 inputs to the LLM (Groq API) and returns
+the prioritized list of tests to execute.
+"""
 
 import os
 import sys
@@ -12,9 +16,10 @@ AI_INPUTS    = os.path.join(ROOT, "ai_inputs")
 DEPS_PATH    = os.path.join(ROOT, "ai_inputs", "dependencies.json")
 
 # ── LLM Config ───────────────────────────────────────────────────────────────
-OLLAMA_URL   = os.environ.get("NGROK_URL", "http://localhost:11434")
-MODEL        = "qwen2.5-coder:3b"
-TIMEOUT      = 180  # seconds — CPU inference is slow
+GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
+GROQ_URL     = "https://api.groq.com/openai/v1/chat/completions"
+MODEL        = "qwen/qwen3-32b"
+TIMEOUT      = 60
 
 # ── Priority order for categories ────────────────────────────────────────────
 CATEGORY_PRIORITY = {
@@ -87,7 +92,6 @@ def build_user_prompt():
     git_diff     = load_input("git_diff.txt")
     test_history = load_input("test_history.txt")
 
-    # Load dependencies
     if not os.path.exists(DEPS_PATH):
         print(f"ERROR: {DEPS_PATH} not found.")
         sys.exit(1)
@@ -108,46 +112,47 @@ Now apply the selection and prioritization rules. Return ONLY the JSON object.
 
 
 def call_llm(user_prompt):
-    url     = f"{OLLAMA_URL}/api/chat"
+    if not GROQ_API_KEY:
+        print("ERROR: GROQ_API_KEY environment variable is not set.")
+        sys.exit(1)
+
     payload = {
-        "model":  MODEL,
-        "stream": False,
-        "options": {
-            "temperature": 0.1,
-            "num_ctx":     8192,
-        },
+        "model": MODEL,
         "messages": [
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user",   "content": user_prompt},
         ],
+        "temperature": 0.1,
+        "max_tokens":  2000,
     }
 
-    # ── Fix ngrok 403 ────────────────────────────────────────────────────────
     headers = {
-     "Content-Type": "application/json",
-     "User-Agent": "python-requests/ollama-client",
-}
+        "Content-Type":  "application/json",
+        "Authorization": f"Bearer {GROQ_API_KEY}",
+    }
 
-    print(f"Calling LLM at {url} (model: {MODEL}) ...")
+    print(f"Calling Groq API (model: {MODEL}) ...")
     try:
-        response = requests.post(url, json=payload, headers=headers, timeout=TIMEOUT)
+        response = requests.post(GROQ_URL, json=payload, headers=headers, timeout=TIMEOUT)
         print(f"Status: {response.status_code}")
-        print(f"Response: {response.text[:1000]}")
         response.raise_for_status()
     except requests.exceptions.Timeout:
-        print("ERROR: LLM request timed out.")
+        print("ERROR: Groq request timed out.")
         sys.exit(1)
     except requests.exceptions.RequestException as e:
-        print(f"ERROR: LLM request failed: {e}")
+        print(f"ERROR: Groq request failed: {e}")
         sys.exit(1)
 
     data = response.json()
-    return data["message"]["content"]
+    return data["choices"][0]["message"]["content"]
 
 
 def parse_and_validate(raw):
     """Extract and validate JSON from LLM response."""
+    import re
     raw = raw.strip()
+    # Strip <think>...</think> blocks (Qwen3 includes reasoning by default)
+    raw = re.sub(r"<think>.*?</think>", "", raw, flags=re.DOTALL).strip()
     if raw.startswith("```"):
         raw = "\n".join(raw.split("\n")[1:])
     if raw.endswith("```"):
@@ -185,7 +190,6 @@ def parse_and_validate(raw):
 
 
 def save_output(result):
-    """Save selected tests to ai_inputs/selected_tests.json and a simple list."""
     out_json = os.path.join(AI_INPUTS, "selected_tests.json")
     out_list = os.path.join(AI_INPUTS, "selected_tests.txt")
 
