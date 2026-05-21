@@ -25,7 +25,7 @@ jobs:
           python-version: "3.10"
 
       - name: "Install Python dependencies"
-        run: pip install pytest pytest-html requests
+        run: pip install pytest pytest-html requests pytest-json-report
 
       # ── STEP 3 : Generate LLM inputs ──────────────────────────────────────
       - name: "Generate git_diff.txt and test_history.txt"
@@ -47,7 +47,7 @@ jobs:
           wc -l ai_inputs/git_diff.txt ai_inputs/test_history.txt ai_inputs/dependencies.json
 
       # ── STEP 4 : Call LLM via ngrok ───────────────────────────────────────
-      - name: "Call LLM — Selection & Prioritization (Ollama via ngrok)"
+      - name: "Call LLM — Selection & Prioritization (Ollama via cloudflare)"
         env:
           NGROK_URL: ${{ secrets.NGROK_URL }}
         run: python ai_test_selector.py
