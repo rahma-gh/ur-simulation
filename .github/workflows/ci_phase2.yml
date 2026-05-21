@@ -1,4 +1,4 @@
-name: CI Phase 2 — Pipeline IA (Ollama local — Qwen3)
+name: CI Phase 2 — AI Pipeline (Ollama + Qwen2.5-Coder)
 
 on:
   push:
@@ -6,79 +6,81 @@ on:
 
 jobs:
 
-  tests-ia:
-    name: "Pipeline IA — Sélection et Priorisation par Qwen3 4B (Ollama)"
+  ai-test-pipeline:
+    name: "AI Pipeline — Selection & Prioritization by Qwen2.5-Coder:7b"
     runs-on: ubuntu-22.04
 
     steps:
-      - name: Checkout code
+
+      # ── STEP 1 : Checkout ─────────────────────────────────────────────────
+      - name: "Checkout code (full history for git diff)"
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0
+          fetch-depth: 0        # required for git diff HEAD~1
 
-      - name: Setup Python 3.10
+      # ── STEP 2 : Python setup ─────────────────────────────────────────────
+      - name: "Setup Python 3.10"
         uses: actions/setup-python@v4
         with:
           python-version: "3.10"
 
-      - name: Install dependencies
-        run: pip install pytest pytest-html
+      - name: "Install Python dependencies"
+        run: pip install pytest pytest-html requests
 
-      # ── Étape 1 : Générer les 2 fichiers d'entrée pour le LLM ────────────
-      - name: "Générer les fichiers ai_inputs/ (prepare_inputs.py)"
+      # ── STEP 3 : Generate LLM inputs ──────────────────────────────────────
+      - name: "Generate git_diff.txt and test_history.txt"
         run: python prepare_inputs.py
 
-      # ── Aperçu des fichiers avant envoi au LLM ───────────────────────────
-      - name: "Aperçu des fichiers envoyés au LLM"
+      - name: "Preview inputs before sending to LLM"
         run: |
-          echo "════════════════════════════════════════════════════════════"
-          echo "  FICHIER 1 — git_diff.txt"
-          echo "════════════════════════════════════════════════════════════"
+          echo "════════════════════════════════════════════════"
+          echo "  INPUT 1 — git_diff.txt"
+          echo "════════════════════════════════════════════════"
           cat ai_inputs/git_diff.txt
           echo ""
-          echo "════════════════════════════════════════════════════════════"
-          echo "  FICHIER 2 — tests_history.txt"
-          echo "════════════════════════════════════════════════════════════"
-          cat ai_inputs/tests_history.txt
+          echo "════════════════════════════════════════════════"
+          echo "  INPUT 3 — test_history.txt (first 20 lines)"
+          echo "════════════════════════════════════════════════"
+          head -20 ai_inputs/test_history.txt
           echo ""
-          echo "════════════════════════════════════════════════════════════"
-          echo "  TAILLES DES FICHIERS"
-          echo "════════════════════════════════════════════════════════════"
-          wc -c ai_inputs/git_diff.txt ai_inputs/tests_history.txt
+          echo "  File sizes:"
+          wc -l ai_inputs/git_diff.txt ai_inputs/test_history.txt ai_inputs/dependencies.json
 
-      # ── Étape 2 : Sélection et priorisation par le LLM ───────────────────
-      - name: "Sélection et priorisation par Qwen3 4B (Ollama via ngrok)"
+      # ── STEP 4 : Call LLM via ngrok ───────────────────────────────────────
+      - name: "Call LLM — Selection & Prioritization (Ollama via ngrok)"
         env:
-          OLLAMA_NGROK_URL: ${{ secrets.OLLAMA_NGROK_URL }}
-        run: python ai_test_selector.py --skip-prepare --dry-run --verbose
+          NGROK_URL: ${{ secrets.NGROK_URL }}
+        run: python ai_test_selector.py
 
-      # ── Afficher la sélection du LLM ──────────────────────────────────────
-      - name: "Sélection retournée par le LLM"
+      - name: "Display LLM selection result"
         run: |
-          python3 -c "
+          python3 - <<'PYEOF'
           import json
-          with open('ai_inputs/last_selection.json') as f:
-              s = json.load(f)
-          print(f\"Modele    : {s['model']}\")
-          print(f\"Diff      : {s.get('diff_summary', '')}\")
-          print(f\"Selection : {len(s['selected'])} tests choisis, {s['skipped']} ignores\n\")
-          for t in s['selected']:
-              print(f\"  [{t['priority']:>2}] {t['test_id']:<50}  {t.get('reason','')[:60]}\")
-          "
+          with open("ai_inputs/selected_tests.json") as f:
+              result = json.load(f)
+          print(f"Changed element  : {result.get('changed_element', '?')}")
+          print(f"Reasoning        : {result.get('reasoning_summary', '?')}")
+          print(f"Total selected   : {result['total_selected']} tests\n")
+          print(f"{'#':<4} {'TEST_ID':<55} {'CATEGORY':<15} REASON")
+          print("-" * 100)
+          for t in result["selected_tests"]:
+              print(f"{t['priority']:<4} {t['test_id']:<55} {t['category']:<15} {t.get('reason','')}")
+          PYEOF
 
-      # ── Étape 3 : Construire la liste des chemins pytest ──────────────────
-      - name: "Préparer les chemins des tests sélectionnés"
+      # ── STEP 5 : Resolve test file paths ──────────────────────────────────
+      - name: "Resolve selected test file paths"
         run: |
-          python3 - <<'EOF'
+          python3 - <<'PYEOF'
           import json
           from pathlib import Path
 
-          with open("ai_inputs/last_selection.json") as f:
-              sel = json.load(f)
+          with open("ai_inputs/selected_tests.json") as f:
+              result = json.load(f)
 
           test_dir = Path("tests")
           paths, not_found = [], []
-          for entry in sel["selected"]:
+
+          for entry in result["selected_tests"]:
               tid     = entry["test_id"]
               matches = list(test_dir.rglob(f"{tid}.py"))
               if matches:
@@ -87,188 +89,160 @@ jobs:
                   not_found.append(tid)
 
           if not_found:
-              print(f"Tests introuvables : {not_found}")
+              print(f"WARNING — Tests not found: {not_found}")
 
           with open("ai_inputs/selected_test_paths.txt", "w") as f:
               f.write(" ".join(paths))
 
-          print(f"{len(paths)} tests à lancer :")
+          print(f"{len(paths)} test paths resolved:")
           for p in paths:
               print(f"  {p}")
-          EOF
+          PYEOF
 
-      # ── Étape 4 : Build Docker + Exécution des tests sélectionnés ─────────
-      - name: "Build image Docker"
+      # ── STEP 6 : Build Docker image ───────────────────────────────────────
+      - name: "Build Docker image (Webots simulation)"
         run: docker build -t ur-simulation .
 
-      - name: "Lancer les tests sélectionnés dans Docker/Webots"
+      # ── STEP 7 : Run simulation + selected tests ───────────────────────────
+      - name: "Run Webots simulation then selected tests"
         run: |
           SELECTED_PATHS=$(cat ai_inputs/selected_test_paths.txt)
-          echo "Tests à lancer : $SELECTED_PATHS"
-          docker run --name ur-test-ia ur-simulation bash -c "
+          echo "Tests to run: $SELECTED_PATHS"
+
+          docker run --name ur-test-ai ur-simulation bash -c "
             export DISPLAY=:99
             Xvfb :99 -screen 0 1280x1024x24 -ac +extension GLX +render -noreset &
             sleep 3
+
             webots --mode=fast --batch --no-rendering worlds/ure.wbt \
-                1>/app/reports/webots_stdout_ia.log \
-                2>/app/reports/webots_stderr_ia.log &
+                1>/app/reports/webots_stdout.log \
+                2>/app/reports/webots_stderr.log &
             WEBOTS_PID=\$!
+
+            echo 'Waiting for simulation to complete...'
             WAITED=0
             while [ \$WAITED -lt 270 ]; do
-              sleep 5; WAITED=\$((WAITED + 5))
+              sleep 5
+              WAITED=\$((WAITED + 5))
               if [ -f /app/reports/simulation_results.json ]; then
-                DONE=\$(python3 -c \"import json; d=json.load(open('/app/reports/simulation_results.json')); print(d.get('sequence_complete',False))\" 2>/dev/null)
+                DONE=\$(python3 -c \"import json; d=json.load(open('/app/reports/simulation_results.json')); print(d.get('sequence_complete', False))\" 2>/dev/null)
                 echo \"[\${WAITED}s] sequence_complete=\${DONE}\"
                 [ \"\$DONE\" = \"True\" ] && break
               else
-                echo \"[\${WAITED}s] simulation_results.json pas encore créé...\"
+                echo \"[\${WAITED}s] simulation_results.json not yet created...\"
               fi
               kill -0 \$WEBOTS_PID 2>/dev/null || break
             done
+
             kill \$WEBOTS_PID 2>/dev/null || true
             sleep 2
+
             pytest $SELECTED_PATHS -v \
-              --html=/app/reports/report_ia.html \
-              --self-contained-html || true
+              --html=/app/reports/report_ai.html \
+              --self-contained-html \
+              --json-report \
+              --json-report-file=/app/reports/test_results.json || true
           "
         continue-on-error: true
 
-      - name: "Récupérer les rapports depuis Docker"
+      # ── STEP 8 : Collect reports from Docker ──────────────────────────────
+      - name: "Collect reports from Docker container"
         if: always()
-        run: docker cp ur-test-ia:/app/reports/. reports_ia/
+        run: |
+          mkdir -p reports_ai
+          docker cp ur-test-ai:/app/reports/. reports_ai/
 
-      # ── Étape 5 : Enrichir le store avec les résultats IA ─────────────────
-      # - name: "Enrichir le store avec les résultats des tests IA"
-      # if: always()
-      # run: |
-      # python3 - <<'EOF'
-      # import json, re, os, subprocess
+      # ── STEP 9 : Enrich store with new results ────────────────────────────
+      # DISABLED DURING TESTING — uncomment when ready
+      # - name: "Enrich test_history_store.json with new results"
+      #   if: always()
+      #   run: |
+      #     python3 - <<'PYEOF'
+      #     import json, re, os, subprocess
+      #     def git(cmd):
+      #         return subprocess.run(cmd, shell=True, capture_output=True, text=True).stdout.strip()
+      #     commit_msg    = git("git log -1 --format=%s")
+      #     diff_text     = git("git show HEAD")
+      #     def extract_changed(diff):
+      #         patterns = [
+      #             r'\+\s*double\s+(\w+)\s*=\s*([\d.\-]+)',
+      #             r'\+\s*#define\s+(\w+)\s+([\d.\-]+)',
+      #             r'\+\s*([A-Z_]{3,})\s*=\s*([\d.\-]+)',
+      #         ]
+      #         for pat in patterns:
+      #             m = re.search(pat, diff)
+      #             if m:
+      #                 return m.group(1), m.group(2)
+      #         return "unknown", "unknown"
+      #     changed_element, value_at_change = extract_changed(diff_text)
+      #     results_path = "reports_ai/test_results.json"
+      #     passed, failed = [], []
+      #     if os.path.exists(results_path):
+      #         with open(results_path) as f:
+      #             data = json.load(f)
+      #         for t in data.get("tests", []):
+      #             name = t.get("nodeid", "").split("::")[-1]
+      #             if t.get("outcome") == "passed":
+      #                 passed.append(name)
+      #             else:
+      #                 failed.append(name)
+      #     store_path = "ai_inputs/test_history_store.json"
+      #     store = {}
+      #     if os.path.exists(store_path):
+      #         with open(store_path, encoding="utf-8-sig") as f:
+      #             content = f.read().strip()
+      #             store = json.loads(content) if content else {}
+      #     new_entries = 0
+      #     for name in passed + failed:
+      #         test_id = name.strip()
+      #         result  = "PASSED" if name in passed else "FAILED"
+      #         if test_id not in store:
+      #             store[test_id] = {"test_id": test_id, "history": []}
+      #         already = any(
+      #             h.get("commit_message") == commit_msg and h.get("result") == result
+      #             for h in store[test_id]["history"]
+      #         )
+      #         if not already:
+      #             store[test_id]["history"].append({
+      #                 "commit_message":  commit_msg,
+      #                 "changed_element": changed_element,
+      #                 "value_at_change": value_at_change,
+      #                 "result":          result,
+      #             })
+      #             new_entries += 1
+      #     with open(store_path, "w", encoding="utf-8") as f:
+      #         json.dump(store, f, indent=2, ensure_ascii=False)
+      #     print(f"Store updated: {len(store)} unique tests, +{new_entries} new entries")
+      #     PYEOF
 
-      # def git(cmd):
-      # return subprocess.run(cmd, shell=True, capture_output=True, text=True).stdout.strip()
+      # ── STEP 10 : Commit updated store ────────────────────────────────────
+      # DISABLED DURING TESTING — uncomment when ready
+      # - name: "Commit updated test_history_store.json"
+      #   if: always()
+      #   run: |
+      #     git config user.name  "github-actions[bot]"
+      #     git config user.email "github-actions[bot]@users.noreply.github.com"
+      #     git pull --rebase || true
+      #     git add ai_inputs/test_history_store.json
+      #     git diff --staged --quiet \
+      #       && echo "No new store entries to commit." \
+      #       || (git commit -m "ci: update test history store [skip ci]" && git push)
 
-      # commit_msg    = git("git log -1 --format=%s")
-      # diff_text     = git("git show HEAD")
-
-          # Extraire fichiers source modifiés uniquement (controllers/)
-      # all_changed   = git("git diff-tree --no-commit-id -r --name-only HEAD").splitlines()
-      # if not all_changed:
-      # all_changed = git("git diff --name-only HEAD~1 HEAD").splitlines()
-      # source_files_changed = [
-      # f for f in all_changed
-      # if 'controllers/' in f and (f.endswith('.c') or f.endswith('.py'))
-      # ]
-
-          # Extraire l'élément changé et sa valeur
-      # def extract_changed_element(diff_text):
-      # patterns = [
-      # (r'\+\s*double\s+(\w+)\s*=\s*([\d.]+)',  lambda m: (m.group(1), m.group(2))),
-      # (r'\+\s*#define\s+(\w+)\s+([\d.]+)',      lambda m: (m.group(1), m.group(2))),
-      # (r'\+\s*([A-Z_]{3,})\s*=\s*([\d.]+)',     lambda m: (m.group(1), m.group(2))),
-      # (r'\+\s*(target_positions)\s*\[\]',        lambda m: (m.group(1), 'modified')),
-      # ]
-      # for pattern, extractor in patterns:
-      # m = re.search(pattern, diff_text)
-      # if m:
-      # return extractor(m)
-      # return ('unknown', 'unknown')
-
-      # changed_element, value_at_change = extract_changed_element(diff_text)
-
-          # Lire les résultats depuis test_results.json
-      # passed, failed, errors = [], [], []
-      # json_path = "reports_ia/test_results.json"
-      # if os.path.exists(json_path):
-      # with open(json_path) as f:
-      # data = json.load(f)
-      # passed = data.get("passed_tests", [])
-      # failed = data.get("failed_tests", [])
-      # print(f"Résultats lus : {len(passed)} passed, {len(failed)} failed")
-      # else:
-      # print(f"ATTENTION : test_results.json absent")
-      # print(f"Contenu reports_ia/ : {os.listdir('reports_ia') if os.path.exists('reports_ia') else 'ABSENT'}")
-
-      # def normalize(name):
-      # if "::" in name: name = name.split("::")[-1]
-      # m = re.search(r'(test_\w+)', name)
-      # return m.group(1) if m else name.strip()
-
-          # Lire la priorité attribuée par le LLM
-      # with open("ai_inputs/last_selection.json") as f:
-      # sel = json.load(f)
-      # priority_map = {t["test_id"]: t["priority"] for t in sel["selected"]}
-
-          # Charger le store existant
-      # store_path = "ai_inputs/test_history_store.json"
-      # store = {}
-      # if os.path.exists(store_path):
-      # try:
-      # with open(store_path, encoding="utf-8-sig") as f:
-      # content_store = f.read().strip()
-      # store = json.loads(content_store) if content_store else {}
-      # except Exception as e:
-      # print(f"Store illisible ({e}) — store vide")
-      # store = {}
-
-          # Ajouter les résultats avec la nouvelle structure enrichie
-      # new_entries = 0
-      # for name in passed + failed + errors:
-      # test_id = normalize(name)
-      # result  = "PASSED" if name in passed else ("FAILED" if name in failed else "ERROR")
-
-      # if test_id not in store:
-      # store[test_id] = {"test_id": test_id, "history": []}
-
-      # already = any(
-      # h.get("commit_message") == commit_msg and h.get("result") == result
-      # for h in store[test_id]["history"]
-      # )
-      # if not already:
-                  # Nouvelle structure enrichie :
-                  # - source_files_changed : seulement les fichiers controllers/
-                  # - changed_element      : la constante modifiée
-                  # - value_at_change      : la nouvelle valeur
-      # store[test_id]["history"].append({
-      # "commit_message":      commit_msg,
-      # "source_files_changed": source_files_changed,
-      # "changed_element":     changed_element,
-      # "value_at_change":     value_at_change,
-      # "result":              result,
-      # })
-      # new_entries += 1
-
-      # with open(store_path, "w", encoding="utf-8") as f:
-      # json.dump(store, f, indent=2, ensure_ascii=False)
-
-      # print(f"Store : {len(store)} tests uniques, +{new_entries} nouvelles entrées (ia)")
-      # EOF
-
-      # ── Commiter le store mis à jour ──────────────────────────────────────
-      # - name: "Commiter le store enrichi"
-      # if: always()
-      # run: |
-      # git config user.name  "github-actions[bot]"
-      # git config user.email "github-actions[bot]@users.noreply.github.com"
-      # git pull --rebase || true
-      # git add ai_inputs/test_history_store.json
-      # git diff --staged --quiet \
-      # && echo "Aucune nouvelle entrée." \
-      # || (git commit -m "ci: update store ia [skip ci]" && git push)
-
-      # ── Upload des artefacts ──────────────────────────────────────────────
-      - name: "Upload — fichiers envoyés au LLM"
+      # ── STEP 11 : Upload artifacts ────────────────────────────────────────
+      - name: "Upload — LLM inputs"
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: llm-inputs
           path: |
             ai_inputs/git_diff.txt
-            ai_inputs/tests_history.txt
-            ai_inputs/last_selection.json
+            ai_inputs/test_history.txt
+            ai_inputs/dependencies.json
+            ai_inputs/selected_tests.json
 
-      - name: "Upload — rapports des tests IA"
+      - name: "Upload — AI test report"
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: resultats-ia
-          path: reports_ia/
+          name: ai-test-report
+          path: reports_ai/
