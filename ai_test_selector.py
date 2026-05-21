@@ -19,7 +19,7 @@ DEPS_PATH    = os.path.join(ROOT, "ai_inputs", "dependencies.json")
 # ── LLM Config ───────────────────────────────────────────────────────────────
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
 GROQ_URL     = "https://api.groq.com/openai/v1/chat/completions"
-MODEL        = "qwen/qwen3-32b"
+MODEL        = "llama-3.3-70b-versatile"
 TIMEOUT      = 60
 
 # ── Priority order for categories ────────────────────────────────────────────
