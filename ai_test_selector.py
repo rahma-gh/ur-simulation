@@ -13,7 +13,7 @@ DEPS_PATH    = os.path.join(ROOT, "ai_inputs", "dependencies.json")
 
 # ── LLM Config ───────────────────────────────────────────────────────────────
 OLLAMA_URL   = os.environ.get("NGROK_URL", "http://localhost:11434")
-MODEL        = "qwen2.5-coder:7b"
+MODEL        = "qwen2.5-coder:3b"
 TIMEOUT      = 180  # seconds — CPU inference is slow
 
 # ── Priority order for categories ────────────────────────────────────────────
@@ -113,7 +113,7 @@ def call_llm(user_prompt):
         "model":  MODEL,
         "stream": False,
         "options": {
-            "temperature": 0.1,   # low temperature → deterministic, structured output
+            "temperature": 0.1,
             "num_ctx":     8192,
         },
         "messages": [
@@ -122,9 +122,17 @@ def call_llm(user_prompt):
         ],
     }
 
+    # ── Fix ngrok 403 ────────────────────────────────────────────────────────
+    headers = {
+     "Content-Type": "application/json",
+     "User-Agent": "python-requests/ollama-client",
+}
+
     print(f"Calling LLM at {url} (model: {MODEL}) ...")
     try:
-        response = requests.post(url, json=payload, timeout=TIMEOUT)
+        response = requests.post(url, json=payload, headers=headers, timeout=TIMEOUT)
+        print(f"Status: {response.status_code}")
+        print(f"Response: {response.text[:1000]}")
         response.raise_for_status()
     except requests.exceptions.Timeout:
         print("ERROR: LLM request timed out.")
@@ -139,7 +147,6 @@ def call_llm(user_prompt):
 
 def parse_and_validate(raw):
     """Extract and validate JSON from LLM response."""
-    # Strip markdown code fences if present
     raw = raw.strip()
     if raw.startswith("```"):
         raw = "\n".join(raw.split("\n")[1:])
@@ -154,12 +161,10 @@ def parse_and_validate(raw):
         print("Raw response:", raw[:500])
         sys.exit(1)
 
-    # Validate required keys
     if "selected_tests" not in result:
         print("ERROR: Missing 'selected_tests' key in LLM response.")
         sys.exit(1)
 
-    # Sort by priority (re-apply our rules as a safety net)
     tests = result["selected_tests"]
     for i, t in enumerate(tests):
         if "priority" not in t:
@@ -170,7 +175,6 @@ def parse_and_validate(raw):
         t.get("priority", 99)
     ))
 
-    # Re-number priorities after sort
     for i, t in enumerate(tests):
         t["priority"] = i + 1
 
@@ -221,7 +225,6 @@ def main():
 
     save_output(result)
 
-    # Output pytest-compatible list for CI
     test_ids = [t["test_id"] for t in result["selected_tests"]]
     print("\n=== PYTEST COMMAND ===")
     print("pytest " + " ".join(f"tests/*/{tid}.py" for tid in test_ids))
