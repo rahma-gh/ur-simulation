@@ -17,7 +17,7 @@ DEPS_PATH    = os.path.join(ROOT, "ai_inputs", "dependencies.json")
 
 # ── LLM Config ───────────────────────────────────────────────────────────────
 OLLAMA_URL   = os.environ.get("NGROK_URL", "http://localhost:11434")
-MODEL        = "qwen2.5-coder:7b"
+MODEL        = "qwen2.5-coder:3b"
 TIMEOUT      = 180  # seconds — CPU inference is slow
 
 # ── Priority order for categories ────────────────────────────────────────────
