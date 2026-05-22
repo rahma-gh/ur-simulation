@@ -1,0 +1,65 @@
+name: CI Phase 1 — Construction de l'historique (Sans IA)
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+
+  tests-classiques:
+    name: "Phase 1 — Tous les tests + alimentation du store"
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: "Build image Docker"
+        run: docker build -t ur-simulation .
+
+      - name: "Lancer TOUS les tests dans Docker"
+        run: docker run --name ur-test-classic ur-simulation
+        continue-on-error: true
+
+      - name: "Récupérer le dossier reports/ depuis Docker"
+        if: always()
+        run: docker cp ur-test-classic:/app/reports/. reports/
+
+      # ── Diagnostic ────────────────────────────────────────────────────────
+      - name: "DIAGNOSTIC — Contenu du dossier reports/"
+        if: always()
+        run: |
+          echo "=== Fichiers dans reports/ ==="
+          find reports/ -type f | sort
+          echo ""
+          echo "=== Aperçu test_results.json ==="
+          cat reports/test_results.json 2>/dev/null | python3 -m json.tool || echo "(absent)"
+
+
+
+      # ── Diagnostics ───────────────────────────────────────────────────────
+      - name: "DIAGNOSTIC — simulation_results.json"
+        if: always()
+        run: cat reports/simulation_results.json || echo "(absent)"
+
+      - name: "DIAGNOSTIC — Webots stderr"
+        if: always()
+        run: tail -20 reports/webots_stderr.log || echo "(absent)"
+
+      - name: "DIAGNOSTIC — Webots stdout"
+        if: always()
+        run: tail -20 reports/webots_stdout.log || echo "(absent)"
+
+      - name: "Upload artefacts — phase 1"
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: resultats-phase1
+          path: reports/
