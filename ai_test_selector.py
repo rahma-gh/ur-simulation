@@ -40,16 +40,16 @@ The system controls a UR robotic arm that grasps and deposits cans using two con
 - ure_can_grasper.c  : state machine (WAITING → GRASPING → ROTATING → RELEASING → ROTATING_BACK)
 - ure_supervisor.py  : monitors heights and positions, writes simulation_results.json
 
-Your task: given a code change, select and prioritize only the relevant tests from the full test suite.
+Your task: given one or more code changes, select and prioritize only the relevant tests from the full test suite.
 
 === SELECTION RULES ===
-Select a test if AT LEAST ONE of these conditions is true:
+Select a test if AT LEAST ONE of these conditions is true for ANY of the changed elements:
 
 S1 - DIRECT LINK: the test directly checks the constant or function that changed.
 S2 - DEPENDENCY LINK: the test checks a behavior listed in the impacts of the changed element in the dependencies file.
 S3 - HISTORY LINK: the test has previously FAILED when this same element was changed (FAILED_WHEN column).
 
-Do NOT select a test if none of S1, S2, S3 applies.
+Do NOT select a test if none of S1, S2, S3 applies to any changed element.
 
 === PRIORITIZATION RULES ===
 Order selected tests by:
@@ -57,7 +57,7 @@ Order selected tests by:
 P1 - CATEGORY PRIORITY (highest to lowest):
      safety_limits > functional > integration > boundary > performance > reliability > stress
 
-P2 - FAILURE HISTORY: within the same category, tests with FAILED_WHEN matching the current change come first.
+P2 - FAILURE HISTORY: within the same category, tests with FAILED_WHEN matching any current change come first.
 
 P3 - FAIL RATE: within the same category and same FAILED_WHEN status, higher FAIL/RUNS ratio comes first.
 
@@ -74,7 +74,7 @@ Exact format:
     }
   ],
   "total_selected": <number>,
-  "changed_element": "<what changed>",
+  "changed_elements": ["element1", "element2"],
   "reasoning_summary": "one sentence explaining the selection logic"
 }
 """
@@ -89,23 +89,29 @@ def load_input(filename):
         return f.read()
 
 
-def extract_changed_element(git_diff_text):
-    """Extract the changed element name from git_diff.txt."""
+def extract_changed_elements(git_diff_text):
+    """Extract ALL changed element names from git_diff.txt — supports multiple changes."""
+    elements = []
     for line in git_diff_text.splitlines():
-        m = re.match(r"CHANGED ELEMENT\s*:\s*(\S+)", line)
+        # Matches lines like:  "  - speed                    : 1.0 → 0.0"
+        m = re.match(r"\s*-\s+(\w+)\s*:", line)
         if m:
-            return m.group(1)
-    return None
+            elements.append(m.group(1))
+    return elements if elements else []
 
 
-def filter_deps(deps, changed_element):
-    """Return only the impacts relevant to the changed element."""
-    if not changed_element:
+def filter_deps(deps, changed_elements):
+    """Return only the impacts relevant to ALL changed elements."""
+    if not changed_elements:
         return deps
+
+    filtered = {}
     for file_deps in deps.values():
-        if changed_element in file_deps:
-            return {changed_element: file_deps[changed_element]}
-    return deps
+        for element in changed_elements:
+            if element in file_deps:
+                filtered[element] = file_deps[element]
+
+    return filtered if filtered else deps
 
 
 def build_user_prompt():
@@ -118,17 +124,17 @@ def build_user_prompt():
     with open(DEPS_PATH) as f:
         deps = json.load(f)
 
-    # Only send the relevant part of dependencies to reduce payload size
-    changed_element = extract_changed_element(git_diff)
-    filtered_deps   = filter_deps(deps, changed_element)
+    # Extract ALL changed elements and filter dependencies for all of them
+    changed_elements = extract_changed_elements(git_diff)
+    filtered_deps    = filter_deps(deps, changed_elements)
 
-    print(f"  Changed element : {changed_element}")
-    print(f"  Deps sent       : {list(filtered_deps.keys())}")
+    print(f"  Changed elements : {changed_elements}")
+    print(f"  Deps sent        : {list(filtered_deps.keys())}")
 
     return f"""=== INPUT 1: GIT DIFF (what changed) ===
 {git_diff}
 
-=== INPUT 2: DEPENDENCY MAP (what the change impacts) ===
+=== INPUT 2: DEPENDENCY MAP (what the changes impact) ===
 {json.dumps(filtered_deps, indent=2)}
 
 === INPUT 3: TEST HISTORY (all tests + sensitivity + past failures) ===
@@ -179,7 +185,6 @@ def call_llm(user_prompt):
 def parse_and_validate(raw):
     """Extract and validate JSON from LLM response."""
     raw = raw.strip()
-    # Strip <think>...</think> blocks (Qwen3 includes reasoning by default)
     raw = re.sub(r"<think>.*?</think>", "", raw, flags=re.DOTALL).strip()
     if raw.startswith("```"):
         raw = "\n".join(raw.split("\n")[1:])
@@ -240,13 +245,13 @@ def main():
     user_prompt = build_user_prompt()
 
     print(f"\n[Input sizes]")
-    print(f"  User prompt : {len(user_prompt)} chars")
+    print(f"  User prompt : {len(user_prompt)} chars (~{len(user_prompt)//4} tokens)")
 
     raw    = call_llm(user_prompt)
     result = parse_and_validate(raw)
 
     print(f"\n=== LLM SELECTION RESULT ===")
-    print(f"Changed element  : {result.get('changed_element', '?')}")
+    print(f"Changed elements : {result.get('changed_elements', '?')}")
     print(f"Reasoning        : {result.get('reasoning_summary', '?')}")
     print(f"Total selected   : {result['total_selected']} tests\n")
 

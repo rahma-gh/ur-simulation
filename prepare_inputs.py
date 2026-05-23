@@ -45,39 +45,68 @@ def run(cmd):
 
 
 def get_git_diff():
-    """Return structured info about the last commit."""
-    commit_msg   = run(["git", "log", "-1", "--pretty=%s"])
+    """Return structured info about the last commit — supports multiple changes."""
+    commit_msg    = run(["git", "log", "-1", "--pretty=%s"])
     changed_files = run(["git", "diff", "HEAD~1", "HEAD", "--name-only"]).splitlines()
-    diff_lines   = run(["git", "diff", "HEAD~1", "HEAD", "--", *CONTROLLERS])
+    diff_lines    = run(["git", "diff", "HEAD~1", "HEAD", "--", *CONTROLLERS])
 
-    # Extract changed element and value from diff
-    changed_element = "unknown"
-    old_value, new_value = "?", "?"
+    # ── Extract ALL changed elements (not just the last one) ─────────────────
+    # Strategy: pair each removed line (-) with the next added line (+)
+    # that changes the same variable name
+    old_values = {}  # element_name → old_value
+    new_values = {}  # element_name → new_value
 
     for line in diff_lines.splitlines():
-        # Look for lines like: -    double speed = 1.0;  /  +    double speed = 0.0;
-        m_old = re.search(r'^-.*?(\w+)\s*=\s*([0-9.\-]+)', line)
-        m_new = re.search(r'^\+.*?(\w+)\s*=\s*([0-9.\-]+)', line)
-        if m_old and not line.startswith("---"):
-            changed_element = m_old.group(1)
-            old_value = m_old.group(2)
-        if m_new and not line.startswith("+++"):
-            new_value = m_new.group(2)
+        if line.startswith("---") or line.startswith("+++"):
+            continue
 
+        if line.startswith("-"):
+            m = re.search(r'(\w+)\s*=\s*([0-9.\-]+)', line)
+            if m:
+                old_values[m.group(1)] = m.group(2)
+
+        elif line.startswith("+"):
+            m = re.search(r'(\w+)\s*=\s*([0-9.\-]+)', line)
+            if m:
+                new_values[m.group(1)] = m.group(2)
+
+    # Build list of changes : only elements that have BOTH old and new value
+    # and where the values actually differ
+    changes = []
+    for element in old_values:
+        if element in new_values and old_values[element] != new_values[element]:
+            changes.append({
+                "element":   element,
+                "old_value": old_values[element],
+                "new_value": new_values[element],
+            })
+
+    # Fallback : if no paired change found, list all touched elements
+    if not changes:
+        for element in set(list(old_values.keys()) + list(new_values.keys())):
+            changes.append({
+                "element":   element,
+                "old_value": old_values.get(element, "?"),
+                "new_value": new_values.get(element, "?"),
+            })
+
+    # ── Build output ──────────────────────────────────────────────────────────
     lines = []
     lines.append("=== GIT DIFF — LAST COMMIT ===")
     lines.append(f"COMMIT MESSAGE   : {commit_msg}")
     lines.append(f"MODIFIED FILES   : {', '.join(changed_files) if changed_files else 'none'}")
-    lines.append(f"CHANGED ELEMENT  : {changed_element}")
-    lines.append(f"OLD VALUE        : {old_value}")
-    lines.append(f"NEW VALUE        : {new_value}")
+    lines.append(f"NUMBER OF CHANGES: {len(changes)}")
+    lines.append("")
+    lines.append("CHANGED ELEMENTS :")
+    for c in changes:
+        lines.append(f"  - {c['element']:<25} : {c['old_value']} → {c['new_value']}")
     lines.append("")
     lines.append("--- RAW DIFF (only +/- lines) ---")
     for line in diff_lines.splitlines():
         if line.startswith(("+", "-")) and not line.startswith(("+++", "---")):
             lines.append(line)
 
-    return "\n".join(lines)
+    return "\n".join(lines), changes
 
 
 def detect_sensitive(test_path):
@@ -99,10 +128,10 @@ def detect_sensitive(test_path):
 
 def get_test_history(test_id, store):
     """Extract FAIL, RUNS, FAILED_WHEN from the store for a given test."""
-    entry = store.get(test_id, {})
+    entry   = store.get(test_id, {})
     history = entry.get("history", [])
-    runs = len(history)
-    fails = sum(1 for h in history if h.get("result") == "FAILED")
+    runs    = len(history)
+    fails   = sum(1 for h in history if h.get("result") == "FAILED")
     failed_when = list({
         f"{h['changed_element']}={h['value_at_change']}"
         for h in history if h.get("result") == "FAILED"
@@ -112,7 +141,7 @@ def get_test_history(test_id, store):
 
 def generate_test_history(store):
     """Generate the formatted test_history.txt table."""
-    lines = []
+    lines  = []
     header = f"{'TEST_ID':<55} | {'CATEGORY':<15} | {'FAIL':>4} | {'RUNS':>4} | {'SENSITIVE_TO':<45} | FAILED_WHEN"
     lines.append(header)
     lines.append("-" * len(header))
@@ -124,9 +153,9 @@ def generate_test_history(store):
         for fname in sorted(os.listdir(cat_dir)):
             if not fname.startswith("test_") or not fname.endswith(".py"):
                 continue
-            test_id   = fname[:-3]
-            test_path = os.path.join(cat_dir, fname)
-            sensitive = detect_sensitive(test_path)
+            test_id         = fname[:-3]
+            test_path       = os.path.join(cat_dir, fname)
+            sensitive       = detect_sensitive(test_path)
             runs, fails, failed_when = get_test_history(test_id, store)
             sensitive_str   = ", ".join(sensitive)
             failed_when_str = ", ".join(failed_when) if failed_when else "—"
@@ -149,10 +178,13 @@ def main():
             store = json.load(f)
 
     # Input 1 — git_diff.txt
-    git_diff = get_git_diff()
+    git_diff, changes = get_git_diff()
     with open(os.path.join(OUTPUT_DIR, "git_diff.txt"), "w") as f:
         f.write(git_diff)
     print("✓ git_diff.txt generated")
+    print(f"  Detected {len(changes)} change(s):")
+    for c in changes:
+        print(f"    - {c['element']} : {c['old_value']} → {c['new_value']}")
 
     # Input 3 — test_history.txt
     test_history = generate_test_history(store)
@@ -161,7 +193,7 @@ def main():
     print("✓ test_history.txt generated")
 
     print("\n=== PREVIEW git_diff.txt ===")
-    print(git_diff[:500])
+    print(git_diff[:600])
     print("\n=== PREVIEW test_history.txt (first 10 lines) ===")
     print("\n".join(test_history.splitlines()[:12]))
 
