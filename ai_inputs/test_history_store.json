@@ -3,6 +3,34 @@
     "test_id": "test_arm_target_positions_conformes",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -61,6 +89,34 @@
   "test_distance_sensor_triggered": {
     "test_id": "test_distance_sensor_triggered",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "FAILED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -121,6 +177,34 @@
     "test_id": "test_boundary_canette_detectee_sous_seuil",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -179,6 +263,34 @@
   "test_boundary_canette_non_detectee_au_dessus": {
     "test_id": "test_boundary_canette_non_detectee_au_dessus",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -239,6 +351,34 @@
     "test_id": "test_boundary_deplacement_can_minimum",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -297,6 +437,34 @@
   "test_boundary_joint_hors_limites_negatif": {
     "test_id": "test_boundary_joint_hors_limites_negatif",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -357,6 +525,34 @@
     "test_id": "test_boundary_joint_hors_limites_positif",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -415,6 +611,34 @@
   "test_boundary_joint_maximum": {
     "test_id": "test_boundary_joint_maximum",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -475,6 +699,34 @@
     "test_id": "test_boundary_joint_minimum",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -533,6 +785,34 @@
   "test_boundary_joint_zero": {
     "test_id": "test_boundary_joint_zero",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -593,6 +873,34 @@
     "test_id": "test_boundary_positions_cibles_dans_limites",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -651,6 +959,34 @@
   "test_boundary_seuil_capteur_valide": {
     "test_id": "test_boundary_seuil_capteur_valide",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -711,6 +1047,34 @@
     "test_id": "test_boundary_valeur_exactement_au_seuil",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -769,6 +1133,34 @@
   "test_boundary_wrist_position_rotation": {
     "test_id": "test_boundary_wrist_position_rotation",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -829,6 +1221,34 @@
     "test_id": "test_gripper_position_dans_limites",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -887,6 +1307,34 @@
   "test_gripper_position_dans_source_c": {
     "test_id": "test_gripper_position_dans_source_c",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "FAILED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -947,6 +1395,34 @@
     "test_id": "test_gripper_sans_ecrasement",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -1005,6 +1481,34 @@
   "test_hauteurs_can_positives": {
     "test_id": "test_hauteurs_can_positives",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -1065,6 +1569,34 @@
     "test_id": "test_positions_cibles_securisees",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -1123,6 +1655,34 @@
   "test_positions_finales_differentes_initiales": {
     "test_id": "test_positions_finales_differentes_initiales",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -1183,6 +1743,34 @@
     "test_id": "test_positions_retour_zero_securisees",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -1241,6 +1829,34 @@
   "test_seuil_detection_distance_sensor": {
     "test_id": "test_seuil_detection_distance_sensor",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -1301,6 +1917,62 @@
     "test_id": "test_vitesse_bras_non_nulle",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -1359,6 +2031,34 @@
   "test_vitesse_bras_securisee": {
     "test_id": "test_vitesse_bras_securisee",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -1419,6 +2119,34 @@
     "test_id": "test_vitesse_dans_limites_absolues",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -1477,6 +2205,34 @@
   "test_capteur_distance_declenche_grasping": {
     "test_id": "test_capteur_distance_declenche_grasping",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "FAILED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -1537,6 +2293,34 @@
     "test_id": "test_capteur_distance_signal_recu",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "FAILED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -1595,6 +2379,34 @@
   "test_capteur_wrist_coherence_releasing_retour": {
     "test_id": "test_capteur_wrist_coherence_releasing_retour",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -1655,6 +2467,34 @@
     "test_id": "test_capteur_wrist_declenche_retour_waiting",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "FAILED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -1713,6 +2553,34 @@
   "test_capteur_wrist_declenche_transition_releasing": {
     "test_id": "test_capteur_wrist_declenche_transition_releasing",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "FAILED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -1773,6 +2641,34 @@
     "test_id": "test_capteur_wrist_signal_recu_par_controleur",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "FAILED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -1831,6 +2727,34 @@
   "test_consignes_retour_transmises": {
     "test_id": "test_consignes_retour_transmises",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "FAILED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -1891,6 +2815,34 @@
     "test_id": "test_controleur_envoie_consigne_fermeture_gripper",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "FAILED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -1949,6 +2901,34 @@
   "test_controleur_envoie_consigne_ouverture_gripper": {
     "test_id": "test_controleur_envoie_consigne_ouverture_gripper",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "FAILED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -2009,6 +2989,34 @@
     "test_id": "test_controleur_transmet_consignes_rotation_bras",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "FAILED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -2067,6 +3075,34 @@
   "test_fermeture_puis_ouverture_gripper": {
     "test_id": "test_fermeture_puis_ouverture_gripper",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "FAILED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -2127,6 +3163,34 @@
     "test_id": "test_json_has_required_keys",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -2185,6 +3249,34 @@
   "test_json_readable_by_pytest": {
     "test_id": "test_json_readable_by_pytest",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -2245,6 +3337,34 @@
     "test_id": "test_moteurs_bras_lèvent_canettes",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -2303,6 +3423,34 @@
   "test_superviseur_a_decouvert_tous_les_noeuds": {
     "test_id": "test_superviseur_a_decouvert_tous_les_noeuds",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -2363,6 +3511,34 @@
     "test_id": "test_superviseur_a_lu_positions_finales",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -2421,6 +3597,34 @@
   "test_superviseur_a_lu_positions_initiales": {
     "test_id": "test_superviseur_a_lu_positions_initiales",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -2481,6 +3685,34 @@
     "test_id": "test_superviseur_a_suivi_hauteurs_en_temps_reel",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -2539,6 +3771,34 @@
   "test_superviseur_transmet_donnees_a_pytest": {
     "test_id": "test_superviseur_transmet_donnees_a_pytest",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -2599,6 +3859,34 @@
     "test_id": "test_supervisor_json_has_duration",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -2657,6 +3945,34 @@
   "test_supervisor_writes_json": {
     "test_id": "test_supervisor_writes_json",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -2717,6 +4033,34 @@
     "test_id": "test_can_souleve_au_dessus_table",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -2775,6 +4119,34 @@
   "test_duree_attente_canette": {
     "test_id": "test_duree_attente_canette",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -2835,6 +4207,34 @@
     "test_id": "test_duree_attente_non_nulle",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -2894,6 +4294,34 @@
     "test_id": "test_duree_cycle_complet_ure",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -2952,6 +4380,34 @@
   "test_duree_cycle_total_simulation": {
     "test_id": "test_duree_cycle_total_simulation",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -3071,6 +4527,34 @@
     "test_id": "test_duree_phase_grasping",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -3129,6 +4613,34 @@
   "test_duree_phase_releasing": {
     "test_id": "test_duree_phase_releasing",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -3189,6 +4701,34 @@
     "test_id": "test_duree_retour_position",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -3247,6 +4787,34 @@
   "test_duree_rotation_bras": {
     "test_id": "test_duree_rotation_bras",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -3307,6 +4875,34 @@
     "test_id": "test_duree_simulation_totale_raisonnable",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -3365,6 +4961,34 @@
   "test_duree_trois_cycles": {
     "test_id": "test_duree_trois_cycles",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -3425,6 +5049,34 @@
     "test_id": "test_hauteur_can_lors_saisie",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -3483,6 +5135,34 @@
   "test_nombre_phases_mouvement": {
     "test_id": "test_nombre_phases_mouvement",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -3543,6 +5223,34 @@
     "test_id": "test_phases_presentes_dans_source",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -3601,6 +5309,34 @@
   "test_ratio_efficacite": {
     "test_id": "test_ratio_efficacite",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -3661,6 +5397,34 @@
     "test_id": "test_ratio_phases_actives",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -3719,6 +5483,34 @@
   "test_simulation_sans_timeout": {
     "test_id": "test_simulation_sans_timeout",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -3779,6 +5571,34 @@
     "test_id": "test_timestep_controleur_multiple_wbt",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -3837,6 +5657,34 @@
   "test_timestep_dans_source_c": {
     "test_id": "test_timestep_dans_source_c",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -3897,6 +5745,34 @@
     "test_id": "test_timestep_ure_wbt_conforme",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -3955,6 +5831,34 @@
   "test_vitesse_bras_par_defaut": {
     "test_id": "test_vitesse_bras_par_defaut",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -4015,6 +5919,34 @@
     "test_id": "test_vitesse_configurable_via_argv",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -4073,6 +6005,34 @@
   "test_reliability_100_lectures_json": {
     "test_id": "test_reliability_100_lectures_json",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -4133,6 +6093,34 @@
     "test_id": "test_reliability_300_validations_json",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -4191,6 +6179,34 @@
   "test_reliability_500_coherences_positions": {
     "test_id": "test_reliability_500_coherences_positions",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -4251,6 +6267,34 @@
     "test_id": "test_reliability_calculs_numeriques_stables",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -4309,6 +6353,34 @@
   "test_reliability_json_non_corrompu": {
     "test_id": "test_reliability_json_non_corrompu",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -4369,6 +6441,34 @@
     "test_id": "test_reliability_json_toujours_present",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -4427,6 +6527,34 @@
   "test_reliability_resultats_reproductibles": {
     "test_id": "test_reliability_resultats_reproductibles",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -4487,6 +6615,34 @@
     "test_id": "test_stress_10000_positions_joints",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -4545,6 +6701,34 @@
   "test_stress_10000_timesteps": {
     "test_id": "test_stress_10000_timesteps",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -4605,6 +6789,34 @@
     "test_id": "test_stress_1000_vitesses_bras",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -4663,6 +6875,34 @@
   "test_stress_20000_calculs_trigo": {
     "test_id": "test_stress_20000_calculs_trigo",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -4723,6 +6963,34 @@
     "test_id": "test_stress_2000_distances_3d",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -4781,6 +7049,34 @@
   "test_stress_200_positions_gripper": {
     "test_id": "test_stress_200_positions_gripper",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -4841,6 +7137,34 @@
     "test_id": "test_stress_3000_calculs_trigo",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -4899,6 +7223,34 @@
   "test_stress_50000_timesteps": {
     "test_id": "test_stress_50000_timesteps",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -4959,6 +7311,34 @@
     "test_id": "test_stress_5000_lectures_json",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -5017,6 +7397,34 @@
   "test_stress_500_positions_joints": {
     "test_id": "test_stress_500_positions_joints",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -5077,6 +7485,34 @@
     "test_id": "test_stress_longue_duree_1",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "FAILED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -5135,6 +7571,34 @@
   "test_stress_longue_duree_2": {
     "test_id": "test_stress_longue_duree_2",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "FAILED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -5195,6 +7659,34 @@
     "test_id": "test_stress_positions_gripper_coherentes",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "PASSED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -5253,6 +7745,34 @@
   "test_all_cans_grasped": {
     "test_id": "test_all_cans_grasped",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "FAILED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -5313,6 +7833,34 @@
     "test_id": "test_arm_returns_to_waiting",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "FAILED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -5371,6 +7919,34 @@
   "test_arm_rotates": {
     "test_id": "test_arm_rotates",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "FAILED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -5431,6 +8007,34 @@
     "test_id": "test_full_state_machine_cycle",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "FAILED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -5489,6 +8093,34 @@
   "test_gripper_closed_on_can": {
     "test_id": "test_gripper_closed_on_can",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "FAILED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -5549,6 +8181,34 @@
     "test_id": "test_gripper_releases_can",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "FAILED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -5607,6 +8267,34 @@
   "test_release_after_grasp": {
     "test_id": "test_release_after_grasp",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "FAILED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -5667,6 +8355,34 @@
     "test_id": "test_wrist_reaches_target",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "FAILED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -5725,6 +8441,34 @@
   "test_boundary_deplacement_can_maximum": {
     "test_id": "test_boundary_deplacement_can_maximum",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "FAILED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -5785,6 +8529,34 @@
     "test_id": "test_vitesse_bras_dans_source_c",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "FAILED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -5843,6 +8615,34 @@
   "test_capteur_distance_repond_a_toutes_les_canettes": {
     "test_id": "test_capteur_distance_repond_a_toutes_les_canettes",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "FAILED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -5903,6 +8703,34 @@
     "test_id": "test_gripper_communique_sur_toutes_les_canettes",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "FAILED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -5961,6 +8789,34 @@
   "test_trois_robots_recoivent_consignes": {
     "test_id": "test_trois_robots_recoivent_consignes",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "FAILED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
@@ -6021,6 +8877,34 @@
     "test_id": "test_simulation_termine_normalement",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "FAILED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -6080,6 +8964,34 @@
     "test_id": "test_reliability_1000_validations_completes",
     "history": [
       {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "FAILED"
+      },
+      {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
           "controllers/ure_can_grasper/ure_can_grasper.c"
@@ -6138,6 +9050,34 @@
   "test_stress_longue_duree_3": {
     "test_id": "test_stress_longue_duree_3",
     "history": [
+      {
+        "commit_sha": "800eb31c6523",
+        "commit_message": "multiple regressions: speed(1.5),target positions (-2.38 to -1.80),gripper positions(0.85 to 0.70),hauteur saisie (1.20),steps stable (120)",
+        "source_files_changed": [
+          "controllers/ure_can_grasper/ure_can_grasper.c",
+          "controllers/ure_supervisor/ure_supervisor.py"
+        ],
+        "changed_element": "speed",
+        "value_at_change": "1.5",
+        "all_changes": [
+          {
+            "element": "speed",
+            "old": "1.0",
+            "new": "1.5"
+          },
+          {
+            "element": "HAUTEUR_SAISIE",
+            "old": "0.80",
+            "new": "1.20"
+          },
+          {
+            "element": "STEPS_STABLE",
+            "old": "30",
+            "new": "120"
+          }
+        ],
+        "result": "FAILED"
+      },
       {
         "commit_message": "Change initial speed to 0.0 in ure_can_grasper.c",
         "source_files_changed": [
