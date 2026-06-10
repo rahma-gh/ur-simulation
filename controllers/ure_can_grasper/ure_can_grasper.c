@@ -29,8 +29,8 @@ int main(int argc, char **argv) {
   wb_robot_init();
   int counter = 0, i = 0;
   int state = WAITING;
-  const double target_positions[] = {-1.88, -2.14, -2.38, -1.51} ; 
-  double speed = 1.0; 
+  const double target_positions[] = {-1.88, -2.14, -1.80, -1.51} ; 
+  double speed = 1.5; 
 
   if (argc == 2)
     sscanf(argv[1], "%lf", &speed);
@@ -62,7 +62,7 @@ int main(int argc, char **argv) {
             counter = 8;
             printf("Grasping can\n");
             for (i = 0; i < 3; ++i)
-              wb_motor_set_position(hand_motors[i], 0.85); 
+              wb_motor_set_position(hand_motors[i], 0.7); 
           } 
           break;
         case GRASPING:
