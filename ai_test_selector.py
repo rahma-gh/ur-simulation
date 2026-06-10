@@ -90,13 +90,27 @@ def load_input(filename):
 
 
 def extract_changed_elements(git_diff_text):
-    """Extract ALL changed element names from git_diff.txt — supports multiple changes."""
+    """Extract ALL changed element names from git_diff.txt — supports multiple changes.
+
+    Handles both simple names (speed, HAUTEUR_SAISIE) and
+    array-indexed names (target_positions[2], gripper_position).
+    """
     elements = []
     for line in git_diff_text.splitlines():
-        # Matches lines like:  "  - speed                    : 1.0 → 0.0"
-        m = re.match(r"\s*-\s+(\w+)\s*:", line)
+        # Matches lines like:
+        #   "  - speed                    : 1.0 → 0.0"
+        #   "  - target_positions[2]      : -2.38 → -1.80"
+        #   "  - gripper_position         : 0.85 → 0.70"
+        m = re.match(r"\s*-\s+([\w\[\]]+)\s*:", line)
         if m:
-            elements.append(m.group(1))
+            name = m.group(1)
+            # Normalise: strip index for dep-map lookup (target_positions[2] -> target_positions)
+            base = re.sub(r'\[\d+\]', '', name)
+            if base not in elements:
+                elements.append(base)
+            # Also keep the indexed form so the LLM sees the exact slot
+            if name != base and name not in elements:
+                elements.append(name)
     return elements if elements else []
 
 

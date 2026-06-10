@@ -44,6 +44,52 @@ def run(cmd):
     return result.stdout.strip()
 
 
+def extract_values_from_line(line):
+    """
+    Extract (element_name, value) pairs from a diff line using multiple strategies.
+
+    Handles:
+      S1 — simple assignment:        speed = 1.5
+      S2 — array literal (by index): target_positions[] = {a, b, OLD, d}  → target_positions[2]
+      S3 — function-call argument:   wb_motor_set_position(hand_motors[i], 0.85)
+           mapped via FUNC_ARG_NAMES
+      S4 — Python constant:          HAUTEUR_SAISIE = 0.80
+    """
+    results = {}
+
+    # S1/S4 — simple scalar assignment:  VARNAME = NUMBER
+    for m in re.finditer(r'\b([A-Za-z_]\w*)\s*=\s*([-]?[0-9]+(?:\.[0-9]*)?)', line):
+        name, val = m.group(1), m.group(2)
+        # skip array declarations that are followed by '{' (handled by S2)
+        if not re.search(r'\b' + re.escape(name) + r'\s*\[\s*\]\s*=\s*\{', line):
+            results[name] = val
+
+    # S2 — array literal: extract each individual index value
+    # e.g.  double target_positions[] = {-1.88, -2.14, -2.38, -1.51}
+    m_arr = re.search(
+        r'\b([A-Za-z_]\w*)\s*\[\s*\]\s*=\s*\{([^}]+)\}', line
+    )
+    if m_arr:
+        arr_name = m_arr.group(1)
+        raw_vals = [v.strip() for v in m_arr.group(2).split(',')]
+        for idx, val in enumerate(raw_vals):
+            val = val.strip()
+            if re.match(r'^[-]?[0-9]+(?:\.[0-9]*)?$', val):
+                results[f"{arr_name}[{idx}]"] = val
+
+    # S3 — known function-call patterns mapped to semantic names
+    FUNC_ARG_NAMES = {
+        # wb_motor_set_position(hand_motors[i], VALUE)  → gripper_position
+        r'wb_motor_set_position\s*\(\s*hand_motors\s*\[.*?\]\s*,\s*([-]?[0-9]+(?:\.[0-9]*)?)': "gripper_position",
+    }
+    for pattern, name in FUNC_ARG_NAMES.items():
+        m_func = re.search(pattern, line)
+        if m_func:
+            results[name] = m_func.group(1)
+
+    return results
+
+
 def get_git_diff():
     """Return structured info about the last commit — supports multiple changes."""
     commit_msg    = run(["git", "log", "-1", "--pretty=%s"])
@@ -51,8 +97,6 @@ def get_git_diff():
     diff_lines    = run(["git", "diff", "HEAD~1", "HEAD", "--", *CONTROLLERS])
 
     # ── Extract ALL changed elements (not just the last one) ─────────────────
-    # Strategy: pair each removed line (-) with the next added line (+)
-    # that changes the same variable name
     old_values = {}  # element_name → old_value
     new_values = {}  # element_name → new_value
 
@@ -61,14 +105,12 @@ def get_git_diff():
             continue
 
         if line.startswith("-"):
-            m = re.search(r'(\w+)\s*=\s*([0-9.\-]+)', line)
-            if m:
-                old_values[m.group(1)] = m.group(2)
+            for name, val in extract_values_from_line(line[1:]).items():
+                old_values[name] = val
 
         elif line.startswith("+"):
-            m = re.search(r'(\w+)\s*=\s*([0-9.\-]+)', line)
-            if m:
-                new_values[m.group(1)] = m.group(2)
+            for name, val in extract_values_from_line(line[1:]).items():
+                new_values[name] = val
 
     # Build list of changes : only elements that have BOTH old and new value
     # and where the values actually differ
