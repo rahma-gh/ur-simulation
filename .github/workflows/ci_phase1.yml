@@ -42,8 +42,6 @@ jobs:
           echo "=== Aperçu test_results.json ==="
           cat reports/test_results.json 2>/dev/null | python3 -m json.tool || echo "(absent)"
 
-
-
       # ── Diagnostics ───────────────────────────────────────────────────────
       - name: "DIAGNOSTIC — simulation_results.json"
         if: always()
@@ -58,20 +56,20 @@ jobs:
         run: tail -20 reports/webots_stdout.log || echo "(absent)"
 
       # ── Alimentation du store ─────────────────────────────────────────────
-      - name: "Alimenter le store avec l'historique des tests"
-        if: always()
-        run: python3 update_store.py
+      # - name: "Alimenter le store avec l'historique des tests"
+      #   if: always()
+      #   run: python3 update_store.py
 
-      - name: "Commit et push du store mis à jour"
-        if: always()
-        run: |
-          git config user.name  "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add ai_inputs/test_history_store.json
-          git diff --cached --quiet || git commit -m "ci: update test_history_store after $(git log -1 --pretty=%s)"
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: "Commit et push du store mis à jour"
+      #   if: always()
+      #   run: |
+      #     git config user.name  "github-actions[bot]"
+      #     git config user.email "github-actions[bot]@users.noreply.github.com"
+      #     git add ai_inputs/test_history_store.json
+      #     git diff --cached --quiet || git commit -m "ci: update test_history_store after $(git log -1 --pretty=%s)"
+      #     git push
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: "Upload artefacts — phase 1"
         uses: actions/upload-artifact@v4
